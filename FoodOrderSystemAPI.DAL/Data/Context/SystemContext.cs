@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace FoodOrderSystemAPI
+namespace FoodOrderSystemAPI;
+
+public class SystemContext : DbContext
 {
-    public class SystemContext
+    public SystemContext(DbContextOptions<SystemContext> options) : base(options)
+    { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        base.OnModelCreating(modelBuilder);
     }
 }

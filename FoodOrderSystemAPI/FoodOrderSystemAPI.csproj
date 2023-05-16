@@ -23,4 +23,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FoodOrderSystemAPI.BL\FoodOrderSystemAPI.BL.csproj" />
+  </ItemGroup>
+
 </Project>
