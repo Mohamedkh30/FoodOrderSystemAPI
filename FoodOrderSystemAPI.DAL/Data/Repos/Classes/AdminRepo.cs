@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace FoodOrderSystemAPI;
 
-namespace FoodOrderSystemAPI;
-
-public class AdminRepo
+public class AdminRepo : EntityRepo<AdminModel>, IAdminRepo
 {
+    public AdminRepo(SystemContext dbContext) : base(dbContext)
+    {
+    }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FoodOrderSystemAPI
 {
-    public class Customer
+    public class CustomerModel
     {
         public int ID { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public DateTime BirthDate { get; set; }
 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace FoodOrderSystemAPI;
 
-namespace FoodOrderSystemAPI;
-
-public class ReviewRepo
+public class ReviewRepo : EntityRepo<ReviewModel>, IReviewRepo
 {
+    public ReviewRepo(SystemContext dbContext) : base(dbContext)
+    {
+    }
 }

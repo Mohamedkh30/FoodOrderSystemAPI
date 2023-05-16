@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderSystemAPI.DAL.Data.Repos
+namespace FoodOrderSystemAPI;
+
+public class RestaurantModel
 {
-    internal class ResturantRepo
-    {
-    }
 }

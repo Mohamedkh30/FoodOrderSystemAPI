@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace FoodOrderSystemAPI;
 
-namespace FoodOrderSystemAPI;
-
-public class OrderProductRepo
+public class OrderProductRepo : EntityRepo<OrderProductModel>, IOrderProductRepo
 {
+    public OrderProductRepo(SystemContext dbContext) : base(dbContext)
+    {
+    }
 }

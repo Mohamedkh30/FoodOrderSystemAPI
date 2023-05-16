@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace FoodOrderSystemAPI;
 
-namespace FoodOrderSystemAPI;
-
-public class CustomerRepo
+public class CustomerRepo : EntityRepo<CustomerModel>, ICustomerRepo
 {
+    public CustomerRepo(SystemContext dbContext) : base(dbContext)
+    {
+    }
 }
+

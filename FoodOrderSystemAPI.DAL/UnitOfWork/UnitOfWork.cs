@@ -1,11 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace FoodOrderSystemAPI;
 
-namespace FoodOrderSystemAPI;
-
-public class UnitOfWork
+public class UnitOfWork : IUnitOfWork
 {
+    private readonly SystemContext _context;
+
+    public UnitOfWork(SystemContext context)
+    {
+        _context = context;
+    }
+
+    public IAdminRepo Admins => new AdminRepo(_context);
+
+    public ICustomerRepo Customers => new CustomerRepo(_context);
+
+    public IOrderRepo Orders => new OrderRepo(_context);
+
+    public IOrderProductRepo OrdersProducts => new OrderProductRepo(_context);
+
+    public IProductRepo Prducts => new ProductRepo(_context);
+
+    public IReviewRepo Reveiws => new ReviewRepo(_context);
+
+    public IRestaurantRepo Restaurants => new RestaurantRepo(_context);
+
+    public void Dispose()
+    {
+        _context.Dispose();
+    }
+
+    public int Save()
+    {
+        return _context.SaveChanges();
+    }
 }

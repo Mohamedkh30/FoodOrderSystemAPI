@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace FoodOrderSystemAPI;
 
-namespace FoodOrderSystemAPI;
-
-public interface IUnitOfWork
+public interface IUnitOfWork: IDisposable
 {
+    IAdminRepo Admins { get; }
+    ICustomerRepo Customers { get; }
+    IOrderRepo Orders { get; }
+    IOrderProductRepo OrdersProducts { get; }
+    IProductRepo Prducts { get; }
+    IReviewRepo Reveiws { get; }
+    IRestaurantRepo Restaurants { get; }
+
+    int Save();
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace FoodOrderSystemAPI.DAL.Data.Repos.Classes;
+namespace FoodOrderSystemAPI;
 
 public class EntityRepo<TEntity> : IEntityRepo<TEntity> where TEntity : class
 {
