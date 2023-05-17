@@ -1,4 +1,4 @@
-﻿namespace FoodOrderSystemAPI;
+﻿namespace FoodOrderSystemAPI.DAL;
 
 public class OrderRepo : EntityRepo<OrderModel>, IOrderRepo
 {

@@ -1,5 +1,5 @@
-﻿namespace FoodOrderSystemAPI;
+﻿namespace FoodOrderSystemAPI.DAL;
 
-public interface IReviewRepo
+public interface IReviewRepo : IEntityRepo<ReviewModel>
 {
 }
