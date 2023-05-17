@@ -10,4 +10,10 @@
     <ProjectReference Include="..\FoodOrderSystemAPI.DAL\FoodOrderSystemAPI.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Managers\Interfaces\" />
+    <Folder Include="Managers\Classes\" />
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
 </Project>
