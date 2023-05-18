@@ -1,12 +1,12 @@
-﻿namespace FoodOrderSystemAPI;
+﻿namespace FoodOrderSystemAPI.DAL;
 
 public interface IUnitOfWork: IDisposable
 {
-    IAdminRepo Admins { get; }
+    public IAdminRepo Admins { get; }
     ICustomerRepo Customers { get; }
     IOrderRepo Orders { get; }
     IOrderProductRepo OrdersProducts { get; }
-    IProductRepo Prducts { get; }
+    IProductRepo Products { get; }
     IReviewRepo Reveiws { get; }
     IRestaurantRepo Restaurants { get; }
 

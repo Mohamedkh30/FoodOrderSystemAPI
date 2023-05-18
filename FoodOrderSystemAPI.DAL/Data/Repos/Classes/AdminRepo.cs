@@ -1,4 +1,4 @@
-﻿namespace FoodOrderSystemAPI;
+﻿namespace FoodOrderSystemAPI.DAL;
 
 public class AdminRepo : EntityRepo<AdminModel>, IAdminRepo
 {

@@ -1,6 +1,6 @@
-﻿namespace FoodOrderSystemAPI;
+﻿namespace FoodOrderSystemAPI.DAL;
 
-public interface IOrderRepo 
+public interface IOrderRepo: IEntityRepo<OrderModel>
 {
     //void CreateOrder(OrderRepo order);
     //OrderRepo GetOrderById(int orderId);

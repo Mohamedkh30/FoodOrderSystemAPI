@@ -1,5 +1,5 @@
-﻿namespace FoodOrderSystemAPI;
+﻿namespace FoodOrderSystemAPI.DAL;
 
-public interface IAdminRepo
+public interface IAdminRepo: IEntityRepo<AdminModel>
 {
 }

@@ -1,6 +1,6 @@
-﻿namespace FoodOrderSystemAPI
+﻿namespace FoodOrderSystemAPI.DAL
 {
-    public interface IRestaurantRepo
+    public interface IRestaurantRepo : IEntityRepo<RestaurantModel>
     {
     }
 }
