@@ -15,6 +15,7 @@ public class SystemContext : DbContext
     //internal DbSet<RestaurantModel> Restaurants => Set<RestaurantModel>();
     //internal DbSet<ReviewModel> Reviews => Set<ReviewModel>();
     #endregion
+    public DbSet<OrderModel> Orders => Set<OrderModel>();
 
     public SystemContext(DbContextOptions<SystemContext> options) : base(options)
     { }
@@ -22,6 +23,7 @@ public class SystemContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
+        modelBuilder.Entity<OrderModel>().HasData(Orders);
         base.OnModelCreating(modelBuilder);
     }
 }

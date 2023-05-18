@@ -23,7 +23,15 @@ public class Program
         #endregion
 
         #region Repos and UOW
-
+        builder.Services.AddTransient<IAdminRepo, AdminRepo>();
+        builder.Services.AddTransient<ICustomerRepo, CustomerRepo>();
+        builder.Services.AddTransient<IOrderProductRepo, OrderProductRepo>();
+        builder.Services.AddTransient<IOrderRepo, OrderRepo>();
+        builder.Services.AddTransient<IProductRepo, ProductRepo>();
+        builder.Services.AddTransient<IRestaurantRepo, RestaurantRepo>();
+        builder.Services.AddTransient<IReviewRepo, ReviewRepo>();
+        // unit of work
+        builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         #endregion
 
         var app = builder.Build();
