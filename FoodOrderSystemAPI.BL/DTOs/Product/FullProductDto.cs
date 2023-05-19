@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderSystemAPI.BL.DTOs.Product
+namespace FoodOrderSystemAPI.BL
 {
-    internal class FullProductDto
+    public class FullProductDto
     {
         public int ID;
 

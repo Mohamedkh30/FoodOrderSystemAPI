@@ -17,7 +17,7 @@ public class UnitOfWork : IUnitOfWork
 
     public IOrderProductRepo OrdersProducts => new OrderProductRepo(_context);
 
-    public IProductRepo Prducts => new ProductRepo(_context);
+    public IProductRepo Products => new ProductRepo(_context);
 
     public IReviewRepo Reveiws => new ReviewRepo(_context);
 

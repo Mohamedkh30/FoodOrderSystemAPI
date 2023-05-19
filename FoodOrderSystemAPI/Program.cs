@@ -22,9 +22,12 @@ public class Program
         builder.Services.AddDbContext<SystemContext>(options => options.UseSqlServer(connectionString));
         #endregion
 
-        #region Repos and UOW
-
+        #region repos and UOW
+        //builder.Services.AddScoped<IProductRepo, ProductRepo>();
+        //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         #endregion
+
+
 
         var app = builder.Build();
 
