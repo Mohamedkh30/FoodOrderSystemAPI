@@ -1,4 +1,4 @@
-﻿namespace FoodOrderSystemAPI;
+﻿namespace FoodOrderSystemAPI.DAL;
 
 public class ReviewRepo : EntityRepo<ReviewModel>, IReviewRepo
 {

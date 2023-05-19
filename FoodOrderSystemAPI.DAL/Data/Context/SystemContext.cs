@@ -21,7 +21,8 @@ public class SystemContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        modelBuilder.Entity<OrderProductModel>()
+            .HasKey(e => new {e.OrderId, e.ProductId });
         base.OnModelCreating(modelBuilder);
     }
 }

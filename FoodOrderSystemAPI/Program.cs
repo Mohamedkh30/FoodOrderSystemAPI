@@ -1,3 +1,4 @@
+using FoodOrderSystemAPI.DAL;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoodOrderSystemAPI;
@@ -22,12 +23,17 @@ public class Program
         builder.Services.AddDbContext<SystemContext>(options => options.UseSqlServer(connectionString));
         #endregion
 
-        #region repos and UOW
-        //builder.Services.AddScoped<IProductRepo, ProductRepo>();
-        //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        #region Repos and UOW
+        builder.Services.AddTransient<IAdminRepo, AdminRepo>();
+        builder.Services.AddTransient<ICustomerRepo, CustomerRepo>();
+        builder.Services.AddTransient<IOrderProductRepo, OrderProductRepo>();
+        builder.Services.AddTransient<IOrderRepo, OrderRepo>();
+        builder.Services.AddTransient<IProductRepo, ProductRepo>();
+        builder.Services.AddTransient<IRestaurantRepo, RestaurantRepo>();
+        builder.Services.AddTransient<IReviewRepo, ReviewRepo>();
+        // unit of work
+        builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         #endregion
-
-
 
         var app = builder.Build();
 

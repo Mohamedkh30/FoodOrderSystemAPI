@@ -1,5 +1,5 @@
-﻿namespace FoodOrderSystemAPI;
+﻿namespace FoodOrderSystemAPI.DAL;
 
-public interface ICustomerRepo
+public interface ICustomerRepo: IEntityRepo<CustomerModel>
 {
 }

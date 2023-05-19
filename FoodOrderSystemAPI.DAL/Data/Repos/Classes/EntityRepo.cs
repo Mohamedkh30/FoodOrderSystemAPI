@@ -1,4 +1,4 @@
-﻿using FoodOrderSystemAPI.DAL.Data.Repos.Interfaces;
+﻿using FoodOrderSystemAPI.DAL;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
