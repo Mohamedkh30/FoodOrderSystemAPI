@@ -9,22 +9,22 @@ namespace FoodOrderSystemAPI.BL
 {
     public class FullProductDto
     {
-        public int ID;
+        public int ProductID { get; set; }
 
-        public String Productname = "";
+        public String Productname { get; set; } = "";
 
-        public float price;
+        public float price { get; set; }
 
-        public String describtion = "";
+        public String describtion { get; set; } = "";
 
-        public String img = "";
+        public String img { get; set; } = "";
 
-        public float offer;
+        public float offer { get; set; }
 
-        public float rate;
+        public float rate { get; set; }
 
-        public String type = "";
+        public String type { get; set; } = "";
 
-        public RestaurantModel restaurant;
+        public RestaurantModel restaurant { get; set; }
     }
 }
