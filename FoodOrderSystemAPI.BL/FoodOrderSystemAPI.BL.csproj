@@ -11,8 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Managers\Interfaces\" />
+    <Folder Include="DTOs\" />
     <Folder Include="Managers\Classes\" />
+    <Folder Include="Managers\Interfaces\" />
+    
+    
+    
   </ItemGroup>
 
 </Project>

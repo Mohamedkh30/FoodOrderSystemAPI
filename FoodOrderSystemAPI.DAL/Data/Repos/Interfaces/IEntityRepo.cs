@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace FoodOrderSystemAPI.DAL.Data.Repos.Interfaces;
+namespace FoodOrderSystemAPI.DAL;
 
 public interface IEntityRepo<T> where T : class
 {
