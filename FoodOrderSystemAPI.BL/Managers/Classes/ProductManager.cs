@@ -50,7 +50,7 @@ namespace FoodOrderSystemAPI.BL
         {
             return _unitOfWork.Products.GetAll().Select(p => new FullProductDto() 
             {
-                ID= p.ID,
+                ID= p.ProductId,
                 describtion= p.describtion,
                 img= p.img,
                 offer = p.offer,
@@ -70,7 +70,7 @@ namespace FoodOrderSystemAPI.BL
                 return null;
             return new FullProductDto()
             {
-                ID = ProductToRead.ID,
+                ID = ProductToRead.ProductId,
                 describtion = ProductToRead.describtion,
                 img = ProductToRead.img,
                 offer = ProductToRead.offer,

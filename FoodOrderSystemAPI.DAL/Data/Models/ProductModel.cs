@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,26 +10,27 @@ namespace FoodOrderSystemAPI;
 
 public class ProductModel
 {
-    public int ID;
+    [Key]
+    public int ProductId { set; get; }
 
-    public String Productname = "";
+    public String Productname { set; get; }  = "";
 
     [Range(0f, float.MaxValue)]     //only +ve values
-    public float price;         
+    public float price { set; get; }
 
-    public String describtion = "";
+    public String describtion { set; get; } = "";
 
-    public String img = "";
+    public String img { set; get; } = "";
 
     [Range(0f,1f)]
-    public float offer;    
-    
-    [Range(0f,5f)]
-    public float rate;    
-    
-    public String type = "";
+    public float offer { set; get; }
 
-    public RestaurantModel restaurant;
+    [Range(0f,5f)]
+    public float rate { set; get; }
+
+    public String type { set; get; } = "";
+
+    public RestaurantModel restaurant { set; get; }
 
     public ICollection<OrderProductModel> orderProducts = new HashSet<OrderProductModel>();
 
