@@ -4,6 +4,7 @@ using FoodOrderSystemAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    partial class SystemContextModelSnapshot : ModelSnapshot
+    [Migration("20230521171444_FirstMigrationCreateAllIdentityClasses2")]
+    partial class FirstMigrationCreateAllIdentityClasses2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,28 +36,16 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<int>("Card_Number")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("CreditCard");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.Location", b =>
                 {
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
 
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Location");
                 });
@@ -414,28 +405,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("RestaurantModel", (string)null);
-                });
-
-            modelBuilder.Entity("FoodOrderSystemAPI.CreditCard", b =>
-                {
-                    b.HasOne("FoodOrderSystemAPI.CustomerModel", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("FoodOrderSystemAPI.Location", b =>
-                {
-                    b.HasOne("FoodOrderSystemAPI.CustomerModel", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
