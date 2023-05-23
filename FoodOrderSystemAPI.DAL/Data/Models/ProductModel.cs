@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,23 +11,29 @@ namespace FoodOrderSystemAPI;
 
 public class ProductModel
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int ID { get; set; }
+    [Key]
+    public int ProductId { set; get; }
 
+    public String Productname { set; get; }  = "";
 
-    public string Name { get; set; }
-    public float Price { get; set; }
-    public string discription  { get; set; }
-    public byte[] Img  { get; set; }
-    public float Offer  { get; set; }
-    public float Rate { get; set; }
-    public string Type { get; set; }
-    [ForeignKey(nameof(Resturant))]
-    public string ResturantId { get; set; }
-    public virtual RestaurantModel Resturant { get; set; }
-    public virtual ICollection<OrderProductModel> Order_Product { get; set; } =  new HashSet<OrderProductModel>();
+    [Range(0f, float.MaxValue)]     //only +ve values
+    public float price { set; get; }
 
-    public virtual ICollection<ReviewModel> Reviews { get; set; } = new HashSet<ReviewModel>();
+    public String describtion { set; get; } = "";
 
+    public String img { set; get; } = "";
 
+    [Range(0f,1f)]
+    public float offer { set; get; }
+
+    [Range(0f,5f)]
+    public float rate { set; get; }
+
+    public String type { set; get; } = "";
+
+    public RestaurantModel restaurant { set; get; }
+
+    public ICollection<OrderProductModel> orderProducts = new HashSet<OrderProductModel>();
+
+    public ICollection<ReviewModel> reviews = new HashSet<ReviewModel>();
 }
