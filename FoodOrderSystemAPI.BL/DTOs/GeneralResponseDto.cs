@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace FoodOrderSystemAPI.BL.DTOs
 {
-    public class OrderUpdateDto
+    public class GeneralResponseDto
     {
-        public int OrderId { get; set; }
-
-        public int CustomerId { get; set; }
-
-        public int TotalPrice { get; set; }
+        public string Message { get; set; } = string.Empty;
     }
 }

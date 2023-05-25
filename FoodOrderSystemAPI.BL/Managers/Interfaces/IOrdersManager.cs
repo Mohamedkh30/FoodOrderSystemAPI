@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderSystemAPI.BL.Managers.Interfaces
+namespace FoodOrderSystemAPI.BL
 {
+
     public interface IOrdersManager
     {
         List<OrderReadDto> GetAll();
