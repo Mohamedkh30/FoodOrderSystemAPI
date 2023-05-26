@@ -43,7 +43,7 @@ public class ReviewManager : IReviewManager
         return Result;
     }
 
-    public GetReviewOutputDto GetByIds(int productId, int customerId)
+    public GetReviewOutputDto GetByIds(int customerId, int productId)
     {
         var TargetReview = _unit.Reveiws.GetByIds(customerId, productId);
         var Result = _mapper.Map<GetReviewOutputDto>(TargetReview);

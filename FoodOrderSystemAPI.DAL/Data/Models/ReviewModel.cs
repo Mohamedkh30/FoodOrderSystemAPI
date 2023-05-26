@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FoodOrderSystemAPI.DAL;
+namespace FoodOrderSystemAPI;
 
 public class ReviewModel
 {

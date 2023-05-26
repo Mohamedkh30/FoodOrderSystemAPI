@@ -10,7 +10,9 @@ public class ReviewRepo : EntityRepo<ReviewModel>, IReviewRepo
 
     public ReviewModel? GetByIds(int customerId, int productId)
     {
-        var result = _context.Set<ReviewModel>().Find(customerId, productId);
+        var result = _context.Set<ReviewModel>()
+            .FirstOrDefault(x => x.ProductId == productId && x.CustomerId == customerId);
+
         return result;
     }
 }
