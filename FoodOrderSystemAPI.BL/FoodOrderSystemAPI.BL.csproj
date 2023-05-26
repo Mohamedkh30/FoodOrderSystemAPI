@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Managers\Classes\" />
+    <Folder Include="Managers\Interfaces\" />
     
     
     
