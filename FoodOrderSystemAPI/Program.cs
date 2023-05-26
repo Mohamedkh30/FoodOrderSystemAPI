@@ -1,5 +1,8 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using FoodOrderSystemAPI.DAL;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace FoodOrderSystemAPI;
 
@@ -18,12 +21,12 @@ public class Program
         builder.Services.AddSwaggerGen();
         #endregion
 
-        #region Context
+        #region Context Service
         var connectionString = builder.Configuration.GetConnectionString("FoodOrderSystemDB_ConStr");
         builder.Services.AddDbContext<SystemContext>(options => options.UseSqlServer(connectionString));
         #endregion
 
-        #region Repos and UOW
+        #region Repos and UOW Services
         builder.Services.AddTransient<IAdminRepo, AdminRepo>();
         builder.Services.AddTransient<ICustomerRepo, CustomerRepo>();
         builder.Services.AddTransient<IOrderProductRepo, OrderProductRepo>();
@@ -34,6 +37,17 @@ public class Program
         // unit of work
         builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         #endregion
+
+        #region Third party packages Services
+        builder.Services.AddAutoMapper(typeof(Program).Assembly);
+        // FluentValidation
+        builder.Services.AddFluentValidationAutoValidation();
+        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        #endregion
+
+        //#region Validator Services
+
+        //#endregion
 
         var app = builder.Build();
 
