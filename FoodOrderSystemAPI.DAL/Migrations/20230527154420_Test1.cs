@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class First : Migration
+    public partial class Test1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -186,6 +186,28 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RestaurantModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    RestaurantName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<int>(type: "int", nullable: false),
+                    PaymentDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RestaurantModel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RestaurantModel_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CustomerModel",
                 columns: table => new
                 {
@@ -207,77 +229,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         column: x => x.CustomerAddressLocationId,
                         principalTable: "Location",
                         principalColumn: "LocationId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RestaurantModel",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Logo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    ResturantLocationLocationId = table.Column<int>(type: "int", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RestaurantModel", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RestaurantModel_AspNetUsers_Id",
-                        column: x => x.Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RestaurantModel_Location_ResturantLocationLocationId",
-                        column: x => x.ResturantLocationLocationId,
-                        principalTable: "Location",
-                        principalColumn: "LocationId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CreditCards",
-                columns: table => new
-                {
-                    CreditId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    Card_Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Card_Expiration_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CVV = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CreditCards", x => x.CreditId);
-                    table.ForeignKey(
-                        name: "FK_CreditCards_CustomerModel_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "CustomerModel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Total_Price = table.Column<float>(type: "real", nullable: false),
-                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Order_Status = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Orders_CustomerModel_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "CustomerModel",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -308,6 +259,76 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CreditCards",
+                columns: table => new
+                {
+                    CreditId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    Card_Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Card_Expiration_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CVV = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CreditCards", x => x.CreditId);
+                    table.ForeignKey(
+                        name: "FK_CreditCards_CustomerModel_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "CustomerModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    TotalPrice = table.Column<int>(type: "int", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderStatus = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_CustomerModel_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "CustomerModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReviewModel",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Rating = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReviewModel", x => new { x.CustomerId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_ReviewModel_CustomerModel_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "CustomerModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReviewModel_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrdersProducts",
                 columns: table => new
                 {
@@ -322,37 +343,11 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         name: "FK_OrdersProducts_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrdersProducts_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ReviewModel",
-                columns: table => new
-                {
-                    CustomerID = table.Column<int>(type: "int", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<float>(type: "real", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ReviewModel", x => new { x.CustomerID, x.ProductID });
-                    table.ForeignKey(
-                        name: "FK_ReviewModel_CustomerModel_CustomerID",
-                        column: x => x.CustomerID,
-                        principalTable: "CustomerModel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ReviewModel_Products_ProductID",
-                        column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.NoAction);
@@ -423,14 +418,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 column: "restaurantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RestaurantModel_ResturantLocationLocationId",
-                table: "RestaurantModel",
-                column: "ResturantLocationLocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ReviewModel_ProductID",
+                name: "IX_ReviewModel_ProductId",
                 table: "ReviewModel",
-                column: "ProductID");
+                column: "ProductId");
         }
 
         /// <inheritdoc />
@@ -479,10 +469,10 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 name: "RestaurantModel");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Location");
 
             migrationBuilder.DropTable(
-                name: "Location");
+                name: "AspNetUsers");
         }
     }
 }

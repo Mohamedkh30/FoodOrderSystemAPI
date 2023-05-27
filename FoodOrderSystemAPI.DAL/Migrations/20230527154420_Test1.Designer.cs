@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20230527121240_First")]
-    partial class First
+    [Migration("20230527154420_Test1")]
+    partial class Test1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,25 +75,26 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Order_Status")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Total_Price")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("date")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ID");
+                    b.Property<string>("OrderStatus")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
 
                     b.HasIndex("CustomerId");
 
@@ -165,23 +166,22 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.ReviewModel", b =>
                 {
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int")
-                        .HasColumnOrder(2);
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
-                    b.HasKey("CustomerID", "ProductID");
+                    b.HasKey("CustomerId", "ProductId");
 
-                    b.HasIndex("ProductID");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ReviewModel");
                 });
@@ -421,22 +421,24 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 {
                     b.HasBaseType("FoodOrderSystemAPI.UserModel");
 
-                    b.Property<byte[]>("Logo")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ResturantLocationLocationId")
+                    b.Property<string>("PaymentDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Phone")
                         .HasColumnType("int");
 
-                    b.HasIndex("ResturantLocationLocationId");
+                    b.Property<string>("RestaurantName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("RestaurantModel", (string)null);
                 });
@@ -466,7 +468,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             modelBuilder.Entity("FoodOrderSystemAPI.OrderProductModel", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.OrderModel", "Order")
-                        .WithMany("Order_Product")
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -485,7 +487,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             modelBuilder.Entity("FoodOrderSystemAPI.ProductModel", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.RestaurantModel", "restaurant")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("restaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -497,13 +499,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 {
                     b.HasOne("FoodOrderSystemAPI.CustomerModel", "Customer")
                         .WithMany("Reviews")
-                        .HasForeignKey("CustomerID")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FoodOrderSystemAPI.ProductModel", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductID")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -587,19 +589,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .HasForeignKey("FoodOrderSystemAPI.RestaurantModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("FoodOrderSystemAPI.Location", "ResturantLocation")
-                        .WithMany()
-                        .HasForeignKey("ResturantLocationLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ResturantLocation");
-                });
-
-            modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
-                {
-                    b.Navigation("Order_Product");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.CustomerModel", b =>
@@ -610,11 +599,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("FoodOrderSystemAPI.RestaurantModel", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
