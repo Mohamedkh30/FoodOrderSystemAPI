@@ -32,9 +32,13 @@ namespace FoodOrderSystemAPI.Controllers
         // POST api/<CustomerController>
         [HttpPost]
 
-        public async Task< int > Post(CustomerToRegister ResgiteredCustomer)
+        public async Task< ActionResult >Post(CustomerToRegister ResgiteredCustomer)
         {
-            return await _customerManager.Register(ResgiteredCustomer);
+            var result =  await _customerManager.Register(ResgiteredCustomer);
+            if(result == -1) {
+                return BadRequest();
+            }
+            return Ok();
         }
 
         [HttpPatch("{id}")]
@@ -42,7 +46,9 @@ namespace FoodOrderSystemAPI.Controllers
         {
           var CustomerUpdated = await  _customerManager.UpdateCustomerPersonalData(id, CustomerPersonalData);
             if (CustomerUpdated is null)
+
                 return NoContent();
+
             return Ok(CustomerUpdated);
             
         }
@@ -83,11 +89,17 @@ namespace FoodOrderSystemAPI.Controllers
             }
             return Ok(LoginResult);
         }
-        //// GET api/<CustomerController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        // Delete api/<CustomerController>/5
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCustomer(int id)
+        {
+            var result = _customerManager.Delete(id);
+            if (result)
+                // Finded &Deleted
+                return Ok();
+            //not finded
+            return
+        BadRequest();
+        }
     }
 }

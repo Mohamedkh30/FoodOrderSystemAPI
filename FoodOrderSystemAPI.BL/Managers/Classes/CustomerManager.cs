@@ -28,10 +28,7 @@ public class CustomerManager:ICustomerManager
        _configuration = configuration;
     }
 
-    public List<CustomerModel> Delete()
-    {
-        throw new NotImplementedException();
-    }
+   
 
     public List<CustomerModel> GetAllCutomers()
     {
@@ -89,7 +86,7 @@ public class CustomerManager:ICustomerManager
             };
 
             await _UserMangager.AddClaimsAsync(CustomerToAdd, CustomerClaims);
-            _unitOfWork.Customers.Add(CustomerToAdd);
+            //_unitOfWork.Customers.Add(CustomerToAdd);
             _unitOfWork.Save();
             return CustomerToAdd.Id;
         }
@@ -215,11 +212,12 @@ public class CustomerManager:ICustomerManager
         return DbCustomer;
     }
 
-    public bool delete(int Customerid)
+    public bool Delete(int Customerid)
     {
         var deletedCustomer = _unitOfWork.Customers.GetById( Customerid);
         if (deletedCustomer != null) {
             _unitOfWork.Customers.Delete(deletedCustomer);
+            _unitOfWork.Save();
             return true;
         }
         return false;

@@ -17,5 +17,5 @@ public interface ICustomerManager
     public Location UpdateAddressCutomer(int Customerid, LocationToUpadate NewLocation);
     public  Task<CustomerModel> UpdateCustomerPersonalData(int Customerid, CustomerToUpdatPersonalData UpdatedCustomer);
 public List<CustomerModel> GetById( );
-    public List<CustomerModel> Delete();
+    public bool Delete( int CustomerID);
 }

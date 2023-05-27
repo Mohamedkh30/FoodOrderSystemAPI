@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/FoodOrderSystemAPI.DAL/Migrations/20230524220258_LoadEntities.cs
+/FoodOrderSystemAPI.DAL/Migrations/20230524220258_LoadEntities.Designer.cs

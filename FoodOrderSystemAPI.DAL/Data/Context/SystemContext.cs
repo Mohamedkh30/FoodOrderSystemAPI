@@ -35,7 +35,7 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
         modelBuilder.Entity<ReviewModel>()
             .HasKey(e => new {e.CustomerID, e.ProductID });
 
-   
+
 
         modelBuilder.Entity<CustomerModel>().ToTable("CustomerModel");
         modelBuilder.Entity<RestaurantModel>().ToTable("RestaurantModel");

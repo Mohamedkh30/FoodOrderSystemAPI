@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20230521173544_FirstMigrationCreateAllIdentityClasses3")]
-    partial class FirstMigrationCreateAllIdentityClasses3
+    [Migration("20230527121240_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,29 +27,40 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.CreditCard", b =>
                 {
-                    b.Property<short>("CVV")
-                        .HasColumnType("smallint");
+                    b.Property<int>("CreditId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CreditId"));
+
+                    b.Property<string>("CVV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Card_Expiration_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Card_Number")
+                    b.Property<string>("Card_Number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.HasKey("CreditId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
 
-                    b.ToTable("CreditCard");
+                    b.ToTable("CreditCards");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.Location", b =>
                 {
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LocationId"));
 
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
@@ -57,7 +68,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
 
-                    b.HasIndex("CustomerId");
+                    b.HasKey("LocationId");
 
                     b.ToTable("Location");
                 });
@@ -70,9 +81,8 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Order_Status")
                         .HasColumnType("int");
@@ -112,52 +122,51 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.ProductModel", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<byte[]>("Img")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Productname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Offer")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Rate")
-                        .HasColumnType("real");
-
-                    b.Property<string>("ResturantId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Type")
+                    b.Property<string>("describtion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("discription")
+                    b.Property<string>("img")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.Property<float>("offer")
+                        .HasColumnType("real");
 
-                    b.HasIndex("ResturantId");
+                    b.Property<float>("price")
+                        .HasColumnType("real");
+
+                    b.Property<float>("rate")
+                        .HasColumnType("real");
+
+                    b.Property<int>("restaurantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("restaurantId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.ReviewModel", b =>
                 {
-                    b.Property<string>("CustomerID")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int")
                         .HasColumnOrder(1);
 
                     b.Property<int>("ProductID")
@@ -174,14 +183,16 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("ReviewModel");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.UserModel", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -191,6 +202,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -222,9 +234,8 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -233,6 +244,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -250,10 +262,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -277,7 +292,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -291,9 +306,8 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -302,7 +316,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -316,9 +330,8 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -327,7 +340,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -338,9 +351,8 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -349,13 +361,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -364,10 +376,10 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -397,6 +409,11 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CustomerAddressLocationId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("CustomerAddressLocationId");
+
                     b.ToTable("CustomerModel", (string)null);
                 });
 
@@ -416,25 +433,19 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ResturantLocationLocationId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("ResturantLocationLocationId");
+
                     b.ToTable("RestaurantModel", (string)null);
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.CreditCard", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.CustomerModel", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("FoodOrderSystemAPI.Location", b =>
-                {
-                    b.HasOne("FoodOrderSystemAPI.CustomerModel", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .WithOne("CustomerCreditCard")
+                        .HasForeignKey("FoodOrderSystemAPI.CreditCard", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -461,7 +472,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FoodOrderSystemAPI.ProductModel", "Product")
-                        .WithMany("Order_Product")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -473,13 +484,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.ProductModel", b =>
                 {
-                    b.HasOne("FoodOrderSystemAPI.RestaurantModel", "Resturant")
+                    b.HasOne("FoodOrderSystemAPI.RestaurantModel", "restaurant")
                         .WithMany("Products")
-                        .HasForeignKey("ResturantId")
+                        .HasForeignKey("restaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Resturant");
+                    b.Navigation("restaurant");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.ReviewModel", b =>
@@ -491,7 +502,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FoodOrderSystemAPI.ProductModel", "Product")
-                        .WithMany("Reviews")
+                        .WithMany()
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -501,16 +512,16 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.UserModel", null)
                         .WithMany()
@@ -519,7 +530,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.UserModel", null)
                         .WithMany()
@@ -528,9 +539,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -543,7 +554,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.UserModel", null)
                         .WithMany()
@@ -554,11 +565,19 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.CustomerModel", b =>
                 {
+                    b.HasOne("FoodOrderSystemAPI.Location", "CustomerAddress")
+                        .WithMany()
+                        .HasForeignKey("CustomerAddressLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FoodOrderSystemAPI.UserModel", null)
                         .WithOne()
                         .HasForeignKey("FoodOrderSystemAPI.CustomerModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CustomerAddress");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.RestaurantModel", b =>
@@ -568,6 +587,14 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .HasForeignKey("FoodOrderSystemAPI.RestaurantModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("FoodOrderSystemAPI.Location", "ResturantLocation")
+                        .WithMany()
+                        .HasForeignKey("ResturantLocationLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ResturantLocation");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
@@ -575,15 +602,11 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Navigation("Order_Product");
                 });
 
-            modelBuilder.Entity("FoodOrderSystemAPI.ProductModel", b =>
-                {
-                    b.Navigation("Order_Product");
-
-                    b.Navigation("Reviews");
-                });
-
             modelBuilder.Entity("FoodOrderSystemAPI.CustomerModel", b =>
                 {
+                    b.Navigation("CustomerCreditCard")
+                        .IsRequired();
+
                     b.Navigation("Orders");
 
                     b.Navigation("Reviews");
