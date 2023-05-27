@@ -19,6 +19,7 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
     internal DbSet<ReviewModel> Reviews => Set<ReviewModel>();
     internal DbSet<CreditCard> CreditCards => Set<CreditCard>();
     internal DbSet<ReviewModel> Loacntions => Set<ReviewModel>();
+    public DbSet<OrderModel> Orders => Set<OrderModel>();
     #endregion
 
     public SystemContext(DbContextOptions<SystemContext> options) : base(options)
@@ -27,8 +28,6 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
-
         modelBuilder.Entity<OrderProductModel>()
             .HasKey(e => new {e.OrderId, e.ProductId });
         

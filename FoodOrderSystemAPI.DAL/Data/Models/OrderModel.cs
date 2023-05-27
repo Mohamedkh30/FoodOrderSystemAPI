@@ -1,32 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderSystemAPI;
-    public enum status
-{
-    preparing,
-    enRoute,
-    recived
 
-}
+namespace FoodOrderSystemAPI;
 
 public class OrderModel
 {
+    [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int OrderId { get; set; }
 
-    public int ID { get; set; }
-    public float Total_Price { get; set; }
-    public DateTime date { get; set; }
-
-    public status Order_Status { get; set; }
-    [ForeignKey(nameof(Customer))]
+    [ForeignKey("CustomerModel")]
     public int CustomerId { get; set; }
-    public  CustomerModel? Customer { get; set; }
-    public  ICollection <OrderProductModel> Order_Product { get; set; }
+    
+    [Range(0,float.MaxValue)]
+    public int TotalPrice { get; set; }
+    public DateTime OrderDate { get; set; }
 
+    [StringLength(30, MinimumLength = 3)]
+    public string? OrderStatus { get; set; } = string.Empty;
+
+    public CustomerModel? Customer { get; set; }
 
 }

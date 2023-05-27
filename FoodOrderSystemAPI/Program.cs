@@ -1,4 +1,6 @@
 using FoodOrderSystemAPI.BL;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using FoodOrderSystemAPI.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using System.Reflection;
 
 namespace FoodOrderSystemAPI;
 
@@ -62,6 +65,13 @@ public class Program
         builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         #endregion
 
+        #region Third party packages Services
+        builder.Services.AddAutoMapper(typeof(Program).Assembly);
+        // FluentValidation
+        builder.Services.AddFluentValidationAutoValidation();
+        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        #endregion
+
 
         #region  Authentcation Scheama 
         //Change the Default behavior of Authentcation Schema From Coockie Authentcation
@@ -104,6 +114,10 @@ public class Program
       
 
   
+
+        //#region Validator Services
+
+        //#endregion
 
         var app = builder.Build();
 
