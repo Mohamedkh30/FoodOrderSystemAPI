@@ -22,12 +22,23 @@ namespace FoodOrderSystemAPI.Controllers
         // GET: api/<CustomerController>
         [HttpGet]
         [Authorize("Customer")]
-        public ActionResult<List<CustomerModel>> Get()
+        public ActionResult<List<CustomerModel>> GetAllCustomers()
         {
          return Ok(_customerManager.ReadAllCutomerProperties());
         }
 
-      
+        // GET: api/<CustomerController>/{id}
+        [HttpGet("{id}")]
+        [Authorize("Customer")]
+        public ActionResult<CustomerToRead> Get(int id)
+        {
+            var customer = _customerManager.GetById(id);
+            if (customer == null)
+            {
+                BadRequest();
+            }
+            return Ok(customer);
+        }
 
         // POST api/<CustomerController>
         [HttpPost]

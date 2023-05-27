@@ -16,6 +16,6 @@ public interface ICustomerManager
     public CreditToRead UpdateCardCutomerData(int Customerid, CreditToUpdate creditCard);
     public Location UpdateAddressCutomer(int Customerid, LocationToUpadate NewLocation);
     public  Task<CustomerModel> UpdateCustomerPersonalData(int Customerid, CustomerToUpdatPersonalData UpdatedCustomer);
-public List<CustomerModel> GetById( );
-    public bool Delete( int CustomerID);
+    public CustomerToRead GetById(int CustomerID );
+        public bool Delete( int CustomerID);
 }

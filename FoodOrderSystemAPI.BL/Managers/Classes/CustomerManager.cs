@@ -20,12 +20,14 @@ public class CustomerManager:ICustomerManager
     private readonly IUnitOfWork _unitOfWork;
     private readonly UserManager<CustomerModel> _UserMangager;
     private readonly IConfiguration _configuration;
+    private readonly ICustomerRepo _CustomerRepo;
 
-    public CustomerManager(IUnitOfWork unitOfWork , UserManager <CustomerModel> UserMangager , IConfiguration configuration)
+    public CustomerManager(IUnitOfWork unitOfWork , UserManager <CustomerModel> UserMangager , IConfiguration configuration , ICustomerRepo customerRepo)
     {
         _unitOfWork = unitOfWork;
         _UserMangager = UserMangager;
        _configuration = configuration;
+        _CustomerRepo = customerRepo;
     }
 
    
@@ -37,9 +39,34 @@ public class CustomerManager:ICustomerManager
 
     }
 
-    public List<CustomerModel> GetById()
+    public CustomerToRead GetById(int CustomerID)
     {
-        throw new NotImplementedException();
+       var CustomerFromDb =  _CustomerRepo.GetCustomerByIdWithNavprop(CustomerID);
+        // Return Cutomer TO read TO avoid Cyrcular referance
+        if(CustomerFromDb == null)
+        {
+            return null; 
+        }
+        return new CustomerToRead()
+        {
+
+            FullName = CustomerFromDb.UserName,
+            Email = CustomerFromDb.Email,
+            Role = CustomerFromDb.Role.ToString(),
+            Phone = CustomerFromDb.PhoneNumber,
+            CustomerBirth = CustomerFromDb.BirthDate,
+            // Set Card
+
+            CardNumber = CustomerFromDb.CustomerCreditCard.Card_Number,
+            ExpirationDate = CustomerFromDb.CustomerCreditCard.Card_Expiration_Date,
+            CvvNumber = CustomerFromDb.CustomerCreditCard.CVV,
+            // Set Address 
+
+            Longitude = CustomerFromDb.CustomerAddress.Longitude,
+            Latitude = CustomerFromDb.CustomerAddress.Latitude
+
+
+        };
     }
 
     public async Task<int> Register(CustomerToRegister RegisterdCustomer)

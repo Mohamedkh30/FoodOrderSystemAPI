@@ -48,6 +48,7 @@ public class Program
             options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
 
         }).AddEntityFrameworkStores<SystemContext>();
+        #endregion
 
         #region Repos and UOW
         builder.Services.AddTransient<IAdminRepo, AdminRepo>();
@@ -61,8 +62,6 @@ public class Program
         builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         #endregion
 
-
-        #endregion
 
         #region  Authentcation Scheama 
         //Change the Default behavior of Authentcation Schema From Coockie Authentcation
