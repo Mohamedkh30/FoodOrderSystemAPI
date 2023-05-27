@@ -13,7 +13,7 @@ public class ReviewModel
     [ForeignKey(nameof(Customer))]
     [Key]
     [Column(Order = 1)]
-    public string CustomerID { get; set; }
+    public int CustomerID { get; set; }
     [ForeignKey(nameof(Product))]
     [Key]
     [Column(Order = 2)]
@@ -21,10 +21,10 @@ public class ReviewModel
     public string? Comment { get; set; }
     [Range(0,5)]
     public float Rating { get; set; }
-    public virtual ProductModel Product { get; set; }
+    public  ProductModel Product { get; set; }
 
 
-    public virtual CustomerModel Customer { get; set; }
+    public  CustomerModel Customer { get; set; }
 
     
 

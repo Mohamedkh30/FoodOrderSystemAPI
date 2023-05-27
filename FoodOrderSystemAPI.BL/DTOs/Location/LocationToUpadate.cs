@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace FoodOrderSystemAPI.BL;
 
-public class CustomerToAdd
+public class LocationToUpadate
 {
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public DateTime Bi { get; set; }
-
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
 }

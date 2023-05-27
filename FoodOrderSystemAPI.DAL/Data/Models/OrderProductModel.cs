@@ -26,6 +26,6 @@ public class OrderProductModel
     public int? ProductId { get; set; }
 
 
-    public virtual OrderModel Order { get; set; }
-    public virtual ProductModel Product { get; set; }
+    public  OrderModel Order { get; set; }
+    public  ProductModel Product { get; set; }
 }

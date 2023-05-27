@@ -1,4 +1,5 @@
 ﻿using FoodOrderSystemAPI.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodOrderSystemAPI.Controllers
@@ -15,6 +16,8 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
+
         public ActionResult<List<FullProductDto>> GetAll()
         {
             return _productManager.GetAll();
@@ -22,6 +25,8 @@ namespace FoodOrderSystemAPI.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize]
+
         public ActionResult<FullProductDto> GetById(int id)
         {
             FullProductDto? product = _productManager.GetById(id);

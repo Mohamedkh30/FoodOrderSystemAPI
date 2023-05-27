@@ -17,20 +17,20 @@ namespace FoodOrderSystemAPI
 
 
 
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
-        [NotMapped]
-        public Location Location { get; set; }
+        public Location CustomerAddress { get; set; }
 
-        [NotMapped]
-        public CreditCard CreditCard { get; set; } 
+
+
+        public CreditCard CustomerCreditCard { get; set; } 
 
      
 
         [InverseProperty("Customer")]
-        public virtual ICollection<OrderModel> Orders { get; set; } = new HashSet<OrderModel>();
+        public  ICollection<OrderModel> Orders { get; set; } = new HashSet<OrderModel>();
         [InverseProperty("Customer")]
-        public virtual ICollection<ReviewModel> Reviews { get; set; } = new HashSet<ReviewModel>();
+        public  ICollection<ReviewModel> Reviews { get; set; } = new HashSet<ReviewModel>();
 
 
 

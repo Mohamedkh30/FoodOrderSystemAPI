@@ -14,13 +14,15 @@ public class RestaurantModel:UserModel
 { 
     public string Name { get; set; }
     public byte[] Logo { get; set; }
-    [NotMapped]
+
+
     public Location ResturantLocation { get; set; }
+
     public string Phone { get; set; }
  
 
 
-    public virtual ICollection<ProductModel> Products { set; get; } = new HashSet<ProductModel>();
+    public  ICollection<ProductModel> Products { set; get; } = new HashSet<ProductModel>();
 
 
 }

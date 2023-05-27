@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace FoodOrderSystemAPI;
 
-public class SystemContext : IdentityDbContext<UserModel>
+public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, int>
 {
     #region models
     // !!!!!!! UNCOMMENT DBSET ONLY WHEN MODEL IS READY !!!!!!!!!!!!!!
@@ -15,25 +17,36 @@ public class SystemContext : IdentityDbContext<UserModel>
     internal DbSet<ProductModel> Products => Set<ProductModel>();
     internal DbSet<RestaurantModel> Restaurants => Set<RestaurantModel>();
     internal DbSet<ReviewModel> Reviews => Set<ReviewModel>();
+    internal DbSet<CreditCard> CreditCards => Set<CreditCard>();
+    internal DbSet<ReviewModel> Loacntions => Set<ReviewModel>();
     #endregion
 
     public SystemContext(DbContextOptions<SystemContext> options) : base(options)
     { }
+   
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
+
         modelBuilder.Entity<OrderProductModel>()
             .HasKey(e => new {e.OrderId, e.ProductId });
         
         modelBuilder.Entity<ReviewModel>()
             .HasKey(e => new {e.CustomerID, e.ProductID });
 
-        modelBuilder.Entity<Location>().HasNoKey();
-        modelBuilder.Entity<CreditCard>().HasNoKey();
+   
 
         modelBuilder.Entity<CustomerModel>().ToTable("CustomerModel");
         modelBuilder.Entity<RestaurantModel>().ToTable("RestaurantModel");
+
+
+
+
+
         base.OnModelCreating(modelBuilder);
+
+
     }
 
 }

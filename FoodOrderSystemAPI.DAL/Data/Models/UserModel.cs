@@ -9,19 +9,32 @@ using Microsoft.AspNetCore.Identity;
 
 namespace FoodOrderSystemAPI;
 
-public class UserModel:IdentityUser
+public enum RoleOptions{
+    Admin , 
+    Customer , 
+    Resturant 
+
+}
+
+public class UserModel: IdentityUser<int>
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public override string Id { get; set; }
+    public override int Id { get; set; }
 
-    [Required]
+   
+    [DataType(DataType.Text,ErrorMessage =" Name Must Be Text ")]
     public override  string NormalizedUserName { get; set; } = string.Empty;
 
-    [EmailAddress]
-    [Required]
-    public override string NormalizedEmail { get; set; }
+    [DataType(DataType.Text, ErrorMessage = " Name Must Be Text ")]
+    public override  string UserName { get; set; } = string.Empty;
 
-    public string Role { get; set; }
+    [EmailAddress]
+    
+    public override string NormalizedEmail { get; set; } = string.Empty;
+    [EmailAddress]
+    public override string Email { get; set; } = string.Empty;
+
+    public RoleOptions Role { get; set; }
 
 }
 

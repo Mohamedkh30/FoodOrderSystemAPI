@@ -24,9 +24,9 @@ public class OrderModel
 
     public status Order_Status { get; set; }
     [ForeignKey(nameof(Customer))]
-    public string CustomerId { get; set; }
-    public virtual CustomerModel? Customer { get; set; }
-    public virtual ICollection <OrderProductModel> Order_Product { get; set; }
+    public int CustomerId { get; set; }
+    public  CustomerModel? Customer { get; set; }
+    public  ICollection <OrderProductModel> Order_Product { get; set; }
 
 
 }
