@@ -1,5 +1,15 @@
+using FoodOrderSystemAPI.BL;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using FoodOrderSystemAPI.DAL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Text;
+using System.Reflection;
 
 namespace FoodOrderSystemAPI;
 
@@ -18,9 +28,29 @@ public class Program
         builder.Services.AddSwaggerGen();
         #endregion
 
+        //builder.Services.AddCors(options =>
+        // {
+        //     options.AddPolicy("AllowOrigin",
+        //         builder =>
+        //         {
+        //             builder.AllowAnyOrigin()
+        //                 .AllowAnyMethod()
+        //                 .AllowAnyHeader();
+        //         });
+        // });
+
         #region Context
         var connectionString = builder.Configuration.GetConnectionString("FoodOrderSystemDB_ConStr");
         builder.Services.AddDbContext<SystemContext>(options => options.UseSqlServer(connectionString));
+        #endregion
+
+        #region Identity User
+        builder.Services.AddIdentity<CustomerModel, IdentityRole<int>>(options =>
+        {
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+
+        }).AddEntityFrameworkStores<SystemContext>();
         #endregion
 
         #region Repos and UOW
@@ -35,6 +65,60 @@ public class Program
         builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         #endregion
 
+        #region Third party packages Services
+        builder.Services.AddAutoMapper(typeof(Program).Assembly);
+        // FluentValidation
+        builder.Services.AddFluentValidationAutoValidation();
+        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        #endregion
+
+
+        #region  Authentcation Scheama 
+        //Change the Default behavior of Authentcation Schema From Coockie Authentcation
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultChallengeScheme = "default";
+            options.DefaultAuthenticateScheme = "default";
+        })
+    .AddJwtBearer("default", options =>
+            {
+                var secretkey = builder.Configuration.GetValue<string>("secretkey");
+                var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
+                var key = new SymmetricSecurityKey(secretkeyinbytes);
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = key
+                };
+            });
+        #endregion
+
+        #region autherization
+
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("Customer", policy => policy
+                .RequireClaim(ClaimTypes.Role, "Customer", "Admin")
+                .RequireClaim(ClaimTypes.NameIdentifier));
+
+        });
+        #endregion
+
+
+        #region Managers
+        builder.Services.AddTransient<ICustomerManager, CustomerManager>();
+
+        #endregion
+
+      
+
+  
+
+        //#region Validator Services
+
+        //#endregion
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -45,9 +129,10 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-
+        app.UseAuthentication();
         app.UseAuthorization();
 
+        //app.UseCors("AllowOrigin");
 
         app.MapControllers();
 
