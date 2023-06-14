@@ -34,7 +34,7 @@ namespace FoodOrderSystemAPI.BL
 
             _unitOfWork.Products.Add(product);
             _unitOfWork.Save();
-            return productDto.ID;
+            return productDto.ProductID;
         }
 
         public void delete(int id)
@@ -50,7 +50,7 @@ namespace FoodOrderSystemAPI.BL
         {
             return _unitOfWork.Products.GetAll().Select(p => new FullProductDto() 
             {
-                ID= p.ProductId,
+                ProductID = p.ProductId,
                 describtion= p.describtion,
                 img= p.img,
                 offer = p.offer,
@@ -70,7 +70,7 @@ namespace FoodOrderSystemAPI.BL
                 return null;
             return new FullProductDto()
             {
-                ID = ProductToRead.ProductId,
+                ProductID = ProductToRead.ProductId,
                 describtion = ProductToRead.describtion,
                 img = ProductToRead.img,
                 offer = ProductToRead.offer,
@@ -85,7 +85,7 @@ namespace FoodOrderSystemAPI.BL
 
         public void update(FullProductDto productDto)
         {
-            ProductModel? ProductfromDb = _unitOfWork.Products.GetById(productDto.ID);
+            ProductModel? ProductfromDb = _unitOfWork.Products.GetById(productDto.ProductID);
             if (ProductfromDb is null)
                 return;
 
