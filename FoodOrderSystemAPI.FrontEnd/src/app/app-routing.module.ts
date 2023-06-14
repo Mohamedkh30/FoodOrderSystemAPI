@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
+import { HomePageComponent } from './home/home-page/home-page.component';
 
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent},
+  {path:'home',component:HomePageComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'**',component:NotFoundComponent}
 ];
