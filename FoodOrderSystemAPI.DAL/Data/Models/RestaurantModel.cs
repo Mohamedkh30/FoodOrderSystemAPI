@@ -10,6 +10,7 @@ namespace FoodOrderSystemAPI;
 
 public class RestaurantModel
 {
+    [Key]
     public int RestaurantId { set; get; }
 
     [Required(ErrorMessage = "Please, Enter Valied Restaurant name!")]
