@@ -27,7 +27,8 @@ namespace FoodOrderSystemAPI.Controllers
             return Resturants;
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Route("Products")]
         public ActionResult<List<RestaurantsProductsReadDto>> GetAllWithProjects()
         {
             var RestaurantsWithProducts =  _restaurantManager.GetAllRestaurantsWithProducts();
@@ -48,7 +49,7 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("Products/{id}")]
         public ActionResult<RestaurantProductsDto> GetProducts(int id)
         {
             var RestaurantProducts = _restaurantManager.GetRestaurentWithProductsById(id);
@@ -60,7 +61,7 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("PaymentMethod/{id}")]
         public ActionResult<RestaurantPaymentMethodDto> GetPaymentMethod(int id)
         {
             var RestaurantPaymentMethod = _restaurantManager.GetRestaurantPaymentMethodsById(id);
