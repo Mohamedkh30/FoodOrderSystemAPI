@@ -27,7 +27,8 @@ namespace FoodOrderSystemAPI.Controllers
             return Resturants;
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Route("Products")]
         public ActionResult<List<RestaurantsProductsReadDto>> GetAllWithProjects()
         {
             var RestaurantsWithProducts =  _restaurantManager.GetAllRestaurantsWithProducts();
