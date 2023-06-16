@@ -42,7 +42,7 @@ public class EntityRepo<TEntity> : IEntityRepo<TEntity> where TEntity : class
     /// </returns>
     public IEnumerable<TEntity> GetAll()
     {
-        return _dbContext.Set<TEntity>();
+        return _dbContext.Set<TEntity>().AsNoTracking();
     }
 
     /// <summary>

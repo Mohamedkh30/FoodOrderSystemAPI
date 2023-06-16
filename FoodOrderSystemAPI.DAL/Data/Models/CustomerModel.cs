@@ -1,6 +1,8 @@
 ﻿using FoodOrderSystemAPI.DAL;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -8,24 +10,27 @@ using System.Threading.Tasks;
 
 namespace FoodOrderSystemAPI
 {
-    public class CustomerModel
-    {
-        public int ID { get; set; }
+    [Table("CustomerModel")]
 
-        public string Name { get; set; } = string.Empty;
+    public class CustomerModel : UserModel
+    {
+
+
 
         public DateTime BirthDate { get; set; }
 
-        [NotMapped]
-        public Location? Location { get; set; }
+        public Location CustomerAddress { get; set; }
 
 
-        public string CreditCard { get; set; }
 
-        public string Email { get; set; }
+        public CreditCard CustomerCreditCard { get; set; } 
 
-        public ICollection<OrderModel> Orders { get; set; } = new HashSet<OrderModel>();
-        public ICollection<ReviewModel> Reviews { get; set; } = new HashSet<ReviewModel>();
+     
+
+        [InverseProperty("Customer")]
+        public  ICollection<OrderModel> Orders { get; set; } = new HashSet<OrderModel>();
+        [InverseProperty("Customer")]
+        public  ICollection<ReviewModel> Reviews { get; set; } = new HashSet<ReviewModel>();
 
 
 

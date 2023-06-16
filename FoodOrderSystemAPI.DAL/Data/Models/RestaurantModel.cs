@@ -1,39 +1,35 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodOrderSystemAPI;
 
-public class RestaurantModel
+public enum PaymentType
 {
-    public int RestaurantId { set; get; }
+    Credit,
+    Cash,
+    Both
+}
 
-    [Required(ErrorMessage = "Please, Enter Valied Restaurant name!")]
+[Table("RestaurantModel")]
+public class RestaurantModel : UserModel
+{
+    [Required(ErrorMessage = "Please enter a valid restaurant name.")]
+    [StringLength(50, MinimumLength = 3, ErrorMessage = "Restaurant name must be between 3 and 50 characters.")]
     public string RestaurantName { set; get; } = string.Empty;
 
     [Required(ErrorMessage = "Address is required.")]
+    [StringLength(100, MinimumLength = 5, ErrorMessage = "Address must be between 5 and 100 characters.")]
     public string Address { set; get; } = string.Empty;
 
     public string Logo { set; get; } = string.Empty;
 
-    [RegularExpression(@"^[0-9]+$", ErrorMessage = "Phone number should only contain numeric digits.")]
-    public int Phone { set; get; }
+    [Phone]
+    [RegularExpression(@"^[0-9]{11,16}$", ErrorMessage = "Please enter a valid Phone number.")]
+    public string Phone { set; get; } = string.Empty;
 
-    public string PaymentDetails { set; get; } = string.Empty;
-
-    public string Email { set; get; } = string.Empty;
-
-    [Required(ErrorMessage = "Username is required.")]
-    public string Username { set; get; } = string.Empty;
-
-    [Required(ErrorMessage = "Password is required.")]
-    [MinLength(8, ErrorMessage = "Password should be at least 8 characters long.")]
-    public string Password { set; get; } = string.Empty;
+    [EnumDataType(typeof(PaymentType), ErrorMessage = "Payment details should be either 'Credit', 'Cash' or 'Both'.")]
+    public string PaymentMethods { set; get; } = string.Empty;
 
     // 1-M Relation with product
-    ICollection<ProductModel> Products { set; get; } = new HashSet<ProductModel>();
+    public ICollection<ProductModel> Products { set; get; } = new HashSet<ProductModel>();
 }
