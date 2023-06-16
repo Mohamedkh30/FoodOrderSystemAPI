@@ -109,6 +109,7 @@ public class Program
         #region Managers
         builder.Services.AddTransient<ICustomerManager, CustomerManager>();
         builder.Services.AddTransient<IRestaurantManager, RestaurantManager>();
+        builder.Services.AddTransient<IReviewManager, ReviewManager>();
         #endregion
 
       

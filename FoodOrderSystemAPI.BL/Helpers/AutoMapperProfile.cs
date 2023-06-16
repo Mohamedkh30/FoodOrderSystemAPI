@@ -21,12 +21,13 @@ public class AutoMapperProfile: Profile
 
         #region RestaurantModel mappings
         // inputs
-        CreateMap<RestaurantAddDto, RestaurantModel>();
+        CreateMap<RestaurantAddDto, RestaurantModel>()
+            .ReverseMap();
         CreateMap<RestaurantUpdateDto, RestaurantModel>();
         // outputs
         CreateMap<RestaurantModel, RestaurantsReadDto>();
         CreateMap<RestaurantModel, RestaurantsProductsReadDto>();
-        CreateMap<ProductModel, FullProductDto>();
+        CreateMap<ProductModel, FullProductDto>().ReverseMap();
         CreateMap<RestaurantModel, RestaurantProductsDto>();
         CreateMap<RestaurantModel, RestaurantPaymentMethodDto>();
         // I/O
