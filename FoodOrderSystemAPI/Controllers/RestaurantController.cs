@@ -7,11 +7,11 @@ namespace FoodOrderSystemAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RestaurantsController : ControllerBase
+    public class RestaurantController : ControllerBase
     {
         private readonly IRestaurantManager _restaurantManager;
 
-        public RestaurantsController(IRestaurantManager restaurantManager)
+        public RestaurantController(IRestaurantManager restaurantManager)
         {
             this._restaurantManager = restaurantManager;
         }
