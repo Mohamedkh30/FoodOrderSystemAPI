@@ -39,6 +39,8 @@ public class ReviewController : ControllerBase
     public ActionResult<AddReviewOutputDto> AddReview(AddReviewInputDto toBeAddedReviewDto)
     {
         var AddedReviewOutputDto = _reviewManager.Add(toBeAddedReviewDto);
+        if(AddedReviewOutputDto is null)
+            return NotFound();
         return AddedReviewOutputDto;
     }
 
