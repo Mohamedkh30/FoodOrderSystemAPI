@@ -1,3 +1,23 @@
-<div>
+<div class="container py-5">
+    <div class="row searchDiv headerDiv">
+        
+        <div class="col-12 d-flex justify-content-center my-5 ">
+            <span>
+                <input type="text" [(ngModel)]="searchString" (keyup.enter)="search()" pInputText placeholder=" search for any product" class="rounded-3"/>
+                <i class="pi pi-search px-2" (click)="search()"></i>
+            </span>
+        </div>
+    </div>
 
+    <div class="row my-4 ">
+        <app-home-filter [Categories]="filterCategories" [Restaurants]="filterRestaurants" class="col-12 col-md-3"></app-home-filter>
+        <div class="col-12 col-md-9 d-flex flex-row justify-content-evenly flex-wrap">
+            <app-home-card></app-home-card>
+            <app-home-card></app-home-card>
+            <app-home-card></app-home-card>
+            <app-home-card></app-home-card>
+            <app-home-card></app-home-card>
+        </div>
+    </div>
 </div>
+
