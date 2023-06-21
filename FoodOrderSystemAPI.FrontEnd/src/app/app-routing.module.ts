@@ -28,14 +28,12 @@ const Router: Routes = [
         (m) => m.HomeModule
       ),
   },
-
-
-
-const routes: Routes = [
   {path:'home',component:HomePageComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'**',component:NotFoundComponent}
-];
+]
+
+
 
 @NgModule({
   declarations: [],
