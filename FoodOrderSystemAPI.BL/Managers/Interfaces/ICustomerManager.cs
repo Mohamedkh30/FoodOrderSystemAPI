@@ -8,8 +8,8 @@ namespace FoodOrderSystemAPI.BL;
 
 public interface ICustomerManager
 {
-    public   Task< int> Register(CustomerToRegister RegisterdCustomer);
-    public   Task< string> Login(CustomerToLogin customerToLogin );
+    public   Task< TokenDto> Register(CustomerToRegister RegisterdCustomer);
+    public   Task<TokenDto> Login(CustomerToLogin customerToLogin );
     public List<CustomerModel> GetAllCutomers();
     public List<CustomerToRead> ReadAllCutomerProperties();
 
