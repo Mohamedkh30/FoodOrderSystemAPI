@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FoodOrderSystemAPI.DAL;
+﻿using FoodOrderSystemAPI.DAL;
 
 namespace FoodOrderSystemAPI.BL;
 
@@ -7,22 +6,42 @@ public class ReviewManager : IReviewManager
 {
     #region Feilds & CTOR
     private readonly IUnitOfWork _unit;
-    private readonly IMapper _mapper;
 
-    public ReviewManager(IUnitOfWork unit, IMapper mapper)
+    public ReviewManager(IUnitOfWork unit)
     {
         _unit = unit;
-        _mapper = mapper;
     }
     #endregion
 
     #region Methods
-    public AddReviewOutputDto Add(AddReviewInputDto inputDto)
+    public AddReviewOutputDto? Add(AddReviewInputDto inputDto)
     {
-        var ToBeAddedReview = _mapper.Map<ReviewModel>(inputDto);
+        var ToBeAddedReview = new ReviewModel
+        {
+            Comment = inputDto.Comment,
+            Rating = inputDto.Rating,
+            ProductId = inputDto.ProductId,
+            CustomerId = inputDto.CustomerId,
+        };
+
+
         _unit.Reveiws.Add(ToBeAddedReview);
-        _unit.Save();
-        var OutputDto = _mapper.Map<AddReviewOutputDto>(ToBeAddedReview);
+        _unit.Reveiws.Update(ToBeAddedReview);
+        //System.InvalidOperationException
+        // TODO: throw error for error handler middleware
+        try
+        {
+            _unit.Save();
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+        var OutputDto = new AddReviewOutputDto
+        {
+            ProductId = inputDto.ProductId,
+            CustomerId = inputDto.CustomerId,
+        };
         return OutputDto;
     }
 
@@ -39,14 +58,28 @@ public class ReviewManager : IReviewManager
     public List<GetAllReveiwsOutputDto> GetAll()
     {
         var AllReviews = _unit.Reveiws.GetAll();
-        var Result = _mapper.Map<List<GetAllReveiwsOutputDto>>(AllReviews);
+        var Result = new List<GetAllReveiwsOutputDto>();
+        foreach (var Reveiws in AllReviews)
+        {
+            Result.Add(new GetAllReveiwsOutputDto
+            {
+                Comment = Reveiws.Comment,
+                Rating = Reveiws.Rating,
+            });
+        }
         return Result;
     }
 
-    public GetReviewOutputDto GetByIds(int customerId, int productId)
+    public GetReviewOutputDto? GetByIds(int customerId, int productId)
     {
         var TargetReview = _unit.Reveiws.GetByIds(customerId, productId);
-        var Result = _mapper.Map<GetReviewOutputDto>(TargetReview);
+        if (TargetReview is null)
+            return null;
+        var Result = new GetReviewOutputDto
+        {
+            Comment = TargetReview.Comment,
+            Rating = TargetReview.Rating,
+        };
         return Result;
     }
 
@@ -55,7 +88,12 @@ public class ReviewManager : IReviewManager
         var ToBeUpdated = _unit.Reveiws.GetByIds(inputDto.CustomerId, inputDto.ProductId);
         if (ToBeUpdated is null)
             return UpdateStatusEnum.NotFound;
-        _mapper.Map(inputDto, ToBeUpdated);
+
+        ToBeUpdated.Comment = inputDto.Comment;
+        ToBeUpdated.Rating = inputDto.Rating;
+        ToBeUpdated.ProductId = inputDto.ProductId;
+        ToBeUpdated.CustomerId = inputDto.CustomerId;
+        _unit.Reveiws.Update(ToBeUpdated);
         _unit.Save();
         return UpdateStatusEnum.Successfull;
     }

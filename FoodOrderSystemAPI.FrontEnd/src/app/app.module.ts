@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JwtTokenInterceptor } from './Interceptors/jwt-token.interceptor';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { ErrorModule } from './error/error.module';
 
 
 @NgModule({
@@ -18,7 +21,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    
+      SharedModule,
+      ErrorModule
  
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyBPfbHdhiBn2prqXNfZKa0yFYVPOWMVvKU', // Replace with your actual API key

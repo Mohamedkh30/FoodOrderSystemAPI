@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './error/not-found/not-found.component';
+import { HomePageComponent } from './home/home-page/home-page.component';
 
 const Router: Routes = [
   // (Lazy Loading ) Laod Module Only when Access authentiction in Url !!
@@ -26,6 +28,13 @@ const Router: Routes = [
         (m) => m.HomeModule
       ),
   },
+
+
+
+const routes: Routes = [
+  {path:'home',component:HomePageComponent},
+  {path:'',redirectTo:'home',pathMatch:'full'},
+  {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({

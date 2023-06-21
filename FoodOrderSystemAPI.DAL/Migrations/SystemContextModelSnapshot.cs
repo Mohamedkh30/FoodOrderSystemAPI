@@ -420,22 +420,25 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PaymentDetails")
+                    b.Property<string>("PaymentMethods")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RestaurantName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.ToTable("RestaurantModel", (string)null);
                 });
@@ -484,7 +487,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             modelBuilder.Entity("FoodOrderSystemAPI.ProductModel", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.RestaurantModel", "restaurant")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("restaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -596,6 +599,11 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("FoodOrderSystemAPI.RestaurantModel", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

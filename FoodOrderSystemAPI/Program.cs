@@ -83,7 +83,7 @@ public class Program
     .AddJwtBearer("default", options =>
             {
                 var secretkey = builder.Configuration.GetValue<string>("secretkey");
-                var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
+                    var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
                 var key = new SymmetricSecurityKey(secretkeyinbytes);
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -108,7 +108,8 @@ public class Program
 
         #region Managers
         builder.Services.AddTransient<ICustomerManager, CustomerManager>();
-
+        builder.Services.AddTransient<IRestaurantManager, RestaurantManager>();
+        builder.Services.AddTransient<IReviewManager, ReviewManager>();
         #endregion
 
       
