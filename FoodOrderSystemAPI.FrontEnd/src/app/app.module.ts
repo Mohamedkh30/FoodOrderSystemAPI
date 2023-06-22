@@ -6,23 +6,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
-
 import { AppComponent } from './app.component';
 import { JwtTokenInterceptor } from './Interceptors/jwt-token.interceptor';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { ErrorModule } from './error/error.module';
-
+import { ProductModule } from './product/product.module';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent,  ],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-      SharedModule,
-      ErrorModule
- 
+    SharedModule,
+    ErrorModule,
+    ProductModule,
+
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyBPfbHdhiBn2prqXNfZKa0yFYVPOWMVvKU', // Replace with your actual API key
     // }),
@@ -32,10 +32,10 @@ import { ErrorModule } from './error/error.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtTokenInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}
