@@ -12,6 +12,8 @@ import { JwtTokenInterceptor } from './Interceptors/jwt-token.interceptor';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { ErrorModule } from './error/error.module';
+import { HomeModule } from './home/home.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +21,10 @@ import { ErrorModule } from './error/error.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ErrorModule,
+    HomeModule,
+    FormsModule,
+
     BrowserAnimationsModule,
       SharedModule,
       ErrorModule
