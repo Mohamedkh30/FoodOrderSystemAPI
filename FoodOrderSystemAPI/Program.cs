@@ -28,16 +28,16 @@ public class Program
         builder.Services.AddSwaggerGen();
         #endregion
 
-        //builder.Services.AddCors(options =>
-        // {
-        //     options.AddPolicy("AllowOrigin",
-        //         builder =>
-        //         {
-        //             builder.AllowAnyOrigin()
-        //                 .AllowAnyMethod()
-        //                 .AllowAnyHeader();
-        //         });
-        // });
+        builder.Services.AddCors(options =>
+         {
+             options.AddDefaultPolicy(
+                 builder =>
+                 {
+                     builder.AllowAnyOrigin()
+                         .AllowAnyMethod()
+                         .AllowAnyHeader();
+                 });
+         });
 
         #region Context
         var connectionString = builder.Configuration.GetConnectionString("FoodOrderSystemDB_ConStr");
@@ -83,7 +83,7 @@ public class Program
     .AddJwtBearer("default", options =>
             {
                 var secretkey = builder.Configuration.GetValue<string>("secretkey");
-                var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
+                    var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
                 var key = new SymmetricSecurityKey(secretkeyinbytes);
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -108,7 +108,8 @@ public class Program
 
         #region Managers
         builder.Services.AddTransient<ICustomerManager, CustomerManager>();
-
+        builder.Services.AddTransient<IRestaurantManager, RestaurantManager>();
+        builder.Services.AddTransient<IReviewManager, ReviewManager>();
         #endregion
 
       
@@ -128,11 +129,11 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseCors();
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();
 
-        //app.UseCors("AllowOrigin");
 
         app.MapControllers();
 
