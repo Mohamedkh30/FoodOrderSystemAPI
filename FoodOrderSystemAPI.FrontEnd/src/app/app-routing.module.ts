@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
+import { RestaurantPageComponent } from './restaurant/restaurant-page/restaurant-page.component';
 
 const Router: Routes = [
   // (Lazy Loading ) Laod Module Only when Access authentiction in Url !!
@@ -21,16 +22,17 @@ const Router: Routes = [
         (m) => m.RegistraionModule
       ),
   },
-  {
-    path: 'home',
-    loadChildren: () =>
-      import('./moduls/home/home.module').then(
-        (m) => m.HomeModule
-      ),
-  },
+  // {
+  //   path: 'home',
+  //   loadChildren: () =>
+  //     import('./moduls/home/home.module').then(
+  //       (m) => m.HomeModule
+  //     ),
+  // },
   {path:'home',component:HomePageComponent},
+  {path:'restaurant',component:RestaurantPageComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
-  {path:'**',component:NotFoundComponent}
+  {path:'**',component:NotFoundComponent},
 ]
 
 

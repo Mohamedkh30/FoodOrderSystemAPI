@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { ErrorModule } from './error/error.module';
 import { HomeModule } from './home/home.module';
 import { FormsModule } from '@angular/forms';
+import { RestaurantModule } from './restaurant/restaurant.module'
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     ErrorModule,
     HomeModule,
     FormsModule,
+    RestaurantModule,
 
     BrowserAnimationsModule,
       SharedModule,
