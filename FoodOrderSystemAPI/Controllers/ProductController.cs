@@ -38,14 +38,13 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
         public ActionResult<int> Add(FullProductDto product)
         {
             return _productManager.Add(product);
         }
 
         [HttpDelete]
-        [Route("delete/{id}")]
+        [Route("{id}")]
         public ActionResult Delete(int id)
         {
             FullProductDto? product = _productManager.GetById(id);
@@ -57,8 +56,7 @@ namespace FoodOrderSystemAPI.Controllers
             return NoContent();
         }
 
-        [HttpPost]
-        [Route("update")]
+        [HttpPut]
         public ActionResult Update(FullProductDto product)
         {
             _productManager.update(product);
