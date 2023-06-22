@@ -12,11 +12,7 @@
     <div class="row my-4 ">
         <app-home-filter [Categories]="filterCategories" [Restaurants]="filterRestaurants" class="col-12 col-md-3"></app-home-filter>
         <div class="col-12 col-md-9 d-flex flex-row justify-content-evenly flex-wrap">
-            <app-home-card></app-home-card>
-            <app-home-card></app-home-card>
-            <app-home-card></app-home-card>
-            <app-home-card></app-home-card>
-            <app-home-card></app-home-card>
+            <app-home-card *ngFor="let product of productsList" [product]="product" ></app-home-card>
         </div>
     </div>
 </div>
