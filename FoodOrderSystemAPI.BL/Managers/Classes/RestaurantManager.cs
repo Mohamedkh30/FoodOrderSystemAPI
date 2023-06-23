@@ -16,62 +16,18 @@ public class RestaurantManager : IRestaurantManager
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly UserManager<RestaurantModel> _UserMangager;
-    private readonly ICustomerManager _customerManager;
-    private readonly IConfiguration _configuration;
+    private readonly IAuthenticationManager _AuthenticationManager;
+
     //private readonly IMapper _mapper;
 
-    public RestaurantManager(IUnitOfWork unitOfWork, IMapper mapper, UserManager<RestaurantModel> UserMangager, ICustomerManager customerManager, IConfiguration configuration)
+    public RestaurantManager(IUnitOfWork unitOfWork, UserManager<RestaurantModel> UserMangager,  IAuthenticationManager authenticationManager)
     {
         this._unitOfWork = unitOfWork;
         _UserMangager = UserMangager;
-        _customerManager = customerManager;
-        _configuration = configuration;
-        //this._mapper = mapper;
+        _AuthenticationManager = authenticationManager;
     }
 
-    public async Task<TokenDto> Login(CustomerToLogin NewLoginCustomer)
-    {
-        var Customer = await _UserMangager.FindByNameAsync(NewLoginCustomer.UserName);
-        if (Customer is null || await _UserMangager.IsLockedOutAsync(Customer))
-        {
-            return null;
-        }
-        bool isAuthenticated = await _UserMangager.CheckPasswordAsync(Customer, NewLoginCustomer.Password);
-        if (!isAuthenticated)
-        {
-            _UserMangager.AccessFailedAsync(Customer);
-            return null;
-        }
 
-        var CustomerClaims = await _UserMangager.GetClaimsAsync(Customer);
-
-        // Generate Tkey 
-        var secretkey = _configuration["secretkey"];
-        var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
-        var key = new SymmetricSecurityKey(secretkeyinbytes);
-
-        // Generate Hashing Result 
-        var HashingResult = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
-
-        //Generate JWt Token 
-        // Calc Expiration Date 
-        var ExpirationDate = DateTime.Now.AddMinutes(30);
-        var Jwt = new JwtSecurityToken(
-            claims: CustomerClaims,
-            notBefore: DateTime.Now,
-            expires: ExpirationDate,
-            signingCredentials: HashingResult
-            );
-
-        var TokenHandler = new JwtSecurityTokenHandler();
-        string TokenString = TokenHandler.WriteToken(Jwt);
-
-        return new TokenDto()
-        {
-            Token = TokenString,
-            ExpirationDate = ExpirationDate
-        };
-    }
 
 
     public List<RestaurantsReadDto> GetAllRestaurants()
@@ -161,7 +117,7 @@ public class RestaurantManager : IRestaurantManager
             Role = RoleOptions.Resturant,
             UserName = restaurantDto.UserName
         };
-        var CreationResult = await _UserMangager.CreateAsync(NewRestaurant, restaurantDto.Password);
+        var CreationResult = await _UserMangager.CreateAsync(NewRestaurant , restaurantDto.Password);
 
 
         // Add To Table 
@@ -180,12 +136,12 @@ public class RestaurantManager : IRestaurantManager
             //_unitOfWork.Customers.Add(CustomerToAdd);
             _unitOfWork.Save();
             // Instantiate An New User to Login from the user that Register
-            CustomerToLogin RegisteredCustomerToLogin = new CustomerToLogin()
+            UserLogin RegisterResturangLogin = new UserLogin()
             {
                 UserName = NewRestaurant.UserName,
                 Password = restaurantDto.Password
             };
-            return await Login(RegisteredCustomerToLogin);
+            return await _AuthenticationManager.LoginAsResturant(RegisterResturangLogin);
 
         }
         else if (!CreationResult.Succeeded)
@@ -202,9 +158,7 @@ public class RestaurantManager : IRestaurantManager
             }
         }
             return null;
-        //_unitOfWork.Restaurants.Add(NewRestaurant);
-        //_unitOfWork.Save();
-        //return NewRestaurant.Id;
+        
     }
 
     public UpdateStatusEnum UpdateRestaurant(RestaurantUpdateDto restaurantDto)

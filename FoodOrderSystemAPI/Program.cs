@@ -147,6 +147,7 @@ public class Program
         builder.Services.AddScoped<IReviewManager, ReviewManager>();
         builder.Services.AddScoped<IProductManager, ProductManager>();
         builder.Services.AddScoped<IOrdersManager, OrdersManager>();
+        builder.Services.AddScoped<IAuthenticationManager, AuthenticationManger>();
 
         #endregion
 
