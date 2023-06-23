@@ -73,10 +73,14 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(RestaurantAddDto restaurantAddDto)
+        public async Task<ActionResult<TokenDto>> Add(RestaurantAddDto restaurantAddDto)
         {
-            var IdOfRestaurantAdded = _restaurantManager.AddRestaurant(restaurantAddDto);
-            return CreatedAtAction("GetById", new { id = IdOfRestaurantAdded });
+            var ResaultToken = await _restaurantManager.AddRestaurant(restaurantAddDto);
+            if (ResaultToken == null)
+            {
+                return BadRequest();
+            }
+            return Ok(ResaultToken);
         }
 
         [HttpPut]

@@ -1,19 +1,79 @@
 ﻿using AutoMapper;
 using FoodOrderSystemAPI.BL.DTOs.Restaurants;
 using FoodOrderSystemAPI.DAL;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 namespace FoodOrderSystemAPI.BL;
 
 public class RestaurantManager : IRestaurantManager
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly UserManager<RestaurantModel> _UserMangager;
+    private readonly ICustomerManager _customerManager;
+    private readonly IConfiguration _configuration;
     //private readonly IMapper _mapper;
 
-    public RestaurantManager(IUnitOfWork unitOfWork, IMapper mapper)
+    public RestaurantManager(IUnitOfWork unitOfWork, IMapper mapper, UserManager<RestaurantModel> UserMangager, ICustomerManager customerManager, IConfiguration configuration)
     {
         this._unitOfWork = unitOfWork;
+        _UserMangager = UserMangager;
+        _customerManager = customerManager;
+        _configuration = configuration;
         //this._mapper = mapper;
     }
+
+    public async Task<TokenDto> Login(CustomerToLogin NewLoginCustomer)
+    {
+        var Customer = await _UserMangager.FindByNameAsync(NewLoginCustomer.UserName);
+        if (Customer is null || await _UserMangager.IsLockedOutAsync(Customer))
+        {
+            return null;
+        }
+        bool isAuthenticated = await _UserMangager.CheckPasswordAsync(Customer, NewLoginCustomer.Password);
+        if (!isAuthenticated)
+        {
+            _UserMangager.AccessFailedAsync(Customer);
+            return null;
+        }
+
+        var CustomerClaims = await _UserMangager.GetClaimsAsync(Customer);
+
+        // Generate Tkey 
+        var secretkey = _configuration["secretkey"];
+        var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
+        var key = new SymmetricSecurityKey(secretkeyinbytes);
+
+        // Generate Hashing Result 
+        var HashingResult = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+
+        //Generate JWt Token 
+        // Calc Expiration Date 
+        var ExpirationDate = DateTime.Now.AddMinutes(30);
+        var Jwt = new JwtSecurityToken(
+            claims: CustomerClaims,
+            notBefore: DateTime.Now,
+            expires: ExpirationDate,
+            signingCredentials: HashingResult
+            );
+
+        var TokenHandler = new JwtSecurityTokenHandler();
+        string TokenString = TokenHandler.WriteToken(Jwt);
+
+        return new TokenDto()
+        {
+            Token = TokenString,
+            ExpirationDate = ExpirationDate
+        };
+    }
+
+
     public List<RestaurantsReadDto> GetAllRestaurants()
     {
         var AllRestaurants = _unitOfWork.Restaurants.GetAll();
@@ -87,7 +147,7 @@ public class RestaurantManager : IRestaurantManager
         };
     }
 
-    public int AddRestaurant(RestaurantAddDto restaurantDto)
+    public async Task<TokenDto> AddRestaurant(RestaurantAddDto restaurantDto)
     {
         //var NewRestaurant = _mapper.Map<RestaurantModel>(restaurantDto);
         var NewRestaurant = new RestaurantModel()
@@ -101,10 +161,50 @@ public class RestaurantManager : IRestaurantManager
             Role = RoleOptions.Resturant,
             UserName = restaurantDto.UserName
         };
-        //var CreationResult = await 
-        _unitOfWork.Restaurants.Add(NewRestaurant);
-        _unitOfWork.Save();
-        return NewRestaurant.Id;
+        var CreationResult = await _UserMangager.CreateAsync(NewRestaurant, restaurantDto.Password);
+
+
+        // Add To Table 
+        if (CreationResult.Succeeded)
+        {
+            var RestaurantClaims = new List<Claim>()
+            {
+
+                new Claim(ClaimTypes.Name, NewRestaurant.UserName),
+                new Claim(ClaimTypes.Email, NewRestaurant.Email),
+                new Claim(ClaimTypes.NameIdentifier, NewRestaurant.Id.ToString()),
+                new Claim(ClaimTypes.Role, NewRestaurant.Role.ToString())
+            };
+
+            await _UserMangager.AddClaimsAsync(NewRestaurant, RestaurantClaims);
+            //_unitOfWork.Customers.Add(CustomerToAdd);
+            _unitOfWork.Save();
+            // Instantiate An New User to Login from the user that Register
+            CustomerToLogin RegisteredCustomerToLogin = new CustomerToLogin()
+            {
+                UserName = NewRestaurant.UserName,
+                Password = restaurantDto.Password
+            };
+            return await Login(RegisteredCustomerToLogin);
+
+        }
+        else if (!CreationResult.Succeeded)
+        {
+            // The user creation operation returned errors
+            // Inspect the errors and handle them accordingly
+            foreach (var error in CreationResult.Errors)
+            {
+                // Access the error properties
+                var errorCode = error.Code;
+                var errorMessage = error.Description;
+
+                // Log or handle the error message
+            }
+        }
+            return null;
+        //_unitOfWork.Restaurants.Add(NewRestaurant);
+        //_unitOfWork.Save();
+        //return NewRestaurant.Id;
     }
 
     public UpdateStatusEnum UpdateRestaurant(RestaurantUpdateDto restaurantDto)
@@ -115,6 +215,12 @@ public class RestaurantManager : IRestaurantManager
             return UpdateStatusEnum.NotFound;
         }
         //_mapper.Map(restaurantDto, RestaurantUpdate);
+        RestaurantUpdate.RestaurantName = restaurantDto.RestaurantName;
+        RestaurantUpdate.Address = restaurantDto.Address;
+        RestaurantUpdate.Logo = restaurantDto.Logo;
+        RestaurantUpdate.Phone = restaurantDto.Phone;
+        RestaurantUpdate.PaymentMethods = restaurantDto.PaymentMethods;
+        _unitOfWork.Restaurants.Update(RestaurantUpdate);
         _unitOfWork.Save();
         return UpdateStatusEnum.Successfull;
     }
@@ -127,4 +233,6 @@ public class RestaurantManager : IRestaurantManager
         _unitOfWork.Save();
         return DeleteStatusEnum.Successfull;
     }
+
+
 }
