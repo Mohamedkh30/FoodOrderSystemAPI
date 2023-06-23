@@ -55,7 +55,7 @@ console.log(this.UserIsLoggedIn)
       // Toggle the "hidden" class on the dropdown menu to show or hide it
     if (this.UserdropdownMenu) {
       this.UserdropdownMenu!!.classList.toggle('hidden')
-      console.log(this.authService.RegisterdCustomer?.TokenExpirationDate)
+      console.log(this.authService.UserLogin?.TokenExpirationDate)
     }
     else {
       console.log(` UserIsLoggedIn = ${this.UserIsLoggedIn} ///////// islogged for service = ${this.authService.IsLoggedIn$.value}`)
