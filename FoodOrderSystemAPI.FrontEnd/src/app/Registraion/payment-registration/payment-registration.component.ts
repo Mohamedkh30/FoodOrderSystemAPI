@@ -114,9 +114,7 @@ export class PaymentRegistrationComponent implements OnInit {
       this.RegisterService.Register().subscribe(
         (RegisterdCustomerTokenDto) => {
           console.log(RegisterdCustomerTokenDto);
-          this.AuthentcationService.IsLoggedIn$.next(true);
-          localStorage.setItem('CustomerData', RegisterdCustomerTokenDto.token)
-          this.AuthentcationService.RegisterdCustomer = this.AuthentcationService.ExtractClamisOfToken();
+          this.AuthentcationService.SetUserDataAfterLogin(RegisterdCustomerTokenDto);
           this.router.navigate(['/home/customers']);
         },
         (error: HttpErrorResponse) => {

@@ -10,6 +10,7 @@ import { CustomerProfileDetailsComponent } from './customer/customer-profile-det
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddCardComponent } from './AddCard/add-card.component';
+import { NavigationRegisterComponent } from './Registraion/navigation-register/navigation-register.component';
 
 const Router: Routes = [
   // (Lazy Loading ) Laod Module Only when Access authentiction in Url !!
@@ -20,6 +21,9 @@ const Router: Routes = [
         (m) => m.AuthentcationModule
       ),
   },
+  { path: 'registration',
+  component: NavigationRegisterComponent
+},
   {
     path: 'registration',
     loadChildren: () =>
@@ -27,13 +31,6 @@ const Router: Routes = [
         (m) => m.RegistraionModule
       ),
   },
-  // {
-  //   path: 'home',
-  //   loadChildren: () =>
-  //     import('./moduls/home/home.module').then(
-  //       (m) => m.HomeModule
-  //     ),
-  // },
   {path:'home',component:HomePageComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'addproduct',component:AddProductComponent},
@@ -44,6 +41,9 @@ const Router: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];
+
+ 
+
 
 
 

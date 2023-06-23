@@ -1,7 +1,6 @@
 // import { AgmCoreModule } from '@agm/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-// import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +17,7 @@ import { ErrorModule } from './error/error.module';
 import { HomeModule } from './home/home.module';
 import { RestaurantModule } from './restaurant/restaurant.module'
 import { ProductModule } from './product/product.module';
+import { NavigationRegisterComponent } from './Registraion/navigation-register/navigation-register.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -26,7 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent , NavigationRegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

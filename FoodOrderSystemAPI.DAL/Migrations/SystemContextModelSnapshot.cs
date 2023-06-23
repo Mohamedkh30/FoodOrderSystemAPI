@@ -538,7 +538,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bfb8d6ce-080f-4556-ad3b-21bb61226362",
+                            ConcurrencyStamp = "8f772f35-32a2-4a7f-9b5f-bece2f6da731",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
