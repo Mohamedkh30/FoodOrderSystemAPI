@@ -56,9 +56,9 @@
           <div class="row">
             <div>
               <div class="mb-3">
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center h5">
                   <h3 class="mb-0">Contact Information</h3>
-                  <h5 class="mb-0">Already have an account? <a href="#">Log in</a></h5>
+                  <h5 class="mb-0">Already have an account? <a href="#" style="color: blue;">Log in</a></h5>
                 </div>
                 <br>
                 <div class="mb-3">
@@ -246,7 +246,7 @@
             </div>
           </div>
           <div class="d-flex justify-content-center py-2" style="width: 18rem;">
-            <button type="button" id="button1" class="btn btn-danger" (click)="returnToCart()">Return to Cart</button>
+            <button type="button" id="button1" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" (click)="returnToCart()">Return to Cart</button>
           </div>
         </div>
         
@@ -281,6 +281,7 @@
           <button type="submit" (click)="proceedToCheckout()" [disabled]="!isProceedEnabled" data-bs-toggle="button" class="btn btn-success">Proceed</button>
 
         </div>
+
 
 
       <!-- </form> -->
