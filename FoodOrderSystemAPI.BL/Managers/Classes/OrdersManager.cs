@@ -1,10 +1,5 @@
 ﻿using FoodOrderSystemAPI.BL.DTOs;
 using FoodOrderSystemAPI.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodOrderSystemAPI.BL.Managers.Classes
 {
@@ -22,17 +17,32 @@ namespace FoodOrderSystemAPI.BL.Managers.Classes
             if (order is null)
                 throw new Exception("Not Found Order Id");
 
-            OrderModel newOrder = new OrderModel
+            // product model dto collection 
+            List<OrderProductModel> NewOrderProducts = new List<OrderProductModel>();
+            foreach (var orderProductDto in orderDto.OrderProducts)
+            {
+                NewOrderProducts.Add(
+                    new OrderProductModel
+                    {
+                        OrderId = orderDto.OrderId,
+                        ProductId = orderProductDto.ProductId,
+                        Quantity = orderProductDto.Quantity,
+                    });
+            }
+
+            OrderModel NewOrder = new OrderModel
             {
                 OrderId = orderDto.OrderId,
                 CustomerId = orderDto.CustomerId,
                 TotalPrice = orderDto.TotalPrice,
                 OrderDate = orderDto.OrderDate,
+                OrderProducts = NewOrderProducts,
             };
-            _unit.Orders.Add(newOrder);
+            _unit.Orders.Add(NewOrder);
+            _unit.Orders.Update(NewOrder);
             _unit.Save();
 
-            return newOrder.OrderId;
+            return NewOrder.OrderId;
         }
 
         public void Delete(int id)
