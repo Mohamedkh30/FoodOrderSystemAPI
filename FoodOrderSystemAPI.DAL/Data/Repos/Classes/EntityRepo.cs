@@ -40,9 +40,9 @@ public class EntityRepo<TEntity> : IEntityRepo<TEntity> where TEntity : class
     /// <returns>
     ///     IEnumerable holds all entities
     /// </returns>
-    public IEnumerable<TEntity> GetAll()
+    public virtual IEnumerable<TEntity> GetAll()
     {
-        return _dbContext.Set<TEntity>();
+        return _dbContext.Set<TEntity>().AsNoTracking();
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class EntityRepo<TEntity> : IEntityRepo<TEntity> where TEntity : class
     ///     entity key that it will search with
     /// </param>
     /// <returns></returns>
-    public TEntity? GetById(int id)
+    public virtual TEntity? GetById(int id)
     {
         return _dbContext.Set<TEntity>().Find(id);
     }

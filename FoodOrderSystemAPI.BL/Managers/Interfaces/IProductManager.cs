@@ -8,10 +8,10 @@ namespace FoodOrderSystemAPI.BL
 {
     public interface IProductManager
     {
-        List<FullProductDto> GetAll();
-        FullProductDto? GetById(int id);
-        int Add(FullProductDto productDto);
-        void update(FullProductDto productDto);
+        List<ProductCardDto> GetAll();
+        ProductCardDto? GetById(int id);
+        int Add(ProductCardDto productDto);
+        void update(ProductCardDto productDto);
         void delete(int id);
     }
 }

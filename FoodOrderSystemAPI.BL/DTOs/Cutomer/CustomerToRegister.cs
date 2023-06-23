@@ -25,8 +25,9 @@ public class CustomerToRegister
         " one uppercase letter, one digit, and one special character.")]
     public string Password { get; set; }
 
-    [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-    public string ConnfirmedPassword  { get; set; }
+
+
+    // Maintainance (1) => Remove Confirm Password Proberty 
 
     // Location Properties 
     public double Langitude { get; set; }
@@ -34,7 +35,7 @@ public class CustomerToRegister
 
     // Card Properties 
 
-    [RegularExpression(@"^[0-9]{16}$", ErrorMessage = "Invalid card number.")]
+    // Maintainance (2) => Remove Validation On Card Number 
     public string? CardNumber { get; set; }
 
     [Display(Name = "Customer Birth")]

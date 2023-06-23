@@ -43,13 +43,13 @@ namespace FoodOrderSystemAPI.Controllers
         // POST api/<CustomerController>
         [HttpPost]
 
-        public async Task< ActionResult >Post(CustomerToRegister ResgiteredCustomer)
+        public async Task< ActionResult<TokenDto> >Post(CustomerToRegister ResgiteredCustomer)
         {
             var result =  await _customerManager.Register(ResgiteredCustomer);
-            if(result == -1) {
+            if(result == null) {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(result);
         }
 
         [HttpPatch("{id}")]
@@ -95,7 +95,7 @@ namespace FoodOrderSystemAPI.Controllers
         public async Task <ActionResult <string>>  Login_Presention_Layer(CustomerToLogin customerToLogin)
         {
             var LoginResult = await _customerManager.Login(customerToLogin);
-            if(LoginResult == string.Empty) {
+            if(LoginResult == null) {
             return Unauthorized(LoginResult);
             }
             return Ok(LoginResult);
