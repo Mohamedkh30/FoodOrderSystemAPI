@@ -27,7 +27,7 @@ public class AutoMapperProfile: Profile
         // outputs
         CreateMap<RestaurantModel, RestaurantsReadDto>();
         CreateMap<RestaurantModel, RestaurantsProductsReadDto>();
-        CreateMap<ProductModel, FullProductDto>().ReverseMap();
+        CreateMap<ProductModel, ProductCardDto>().ReverseMap();
         CreateMap<RestaurantModel, RestaurantProductsDto>();
         CreateMap<RestaurantModel, RestaurantPaymentMethodDto>();
         // I/O

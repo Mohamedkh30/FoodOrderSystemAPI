@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FoodOrderSystemAPI.DAL;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -15,6 +16,7 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
     internal DbSet<OrderModel> Orders => Set<OrderModel>();
     internal DbSet<OrderProductModel> OrdersProducts => Set<OrderProductModel>();
     internal DbSet<ProductModel> Products => Set<ProductModel>();
+    internal DbSet<ProductTag> ProductTags => Set<ProductTag>();
     internal DbSet<RestaurantModel> Restaurants => Set<RestaurantModel>();
     internal DbSet<ReviewModel> Reviews => Set<ReviewModel>();
     internal DbSet<CreditCard> CreditCards => Set<CreditCard>();
@@ -33,11 +35,42 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
         modelBuilder.Entity<ReviewModel>()
             .HasKey(e => new {e.CustomerId, e.ProductId });
 
+        modelBuilder.Entity<ProductTag>()
+            .HasKey(e => new { e.ProductId, e.tag });
+
 
 
         modelBuilder.Entity<CustomerModel>().ToTable("CustomerModel");
         modelBuilder.Entity<RestaurantModel>().ToTable("RestaurantModel");
 
+
+        #region product seed
+        modelBuilder.Entity<ProductModel>().HasData(
+            new ProductModel { ProductId = 1, Productname = "Flafel", price = 3, describtion = "flafel so5na", img = "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg", offer = 0.45555f, rate = 4 ,RestaurantID = 1 },
+            new ProductModel { ProductId = 2, Productname = "fool", price = 5, describtion = "fool so5n", img = "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg", offer = 0, rate = 2, RestaurantID = 1 },
+            new ProductModel { ProductId = 3, Productname = "Koshary", price = 20, describtion = "Koshary so5n", img = "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg", offer = 0.5f, rate = 4, RestaurantID = 1 },
+            new ProductModel { ProductId = 4, Productname = "kebda", price = 30, describtion = "kebda so5na", img = "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg", offer = 0.1f, rate = 3 , RestaurantID = 1 }
+        );
+        #endregion
+
+        #region product Tags seed
+        modelBuilder.Entity<ProductTag>().HasData(
+            new ProductTag { ProductId = 1, tag = "vegetarian" },
+            new ProductTag { ProductId = 1, tag = "local" },
+            new ProductTag { ProductId = 2, tag = "vegetarian" },
+            new ProductTag { ProductId = 2, tag = "local" },
+            new ProductTag { ProductId = 3, tag = "vegetarian" },
+            new ProductTag { ProductId = 3, tag = "local" },
+            new ProductTag { ProductId = 4, tag = "local" }
+            );
+        #endregion
+
+        #region Restaurant seed
+        modelBuilder.Entity<RestaurantModel>().HasData(
+            new RestaurantModel { Id = 1, RestaurantName = "Mohamed Ahmed",UserName= "Mohamed Ahmed" , Address="test", Email="test" ,PaymentMethods= PaymentType.Cash }//,
+            //new RestaurantModel { Id = 2, RestaurantName = "Kebdaky" }
+            );
+        #endregion
 
 
 

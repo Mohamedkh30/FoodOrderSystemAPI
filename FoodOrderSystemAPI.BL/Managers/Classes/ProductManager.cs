@@ -16,23 +16,26 @@ namespace FoodOrderSystemAPI.BL
             _unitOfWork=unitOfWork;
         }
 
-        public int Add(FullProductDto productDto)
+        public int Add(ProductCardDto productDto)           //not working (move to DAL? | )
         {
             var product = new ProductModel()
             {
+                ProductId= productDto.ProductID,
                 describtion = productDto.describtion,
                 img = productDto.img,
                 offer = productDto.offer,
                 price = productDto.price,
                 Productname = productDto.Productname,
                 rate = productDto.rate,
-                type = productDto.type,
-
-                //ID=productDto.ID,
-                restaurant = productDto.restaurant,
             };
-
             _unitOfWork.Products.Add(product);
+            _unitOfWork.Save();
+            foreach (var tag in productDto.tags)
+            {
+                _unitOfWork.ProductTags.Add(new ProductTag { ProductId= productDto.ProductID,tag= tag});
+            }
+
+            
             _unitOfWork.Save();
             return productDto.ProductID;
         }
@@ -42,13 +45,19 @@ namespace FoodOrderSystemAPI.BL
             ProductModel? productToDelete = _unitOfWork.Products.GetById(id);
             if (productToDelete is null)
                 return;
+
+            IEnumerable<ProductTag>? tagsToDelete = _unitOfWork.ProductTags.GetAll().Where(t=>t.ProductId==id);
             _unitOfWork.Products.Delete(productToDelete);
+            foreach(var tag in tagsToDelete)
+            {
+                _unitOfWork.ProductTags.Delete(tag);
+            }
             _unitOfWork.Save();
         }
 
-        public List<FullProductDto> GetAll()
+        public List<ProductCardDto> GetAll()
         {
-            return _unitOfWork.Products.GetAll().Select(p => new FullProductDto() 
+            var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto() 
             {
                 ProductID = p.ProductId,
                 describtion= p.describtion,
@@ -57,18 +66,24 @@ namespace FoodOrderSystemAPI.BL
                 price = p.price,
                 Productname = p.Productname,
                 rate = p.rate,
-                type = p.type,
-
-                restaurant= p.restaurant,
+                restaurantID = p.RestaurantID,
+                restaurantName = p.restaurant.RestaurantName,
             }).ToList();
+
+            foreach (var product in products)
+            {
+                product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
+            }
+            return products;
+
         }
 
-        public FullProductDto? GetById(int id)
+        public ProductCardDto? GetById(int id)
         {
             ProductModel? ProductToRead = _unitOfWork.Products.GetById(id);
             if (ProductToRead is null)
                 return null;
-            return new FullProductDto()
+            return new ProductCardDto()
             {
                 ProductID = ProductToRead.ProductId,
                 describtion = ProductToRead.describtion,
@@ -77,13 +92,13 @@ namespace FoodOrderSystemAPI.BL
                 price = ProductToRead.price,
                 Productname = ProductToRead.Productname,
                 rate = ProductToRead.rate,
-                type = ProductToRead.type,
-
-                restaurant = ProductToRead.restaurant,
+                tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == ProductToRead.ProductId).Select(t => t.tag).ToList(),
+                restaurantID = ProductToRead.restaurant.Id,
+                restaurantName = ProductToRead.restaurant.RestaurantName,
             };
         }
 
-        public void update(FullProductDto productDto)
+        public void update(ProductCardDto productDto)           // doesn't update tag list
         {
             ProductModel? ProductfromDb = _unitOfWork.Products.GetById(productDto.ProductID);
             if (ProductfromDb is null)
@@ -95,9 +110,6 @@ namespace FoodOrderSystemAPI.BL
             ProductfromDb.price = productDto.price;
             ProductfromDb.Productname = productDto.Productname;
             ProductfromDb.rate = productDto.rate;
-            ProductfromDb.type = productDto.type;
-
-            ProductfromDb.restaurant = productDto.restaurant;
 
             _unitOfWork.Products.Update(ProductfromDb);
             _unitOfWork.Save();

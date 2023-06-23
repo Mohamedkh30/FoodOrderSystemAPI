@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using System.Reflection;
+using FoodOrderSystemAPI.BL.Managers.Classes;
 
 namespace FoodOrderSystemAPI;
 
@@ -110,11 +111,14 @@ public class Program
         builder.Services.AddTransient<ICustomerManager, CustomerManager>();
         builder.Services.AddTransient<IRestaurantManager, RestaurantManager>();
         builder.Services.AddTransient<IReviewManager, ReviewManager>();
+        builder.Services.AddTransient<IProductManager, ProductManager>();
+        builder.Services.AddTransient<IOrdersManager, OrdersManager>();
+
         #endregion
 
-      
 
-  
+
+
 
         //#region Validator Services
 

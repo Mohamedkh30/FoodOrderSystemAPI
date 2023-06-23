@@ -16,20 +16,20 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
 
-        public ActionResult<List<FullProductDto>> GetAll()
+        public ActionResult<List<ProductCardDto>> GetAll()
         {
             return _productManager.GetAll();
         }
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize]
+        //[Authorize]
 
-        public ActionResult<FullProductDto> GetById(int id)
+        public ActionResult<ProductCardDto> GetById(int id)
         {
-            FullProductDto? product = _productManager.GetById(id);
+            ProductCardDto? product = _productManager.GetById(id);
             if (product is null)
             {
                 return NotFound();
@@ -38,7 +38,7 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> Add(FullProductDto product)
+        public ActionResult<int> Add(ProductCardDto product)
         {
             return _productManager.Add(product);
         }
@@ -47,7 +47,7 @@ namespace FoodOrderSystemAPI.Controllers
         [Route("{id}")]
         public ActionResult Delete(int id)
         {
-            FullProductDto? product = _productManager.GetById(id);
+            ProductCardDto? product = _productManager.GetById(id);
             if (product is null)
             {
                 return NotFound();
@@ -57,7 +57,7 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpPut]
-        public ActionResult Update(FullProductDto product)
+        public ActionResult Update(ProductCardDto product)
         {
             _productManager.update(product);
             return NoContent();

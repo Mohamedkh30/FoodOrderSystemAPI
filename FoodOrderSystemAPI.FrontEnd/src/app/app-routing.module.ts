@@ -21,13 +21,13 @@ const Router: Routes = [
         (m) => m.RegistraionModule
       ),
   },
-  {
-    path: 'home',
-    loadChildren: () =>
-      import('./moduls/home/home.module').then(
-        (m) => m.HomeModule
-      ),
-  },
+  // {
+  //   path: 'home',
+  //   loadChildren: () =>
+  //     import('./moduls/home/home.module').then(
+  //       (m) => m.HomeModule
+  //     ),
+  // },
   {path:'home',component:HomePageComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'**',component:NotFoundComponent}
