@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderSystemAPI.BL
 {
-    public class FullProductDto
+    public class ProductCardDto
     {
         public int ProductID { get; set; }
 
@@ -23,8 +23,9 @@ namespace FoodOrderSystemAPI.BL
 
         public float rate { get; set; }
 
-        public String type { get; set; } = "";
+        public List<string> tags { get; set; } = new List<string>();
+        public int restaurantID { get; set; } 
 
-        public RestaurantModel restaurant { get; set; }
+        public string restaurantName { get; set; } = "";
     }
 }

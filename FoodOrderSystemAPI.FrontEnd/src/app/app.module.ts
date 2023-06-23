@@ -11,13 +11,22 @@ import { JwtTokenInterceptor } from './Interceptors/jwt-token.interceptor';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { ErrorModule } from './error/error.module';
+import { HomeModule } from './home/home.module';
+import { FormsModule } from '@angular/forms';
+import { RestaurantModule } from './restaurant/restaurant.module'
 import { ProductModule } from './product/product.module';
+
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ErrorModule,
+    HomeModule,
+    FormsModule,
+    RestaurantModule,
+
     BrowserAnimationsModule,
     SharedModule,
     ErrorModule,

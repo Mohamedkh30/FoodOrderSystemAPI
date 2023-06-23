@@ -9,7 +9,7 @@ public interface IRestaurantManager
     List<RestaurantsProductsReadDto> GetAllRestaurantsWithProducts();
     RestaurantPaymentMethodDto? GetRestaurantPaymentMethodsById(int id);
     RestaurantProductsDto? GetRestaurentWithProductsById(int id);
-    int AddRestaurant(RestaurantAddDto restaurantDto);
+    Task<TokenDto> AddRestaurant(RestaurantAddDto restaurantDto);
     UpdateStatusEnum UpdateRestaurant(RestaurantUpdateDto restaurantDto);
     DeleteStatusEnum DeleteRestaurant(int id);
 }

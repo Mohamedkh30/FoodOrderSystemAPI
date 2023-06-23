@@ -4,27 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~primeng/resources/themes/saga-blue/theme.css';
-@import '~primeng/resources/primeng.min.css'; */
-
-.body > app-root > app-register-as-cutomer > section > div.card > p-steps > div > ul > li:nth-child(3) > a{
-    background-color: transparent !important;
-}
-.p-steps .p-steps-item .p-menuitem-link{
-    background-color: transparent !important;
-
-}
-.p-steps .p-steps-item .p-menuitem-link .p-steps-title{
-    color: #FFF;
-   font-weight: bold;
-}
-/* .p-steps .p-steps-item.p-highlight .p-steps-title{
-    color: #a855f7;
-} */
-.bghight{
-    height: calc(100vh - 168px) !important;
-}
-.p-steps{
-margin-bottom: 3rem !important;
-} 
+@import '~primeng/resources/primeng.min.css';
+@import "primeicons/primeicons.css";

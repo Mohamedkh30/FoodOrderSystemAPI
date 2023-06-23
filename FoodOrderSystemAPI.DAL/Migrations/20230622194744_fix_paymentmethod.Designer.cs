@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20230616123844_some changes in restaurant model")]
-    partial class somechangesinrestaurantmodel
+    [Migration("20230622194744_fix_paymentmethod")]
+    partial class fix_paymentmethod
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -430,9 +430,8 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PaymentMethods")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PaymentMethods")
+                        .HasColumnType("int");
 
                     b.Property<string>("Phone")
                         .IsRequired()

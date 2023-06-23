@@ -10,6 +10,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using FoodOrderSystemAPI.BL.Managers.Classes;
+
 
 namespace FoodOrderSystemAPI;
 
@@ -45,12 +48,38 @@ public class Program
         #endregion
 
         #region Identity User
-        builder.Services.AddIdentity<CustomerModel, IdentityRole<int>>(options =>
+        //builder.Services.AddIdentity<CustomerModel, IdentityRole<int>>(options =>
+        //{
+        //    options.Lockout.MaxFailedAccessAttempts = 5;
+        //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+
+        //}).AddEntityFrameworkStores<SystemContext>();
+
+        //builder.Services.AddIdentity<RestaurantModel, IdentityRole<int>>(options =>
+        //{
+        //    options.Lockout.MaxFailedAccessAttempts = 5;
+        //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+
+        //}).AddEntityFrameworkStores<SystemContext>();
+        builder.Services.AddIdentityCore<CustomerModel>(options =>
         {
+            // Configure options for CustomerModel if needed
             options.Lockout.MaxFailedAccessAttempts = 5;
             options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+        })
+        .AddEntityFrameworkStores<SystemContext>()
+        .AddUserStore<UserStore<CustomerModel, IdentityRole<int>, SystemContext, int>>()
+        .AddDefaultTokenProviders();
 
-        }).AddEntityFrameworkStores<SystemContext>();
+        builder.Services.AddIdentityCore<RestaurantModel>(options =>
+        {
+            // Configure options for RestaurantModel if needed
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+        })
+        .AddEntityFrameworkStores<SystemContext>()
+        .AddUserStore<UserStore<RestaurantModel, IdentityRole<int>, SystemContext, int>>()
+        .AddDefaultTokenProviders();
         #endregion
 
         #region Repos and UOW
@@ -80,10 +109,10 @@ public class Program
             options.DefaultChallengeScheme = "default";
             options.DefaultAuthenticateScheme = "default";
         })
-    .AddJwtBearer("default", options =>
+        .AddJwtBearer("default", options =>
             {
                 var secretkey = builder.Configuration.GetValue<string>("secretkey");
-                    var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
+                var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
                 var key = new SymmetricSecurityKey(secretkeyinbytes);
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -107,14 +136,18 @@ public class Program
 
 
         #region Managers
-        builder.Services.AddTransient<ICustomerManager, CustomerManager>();
-        builder.Services.AddTransient<IRestaurantManager, RestaurantManager>();
-        builder.Services.AddTransient<IReviewManager, ReviewManager>();
+
+        builder.Services.AddScoped<ICustomerManager, CustomerManager>();
+        builder.Services.AddScoped<IRestaurantManager, RestaurantManager>();
+        builder.Services.AddScoped<IReviewManager, ReviewManager>();
+        builder.Services.AddScoped<IProductManager, ProductManager>();
+        builder.Services.AddScoped<IOrdersManager, OrdersManager>();
+
         #endregion
 
-      
 
-  
+
+
 
         //#region Validator Services
 
