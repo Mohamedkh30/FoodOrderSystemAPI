@@ -7,6 +7,9 @@ import { HomePageComponent } from './home/home-page/home-page.component';
 import { RestaurantPageComponent } from './restaurant/restaurant-page/restaurant-page.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { CustomerProfileDetailsComponent } from './customer/customer-profile-details/customer-profile-details.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { AddCardComponent } from './AddCard/add-card.component';
 
 const Router: Routes = [
   // (Lazy Loading ) Laod Module Only when Access authentiction in Url !!
@@ -32,13 +35,12 @@ const Router: Routes = [
   //     ),
   // },
   {path:'home',component:HomePageComponent},
+  {path:'checkout',component:CheckoutComponent},
+  {path:'addproduct',component:AddProductComponent},
+  {path:'addcard',component:AddCardComponent},
   {path:'restaurant',component:RestaurantPageComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'**',component:NotFoundComponent},
-]
-
-
-  {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({
