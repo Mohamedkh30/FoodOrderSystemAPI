@@ -81,10 +81,10 @@ public class Program
             options.DefaultChallengeScheme = "default";
             options.DefaultAuthenticateScheme = "default";
         })
-    .AddJwtBearer("default", options =>
+        .AddJwtBearer("default", options =>
             {
                 var secretkey = builder.Configuration.GetValue<string>("secretkey");
-                    var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
+                var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
                 var key = new SymmetricSecurityKey(secretkeyinbytes);
                 options.TokenValidationParameters = new TokenValidationParameters
                 {

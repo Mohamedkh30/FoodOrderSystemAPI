@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
+import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { CustomerProfileDetailsComponent } from './customer/customer-profile-details/customer-profile-details.component';
 
 const Router: Routes = [
   // (Lazy Loading ) Laod Module Only when Access authentiction in Url !!
