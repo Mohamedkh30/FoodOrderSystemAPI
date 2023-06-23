@@ -42,17 +42,9 @@ const Router: Routes = [
   { path: '**', component: NotFoundComponent },
 ];
 
-  {path:'',redirectTo:'home',pathMatch:'full'},
-  {
-    path: 'home',
-    loadChildren: () =>
-      import('./moduls/home/home.module').then(
-        (m) => m.HomeModule
-      ),
-  },
+ 
 
-  {path:'**',component:NotFoundComponent}
-]
+
 
 
 
