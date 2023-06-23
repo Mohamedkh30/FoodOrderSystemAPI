@@ -22,7 +22,7 @@ public class CustomerManager:ICustomerManager
     private readonly IConfiguration _configuration;
     private readonly ICustomerRepo _CustomerRepo;
 
-    public CustomerManager(IUnitOfWork unitOfWork , UserManager <CustomerModel> UserMangager , IConfiguration configuration , ICustomerRepo customerRepo)
+    public CustomerManager(IUnitOfWork unitOfWork , UserManager<CustomerModel> UserMangager , IConfiguration configuration , ICustomerRepo customerRepo)
     {
         _unitOfWork = unitOfWork;
         _UserMangager = UserMangager;
@@ -196,10 +196,6 @@ public class CustomerManager:ICustomerManager
         { Token = TokenString,
             ExpirationDate = ExpirationDate
         };
-
-
-
-
     }
 
     public CreditToRead UpdateCardCutomerData(int Customerid, CreditToUpdate creditCard)

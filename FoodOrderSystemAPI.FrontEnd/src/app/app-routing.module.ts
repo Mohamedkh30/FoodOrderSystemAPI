@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
+import { RestaurantPageComponent } from './restaurant/restaurant-page/restaurant-page.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { CustomerProfileDetailsComponent } from './customer/customer-profile-details/customer-profile-details.component';
 
@@ -31,8 +32,9 @@ const Router: Routes = [
   //     ),
   // },
   {path:'home',component:HomePageComponent},
+  {path:'restaurant',component:RestaurantPageComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
-  {path:'**',component:NotFoundComponent}
+  {path:'**',component:NotFoundComponent},
 ]
 
 

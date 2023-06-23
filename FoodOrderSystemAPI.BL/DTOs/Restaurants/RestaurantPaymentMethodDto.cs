@@ -3,6 +3,6 @@
     public class RestaurantPaymentMethodDto
     {
         public string RestaurantName { set; get; } = string.Empty;
-        public string PaymentMethods { set; get; } = string.Empty;
+        public PaymentType PaymentMethods { set; get; } = PaymentType.Cash;
     }
 }
