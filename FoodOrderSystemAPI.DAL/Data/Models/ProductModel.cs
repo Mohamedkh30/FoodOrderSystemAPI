@@ -30,9 +30,11 @@ public class ProductModel
     [Range(0f,5f)]
     public float rate { set; get; }
 
-    public String type { set; get; } = "";
-
+    [ForeignKey("restaurant")]
+    public int RestaurantID { set; get; }
     public RestaurantModel restaurant { set; get; }
+
+    public ICollection<ProductTag> productTags = new HashSet<ProductTag>();
 
     public ICollection<OrderProductModel> orderProducts = new HashSet<OrderProductModel>();
 

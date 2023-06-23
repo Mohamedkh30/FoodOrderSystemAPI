@@ -11,6 +11,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using FoodOrderSystemAPI.BL.Managers.Classes;
+
 
 namespace FoodOrderSystemAPI;
 
@@ -134,15 +136,18 @@ public class Program
 
 
         #region Managers
+
         builder.Services.AddScoped<ICustomerManager, CustomerManager>();
         builder.Services.AddScoped<IRestaurantManager, RestaurantManager>();
         builder.Services.AddScoped<IReviewManager, ReviewManager>();
+        builder.Services.AddScoped<IProductManager, ProductManager>();
+        builder.Services.AddScoped<IOrdersManager, OrdersManager>();
 
         #endregion
 
-      
 
-  
+
+
 
         //#region Validator Services
 
