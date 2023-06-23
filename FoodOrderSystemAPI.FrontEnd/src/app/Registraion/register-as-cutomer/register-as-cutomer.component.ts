@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerToRegisterDto } from 'src/app/types/customer-to-register-dto';
+import { CustomerToRegisterDto } from 'src/app/types/Customer/customer-to-register-dto';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { PasswordMatchedValidation } from 'src/app/types/CustomValidations/password-matched-validation';
 import { DateInPastValidator } from 'src/app/types/CustomValidations/date-in-past-validator';
