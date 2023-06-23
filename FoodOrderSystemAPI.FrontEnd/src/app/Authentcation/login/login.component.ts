@@ -33,15 +33,7 @@ export class LoginComponent {
 
     this.AuthentcatoinService.Login(Credentials).subscribe((TokenDto) => { // subscribe On Event Loging On AthentcationService To Take An Action !!
       // set the value of IsLoggedIn to true 
-      this.AuthentcatoinService.IsLoggedIn$.next(true);
-            // When User Enter Valid Data Change the WrongDataFlag property to False to hide Span Elment in Component
-      this.WrongDataFlag = false;
-      // Save the token to local strorage 
-      localStorage.setItem('CustomerData', TokenDto.token)  
-
-      // Handle Registerd Customer Data After Login 
-      this.AuthentcatoinService.RegisterdCustomer = this.AuthentcatoinService.ExtractClamisOfToken();
-
+      this.AuthentcatoinService.SetUserDataAfterLogin(TokenDto);
       this.router.navigate(['/home/customers'])
 
     },

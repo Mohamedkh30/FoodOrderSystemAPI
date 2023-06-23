@@ -73,7 +73,12 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
         #endregion
 
 
-
+        #region Customer Seed
+        //modelBuilder.Entity<CustomerModel>().HasData(
+        //    new CustomerModel() { Id = 1, UserName = "hassan mohamed", Email = "hassan@gmail.com", BirthDate = new DateTime(1999, 3, 24), CustomerAddress = new Location() { LocationId = 1, Latitude = .33, Longitude = .22 } , CustomerCreditCard = new CreditCard() { Card_Expiration_Date = new DateTime(2024, 3, 12), Card_Number = "1234123412341234", CVV = "333" }, Role = RoleOptions.Customer },
+        //    new CustomerModel() { Id = 2 ,  UserName = "hamdy mohamed", Email = "hamdy@gmail.com", BirthDate = new DateTime(2002, 3, 24), CustomerAddress = new Location() { LocationId = 2 ,  Latitude = .53, Longitude = .62 }, CustomerCreditCard = new CreditCard() { Card_Expiration_Date = new DateTime(2026, 7, 22), Card_Number = "1212121212121212", CVV = "229" }, Role = RoleOptions.Customer }
+        //    );
+        #endregion 
 
         base.OnModelCreating(modelBuilder);
 
