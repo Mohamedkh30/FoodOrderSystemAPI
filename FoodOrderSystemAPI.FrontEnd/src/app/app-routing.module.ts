@@ -39,9 +39,14 @@ const Router: Routes = [
   {path:'addproduct',component:AddProductComponent},
   {path:'addcard',component:AddCardComponent},
   {path:'restaurant',component:RestaurantPageComponent},
-  {path:'',redirectTo:'home',pathMatch:'full'},
-  {path:'**',component:NotFoundComponent},
+  { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'customer/:id', component: CustomerProfileDetailsComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
+
+
+
 
 @NgModule({
   declarations: [],
