@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginDto } from '../types/login-dto';
 import { TokenDto } from '../types/token-dto';
-import { CustomerTokenClaims } from '../types/customer-token-claims';
+import { UserTokenClaims } from '../types/user-token-claims';
 import jwtDecode from 'jwt-decode';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AuthentcationService {
   // Attrebutes Of Authentication Service
   public IsLoggedIn$ = new BehaviorSubject(false);
 
-  public RegisterdCustomer: null | CustomerTokenClaims;
+  public UserLogin: null | UserTokenClaims;
 
   public UserToken: string | null = null;
 
@@ -21,7 +21,7 @@ export class AuthentcationService {
   constructor(private httpclient: HttpClient) {
     // Assign Customer Claims TO Registerd Cusotmer Property
 
-    this.RegisterdCustomer = this.ExtractClamisOfToken();
+    this.UserLogin = this.ExtractClamisOfToken();
   }
 
   // Function That Return Observable TO Subscibe On When Login
@@ -36,15 +36,23 @@ export class AuthentcationService {
   // Logout Function
   Logout = () => {
     // Remove The TOken Of User
-    localStorage.removeItem('CustomerData');
+    localStorage.removeItem('UserData');
     // Set The Value Of Login Attrebute TO Flase
     this.IsLoggedIn$.next(false);
   };
 
+  // Function To Set User Data
+
+  SetUserDataAfterLogin(RegisterUserToken: TokenDto) {
+    this.IsLoggedIn$.next(true);
+    localStorage.setItem('UserData', RegisterUserToken.token);
+    this.UserLogin = this.ExtractClamisOfToken();
+  }
+
   // Function to create Object hava User Data
-  ExtractClamisOfToken = (): CustomerTokenClaims | null => {
+  ExtractClamisOfToken = (): UserTokenClaims | null => {
     // Get the Decoded Token
-    this.UserToken = localStorage.getItem('CustomerData');
+    this.UserToken = localStorage.getItem('UserData');
 
     // Sitution TO Retrive Decoded If Exist Or Not
     const DecodedToken: any = this.UserToken ? jwtDecode(this.UserToken) : null;
@@ -74,10 +82,10 @@ export class AuthentcationService {
     const { exp } = DecodedToken;
     const expiryDate = new Date(0); // Create a new Date object with a time of 0 (UNIX epoch)
     expiryDate.setUTCSeconds(exp); // Set the expiry time in seconds
-   
+
     //  Set The Flag Of THe Customer Is Logged In To True
     this.IsLoggedIn$.next(true);
 
-    return new CustomerTokenClaims(id, UserName, Role, EmailAddress, expiryDate);
+    return new UserTokenClaims(id, UserName, Role, EmailAddress, expiryDate);
   };
 }

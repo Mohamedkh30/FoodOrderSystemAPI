@@ -150,15 +150,15 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.OrderProductModel", b =>
                 {
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId", "ProductId");
@@ -538,12 +538,12 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "df60442c-dccb-478f-90f1-5da4ebc300fe",
+                            ConcurrencyStamp = "e2c0f8eb-c55b-421b-8c84-d7e60a20b514",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "",
-                            NormalizedUserName = "",
+                            NormalizedUserName = "Mohamed Ahmed",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
@@ -558,41 +558,21 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "96d084e4-0099-4b1b-8f43-e61afe3716dc",
-                            Email = "",
+                            ConcurrencyStamp = "a20e63ea-7d6a-4381-a248-b31f4541e45e",
+                            Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "",
-                            NormalizedUserName = "",
+                            NormalizedUserName = "KFC",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
-                            UserName = "",
-                            Address = "Address 1",
-                            Logo = "Logo 1",
+                            UserName = "KFC",
+                            Address = "test",
+                            Logo = "",
                             PaymentMethods = 1,
-                            Phone = "1234567890",
-                            RestaurantName = "Restaurant 1"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "507d4db6-f74e-40e9-b670-a215d3cda8b5",
-                            Email = "",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "",
-                            Address = "Address 2",
-                            Logo = "Logo 2",
-                            PaymentMethods = 0,
-                            Phone = "9876543210",
-                            RestaurantName = "Restaurant 2"
+                            Phone = "",
+                            RestaurantName = "KFC"
                         });
                 });
 
@@ -632,7 +612,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             modelBuilder.Entity("FoodOrderSystemAPI.OrderProductModel", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.OrderModel", "Order")
-                        .WithMany()
+                        .WithMany("OrderProducts")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -753,6 +733,11 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .HasForeignKey("FoodOrderSystemAPI.RestaurantModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
+                {
+                    b.Navigation("OrderProducts");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.CustomerModel", b =>

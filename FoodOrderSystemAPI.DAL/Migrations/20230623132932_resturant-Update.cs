@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Test1 : Migration
+    public partial class resturantUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -190,11 +192,11 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    RestaurantName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RestaurantName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<int>(type: "int", nullable: false),
-                    PaymentDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentMethods = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -244,15 +246,14 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     img = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     offer = table.Column<float>(type: "real", nullable: false),
                     rate = table.Column<float>(type: "real", nullable: false),
-                    type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    restaurantId = table.Column<int>(type: "int", nullable: false)
+                    RestaurantID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Products_RestaurantModel_restaurantId",
-                        column: x => x.restaurantId,
+                        name: "FK_Products_RestaurantModel_RestaurantID",
+                        column: x => x.RestaurantID,
                         principalTable: "RestaurantModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -299,6 +300,24 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         column: x => x.CustomerId,
                         principalTable: "CustomerModel",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductTags",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    tag = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductTags", x => new { x.ProductId, x.tag });
+                    table.ForeignKey(
+                        name: "FK_ProductTags_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -351,6 +370,41 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         principalTable: "Products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "c468e681-9301-4fab-9e64-024ad0164373", "test", false, false, null, "", "", null, null, false, 0, null, false, "Mohamed Ahmed" });
+
+            migrationBuilder.InsertData(
+                table: "RestaurantModel",
+                columns: new[] { "Id", "Address", "Logo", "PaymentMethods", "Phone", "RestaurantName" },
+                values: new object[] { 1, "test", "", 1, "", "Mohamed Ahmed" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "Productname", "RestaurantID", "describtion", "img", "offer", "price", "rate" },
+                values: new object[,]
+                {
+                    { 1, "Flafel", 1, "flafel so5na", "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg", 0.45555f, 3f, 4f },
+                    { 2, "fool", 1, "fool so5n", "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg", 0f, 5f, 2f },
+                    { 3, "Koshary", 1, "Koshary so5n", "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg", 0.5f, 20f, 4f },
+                    { 4, "kebda", 1, "kebda so5na", "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg", 0.1f, 30f, 3f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductTags",
+                columns: new[] { "ProductId", "tag" },
+                values: new object[,]
+                {
+                    { 1, "local" },
+                    { 1, "vegetarian" },
+                    { 2, "local" },
+                    { 2, "vegetarian" },
+                    { 3, "local" },
+                    { 3, "vegetarian" },
+                    { 4, "local" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -413,9 +467,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_restaurantId",
+                name: "IX_Products_RestaurantID",
                 table: "Products",
-                column: "restaurantId");
+                column: "RestaurantID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReviewModel_ProductId",
@@ -449,6 +503,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrdersProducts");
+
+            migrationBuilder.DropTable(
+                name: "ProductTags");
 
             migrationBuilder.DropTable(
                 name: "ReviewModel");
