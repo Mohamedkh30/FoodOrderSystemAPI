@@ -5,7 +5,7 @@
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class removevalidationoncreditcard : Migration
+    public partial class lastUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
