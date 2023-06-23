@@ -22,7 +22,7 @@ public class CustomerManager:ICustomerManager
     private readonly IConfiguration _configuration;
     private readonly ICustomerRepo _CustomerRepo;
 
-    public CustomerManager(IUnitOfWork unitOfWork , UserManager <CustomerModel> UserMangager , IConfiguration configuration , ICustomerRepo customerRepo)
+    public CustomerManager(IUnitOfWork unitOfWork , UserManager<CustomerModel> UserMangager , IConfiguration configuration , ICustomerRepo customerRepo)
     {
         _unitOfWork = unitOfWork;
         _UserMangager = UserMangager;
@@ -69,7 +69,7 @@ public class CustomerManager:ICustomerManager
         };
     }
 
-    public async Task<int> Register(CustomerToRegister RegisterdCustomer)
+    public async Task<TokenDto> Register(CustomerToRegister RegisterdCustomer)
     {
         // Map to CutomerModel To Add To List 
 
@@ -107,17 +107,25 @@ public class CustomerManager:ICustomerManager
             var CustomerClaims = new List<Claim>()
             {
 
-                new Claim(ClaimTypes.NameIdentifier, CustomerToAdd.UserName),
+                new Claim(ClaimTypes.Name, CustomerToAdd.UserName),
                 new Claim(ClaimTypes.Email, CustomerToAdd.Email),
+                new Claim(ClaimTypes.NameIdentifier, CustomerToAdd.Id.ToString()),
                 new Claim(ClaimTypes.Role, CustomerToAdd.Role.ToString())
             };
 
             await _UserMangager.AddClaimsAsync(CustomerToAdd, CustomerClaims);
             //_unitOfWork.Customers.Add(CustomerToAdd);
             _unitOfWork.Save();
-            return CustomerToAdd.Id;
+            // Instantiate An New User to Login from the user that Register
+            CustomerToLogin RegisteredCustomerToLogin = new CustomerToLogin()
+            {
+                UserName = CustomerToAdd.UserName,
+                Password = RegisterdCustomer.Password
+            };
+            return await Login(RegisteredCustomerToLogin);
+             
         }
-        return -1;
+        return null;
     }
 
 
@@ -148,17 +156,17 @@ public class CustomerManager:ICustomerManager
 
     }
 
-    public async Task<string> Login(CustomerToLogin NewLoginCustomer )
+    public async Task<TokenDto> Login(CustomerToLogin NewLoginCustomer )
     {
         var Customer =await _UserMangager.FindByNameAsync(NewLoginCustomer.UserName);
         if (Customer is null ||await  _UserMangager.IsLockedOutAsync(Customer))
         {
-        return string.Empty;
+        return null;
         }
         bool isAuthenticated = await _UserMangager.CheckPasswordAsync(Customer , NewLoginCustomer.Password);
         if (! isAuthenticated ) {
         _UserMangager.AccessFailedAsync(Customer);
-            return string.Empty;
+            return null;
         }
 
         var CustomerClaims = await _UserMangager.GetClaimsAsync(Customer);
@@ -172,22 +180,22 @@ public class CustomerManager:ICustomerManager
         var HashingResult = new SigningCredentials(key , SecurityAlgorithms.HmacSha256Signature);
 
         //Generate JWt Token 
-
+        // Calc Expiration Date 
+        var ExpirationDate = DateTime.Now.AddMinutes(30);
         var Jwt = new JwtSecurityToken(
             claims: CustomerClaims,
             notBefore:DateTime.Now,
-            expires: DateTime.Now.AddMinutes(30),
+            expires: ExpirationDate,
             signingCredentials: HashingResult 
             );
 
         var TokenHandler = new JwtSecurityTokenHandler();
         string TokenString  = TokenHandler.WriteToken(Jwt);
 
-        return TokenString;
-
-
-
-
+        return new TokenDto()
+        { Token = TokenString,
+            ExpirationDate = ExpirationDate
+        };
     }
 
     public CreditToRead UpdateCardCutomerData(int Customerid, CreditToUpdate creditCard)

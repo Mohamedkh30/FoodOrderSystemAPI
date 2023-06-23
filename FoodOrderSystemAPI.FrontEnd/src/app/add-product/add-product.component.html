@@ -1,0 +1,61 @@
+
+<div class="container py-5 my-5" style="background-color: #E5F3FD;">
+  <div class="header py-4">
+    <h1>Add Product</h1>
+    <hr class="header-line">
+  </div>
+
+
+  <div class="form-container py-5">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <div class="photo-upload">
+          <input type="file" id="productImage" (change)="onFileChange($event)" style="display: none">
+          <div class="upload-icon" (click)="onFileInputClick()">
+            <i class="fa fa-cloud-upload"></i>
+          </div>
+          <img src="../../assets/Images/AddPhoto.webp"  class="upload-icon" (click)="onFileInputClick()">
+
+          <br>
+          <label for="productImage" class="upload-label" [ngClass]="{'with-photo': photo}">
+            {{ photo ? '' : 'Add Photo' }}
+            <span *ngIf="photo" class="photo-name">{{ getFileName() }}</span>
+          </label>
+          <p class="upload-instructions">Upload a photo for the product</p>
+          <button class="delete-button btn btn-danger" *ngIf="photo" (click)="deletePhoto()">Delete</button>
+        </div>
+      </div>
+         
+
+      <div class="form-group">
+        <label for="productName">Product Name</label>
+        <input type="text" id="productName" formControlName="product" class="form-control">
+        <div *ngIf="isSubmitted && productForm.get('product')?.invalid" class="error-msg">
+          {{ getControlErrorMessage('product') }}
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" id="price" formControlName="price" class="form-control" min="1">
+        <br>
+        <div *ngIf="isSubmitted && productForm.get('price')?.invalid" class="error-msg">
+          {{ getControlErrorMessage('price') }}
+        </div>
+      </div>
+      
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+        <div *ngIf="isSubmitted && productForm.get('description')?.invalid" class="error-msg">
+          {{ getControlErrorMessage('description') }}
+        </div>
+      </div>
+
+      <br>
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+</div>
