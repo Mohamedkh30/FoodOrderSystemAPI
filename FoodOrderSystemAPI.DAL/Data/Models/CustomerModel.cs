@@ -19,9 +19,10 @@ namespace FoodOrderSystemAPI
 
         public DateTime BirthDate { get; set; }
 
+        [ForeignKey(nameof(CustomerAddressLocationId))]
         public Location CustomerAddress { get; set; }
 
-
+       public int CustomerAddressLocationId { get; set; }
 
         public CreditCard CustomerCreditCard { get; set; } 
 

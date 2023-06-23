@@ -25,6 +25,10 @@ public class OrderModel
     [StringLength(30, MinimumLength = 3)]
     public string? OrderStatus { get; set; } = string.Empty;
 
+
+    // navigation properties
+
     public CustomerModel? Customer { get; set; }
+    public ICollection<OrderProductModel> OrderProducts { get; set; } = new HashSet<OrderProductModel>();
 
 }

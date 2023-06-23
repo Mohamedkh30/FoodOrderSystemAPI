@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class resturantUpdate : Migration
+    public partial class seeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -375,12 +375,44 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "c468e681-9301-4fab-9e64-024ad0164373", "test", false, false, null, "", "", null, null, false, 0, null, false, "Mohamed Ahmed" });
+                values: new object[,]
+                {
+                    { 1, 0, "407772a6-88d8-4f43-9db5-573f8f2b2b32", "test", false, false, null, "", "", null, null, false, 0, null, false, "Mohamed Ahmed" },
+                    { 2, 0, "d9f32085-ce9e-4fe9-8a97-b2c87b8d3bc6", "hassan@gmail.com", false, false, null, "", "testmohamed", null, null, false, 0, null, false, "testmohamed" },
+                    { 3, 0, "17326f17-f7ec-4816-a959-da862999584b", "hamdy@gmail.com", false, false, null, "", "ramymohamed", null, null, false, 0, null, false, "ramymohamed" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Location",
+                columns: new[] { "LocationId", "Latitude", "Longitude" },
+                values: new object[,]
+                {
+                    { 1, 0.33000000000000002, 0.22 },
+                    { 2, 0.53000000000000003, 0.62 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CustomerModel",
+                columns: new[] { "Id", "BirthDate", "CustomerAddressLocationId" },
+                values: new object[,]
+                {
+                    { 2, new DateTime(1999, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, new DateTime(2002, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "RestaurantModel",
                 columns: new[] { "Id", "Address", "Logo", "PaymentMethods", "Phone", "RestaurantName" },
                 values: new object[] { 1, "test", "", 1, "", "Mohamed Ahmed" });
+
+            migrationBuilder.InsertData(
+                table: "CreditCards",
+                columns: new[] { "CreditId", "CVV", "Card_Expiration_Date", "Card_Number", "CustomerId" },
+                values: new object[,]
+                {
+                    { 1, "333", new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "1234123412341234", 2 },
+                    { 2, "229", new DateTime(2026, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "1212121212121212", 3 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Products",
