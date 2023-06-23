@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
-import { CustomerToRegisterDto } from '../types/customer-to-register-dto';
+import { CustomerToRegisterDto } from '../types/Customer/customer-to-register-dto';
 import { ResturantRegister } from '../types/resturant-register';
 import { TokenDto } from '../types/token-dto';
 
