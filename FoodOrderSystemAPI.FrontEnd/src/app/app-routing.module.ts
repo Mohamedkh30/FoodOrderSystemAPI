@@ -31,15 +31,16 @@ const Router: Routes = [
   //       (m) => m.HomeModule
   //     ),
   // },
-  {path:'home',component:HomePageComponent},
-  {path:'restaurant',component:RestaurantPageComponent},
-  {path:'',redirectTo:'home',pathMatch:'full'},
-  {path:'**',component:NotFoundComponent},
-]
-
-
-  {path:'**',component:NotFoundComponent}
+  { path: 'home', component: HomePageComponent },
+  { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'customer/:id', component: CustomerProfileDetailsComponent },
+  { path: 'restaurant', component: RestaurantPageComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
+
+
+
 
 @NgModule({
   declarations: [],
