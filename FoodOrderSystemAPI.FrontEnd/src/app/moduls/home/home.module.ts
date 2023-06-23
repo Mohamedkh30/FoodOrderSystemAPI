@@ -6,7 +6,7 @@ import { CustomersComponent } from 'src/app/home/customers/customers.component';
 
 
 @NgModule({
-  declarations: [ CustomersComponent],
+  declarations: [ CustomersComponent ],
   imports: [
     CommonModule,
     HomeRoutingModule
