@@ -67,9 +67,25 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
 
         #region Restaurant seed
         modelBuilder.Entity<RestaurantModel>().HasData(
-            new RestaurantModel { Id = 1, RestaurantName = "Mohamed Ahmed",UserName= "Mohamed Ahmed" , Address="test", Email="test" ,PaymentMethods= PaymentType.Cash }//,
-            //new RestaurantModel { Id = 2, RestaurantName = "Kebdaky" }
-            );
+            new RestaurantModel { Id = 1, RestaurantName = "Mohamed Ahmed",UserName= "Mohamed Ahmed" , Address="test", Email="test" ,PaymentMethods= PaymentType.Cash },
+            new RestaurantModel
+            {
+                Id = 2,
+                RestaurantName = "Restaurant 1",
+                Address = "Address 1",
+                Logo = "Logo 1",
+                Phone = "1234567890",
+                PaymentMethods = PaymentType.Cash
+            },
+            new RestaurantModel
+            {
+                Id = 3,
+                RestaurantName = "Restaurant 2",
+                Address = "Address 2",
+                Logo = "Logo 2",
+                Phone = "9876543210",
+                PaymentMethods = PaymentType.Credit
+            });
         #endregion
 
 

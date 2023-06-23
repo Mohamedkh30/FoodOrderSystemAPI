@@ -53,7 +53,7 @@ public class RestaurantManager : IRestaurantManager
         // Generate Hashing Result 
         var HashingResult = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
-        //Generate JWt Token 
+        // Generate JWt Token 
         // Calc Expiration Date 
         var ExpirationDate = DateTime.Now.AddMinutes(30);
         var Jwt = new JwtSecurityToken(
@@ -128,11 +128,25 @@ public class RestaurantManager : IRestaurantManager
         {
             return null;
         }
-        //return _mapper.Map<RestaurantProductsDto>(RestaurantProducts);
-        return new RestaurantProductsDto()
+        var RestaurantProductsDto = new RestaurantProductsDto();
+        RestaurantProductsDto.Products = RestaurantProducts.Select(p => new ProductCardDto()
         {
-            Products = RestaurantProducts.ToList()
-        };
+            ProductID = p.ProductId,
+            describtion = p.describtion,
+            img = p.img,
+            offer = p.offer,
+            price = p.price,
+            Productname = p.Productname,
+            rate = p.rate,
+            restaurantID = p.RestaurantID,
+            restaurantName = p.restaurant.RestaurantName,
+        }).ToList();
+
+        foreach (var product in RestaurantProductsDto.Products)
+        {
+            product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
+        }
+        return RestaurantProductsDto;
     }
 
     public RestaurantPaymentMethodDto? GetRestaurantPaymentMethodsById(int id)
