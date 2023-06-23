@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20230527154420_Test1")]
-    partial class Test1
+    [Migration("20230623132932_resturant-Update")]
+    partial class resturantUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,56 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("CreditCards");
+                });
+
+            modelBuilder.Entity("FoodOrderSystemAPI.DAL.ProductTag", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("tag")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ProductId", "tag");
+
+                    b.ToTable("ProductTags");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            tag = "vegetarian"
+                        },
+                        new
+                        {
+                            ProductId = 1,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            tag = "vegetarian"
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            tag = "vegetarian"
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            tag = "local"
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.Location", b =>
@@ -133,6 +183,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RestaurantID")
+                        .HasColumnType("int");
+
                     b.Property<string>("describtion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -150,18 +203,57 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<float>("rate")
                         .HasColumnType("real");
 
-                    b.Property<int>("restaurantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ProductId");
 
-                    b.HasIndex("restaurantId");
+                    b.HasIndex("RestaurantID");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            Productname = "Flafel",
+                            RestaurantID = 1,
+                            describtion = "flafel so5na",
+                            img = "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg",
+                            offer = 0.45555f,
+                            price = 3f,
+                            rate = 4f
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            Productname = "fool",
+                            RestaurantID = 1,
+                            describtion = "fool so5n",
+                            img = "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg",
+                            offer = 0f,
+                            price = 5f,
+                            rate = 2f
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            Productname = "Koshary",
+                            RestaurantID = 1,
+                            describtion = "Koshary so5n",
+                            img = "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg",
+                            offer = 0.5f,
+                            price = 20f,
+                            rate = 4f
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            Productname = "kebda",
+                            RestaurantID = 1,
+                            describtion = "kebda so5na",
+                            img = "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg",
+                            offer = 0.1f,
+                            price = 30f,
+                            rate = 3f
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.ReviewModel", b =>
@@ -423,24 +515,48 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PaymentDetails")
+                    b.Property<int>("PaymentMethods")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
 
                     b.Property<string>("RestaurantName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.ToTable("RestaurantModel", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c468e681-9301-4fab-9e64-024ad0164373",
+                            Email = "test",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "Mohamed Ahmed",
+                            Address = "test",
+                            Logo = "",
+                            PaymentMethods = 1,
+                            Phone = "",
+                            RestaurantName = "Mohamed Ahmed"
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.CreditCard", b =>
@@ -452,6 +568,17 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("FoodOrderSystemAPI.DAL.ProductTag", b =>
+                {
+                    b.HasOne("FoodOrderSystemAPI.ProductModel", "product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
@@ -487,8 +614,8 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             modelBuilder.Entity("FoodOrderSystemAPI.ProductModel", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.RestaurantModel", "restaurant")
-                        .WithMany()
-                        .HasForeignKey("restaurantId")
+                        .WithMany("Products")
+                        .HasForeignKey("RestaurantID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -599,6 +726,11 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("FoodOrderSystemAPI.RestaurantModel", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

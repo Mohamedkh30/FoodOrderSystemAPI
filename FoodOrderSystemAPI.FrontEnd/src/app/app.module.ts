@@ -12,9 +12,11 @@ import { SharedModule } from './shared/shared.module';
 import { ErrorModule } from './error/error.module';
 import { HomeModule } from './home/home.module';
 import { FormsModule } from '@angular/forms';
+import { RestaurantModule } from './restaurant/restaurant.module'
 import { ProductModule } from './product/product.module';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { NavigationRegisterComponent } from './Registraion/navigation-register/navigation-register.component';
+
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent , NavigationRegisterComponent],
@@ -24,6 +26,7 @@ import { NavigationRegisterComponent } from './Registraion/navigation-register/n
     ErrorModule,
     HomeModule,
     FormsModule,
+    RestaurantModule,
 
     BrowserAnimationsModule,
     SharedModule,
