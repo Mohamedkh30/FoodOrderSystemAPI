@@ -43,8 +43,13 @@ public class Program
          });
 
         #region Context
-        var connectionString = builder.Configuration.GetConnectionString("FoodOrderSystemDB_ConStr");
-        builder.Services.AddDbContext<SystemContext>(options => options.UseSqlServer(connectionString));
+        //var connectionString = builder.Configuration.GetConnectionString("FoodOrderSystemDB_ConStr");
+        //builder.Services.AddDbContext<SystemContext>(options => options.UseSqlServer(connectionString));
+        builder.Services.AddDbContext<SystemContext>(options =>
+        {
+            options.UseSqlServer("Server=.;Database=GP-Test;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;");
+        });
+
         #endregion
 
         #region Identity User
