@@ -8,17 +8,14 @@ import { CustomerProfileDetails } from 'src/app/types/Customer/customer-profile-
   templateUrl: './customer-profile-details.component.html',
   styleUrls: ['./customer-profile-details.component.css'],
 })
-export class CustomerProfileDetailsComponent implements OnInit, DoCheck {
+export class CustomerProfileDetailsComponent implements OnInit {
   _customer: CustomerProfileDetails = new CustomerProfileDetails();
   constructor(
     private activatedRoute: ActivatedRoute,
     private customerService: CustomerService
   ) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-  ngDoCheck(): void {
-    throw new Error('Method not implemented.');
+    this.getCustomer();
   }
   getCustomer() {
     let urlCustomerId = this.activatedRoute.snapshot.paramMap.get('id');
