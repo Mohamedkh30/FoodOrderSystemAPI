@@ -7,6 +7,7 @@ public interface IUnitOfWork: IDisposable
     IOrderRepo Orders { get; }
     IOrderProductRepo OrdersProducts { get; }
     IProductRepo Products { get; }
+    IProductTagRepo ProductTags { get; }
     IReviewRepo Reveiws { get; }
     IRestaurantRepo Restaurants { get; }
 

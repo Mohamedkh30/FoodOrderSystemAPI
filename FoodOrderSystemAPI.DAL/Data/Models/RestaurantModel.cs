@@ -28,7 +28,7 @@ public class RestaurantModel : UserModel
     public string Phone { set; get; } = string.Empty;
 
     [EnumDataType(typeof(PaymentType), ErrorMessage = "Payment details should be either 'Credit', 'Cash' or 'Both'.")]
-    public string PaymentMethods { set; get; } = string.Empty;
+    public PaymentType PaymentMethods { set; get; } = PaymentType.Cash;
 
     // 1-M Relation with product
     public ICollection<ProductModel> Products { set; get; } = new HashSet<ProductModel>();
