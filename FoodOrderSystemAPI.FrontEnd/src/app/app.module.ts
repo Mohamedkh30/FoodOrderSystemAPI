@@ -17,7 +17,6 @@ import { ErrorModule } from './error/error.module';
 import { HomeModule } from './home/home.module';
 import { RestaurantModule } from './restaurant/restaurant.module'
 import { ProductModule } from './product/product.module';
-import { HomePageComponent } from './home/home-page/home-page.component';
 import { NavigationRegisterComponent } from './Registraion/navigation-register/navigation-register.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
