@@ -67,11 +67,51 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
 
         #region Restaurant seed
         modelBuilder.Entity<RestaurantModel>().HasData(
-            new RestaurantModel { Id = 1, RestaurantName = "Mohamed Ahmed",UserName= "Mohamed Ahmed" , Address="test", Email="test" ,PaymentMethods= PaymentType.Cash }//,
+            new RestaurantModel { Id = 1, RestaurantName = "Mohamed Ahmed", UserName = "Mohamed Ahmed", Address = "test", Email = "test", PaymentMethods = PaymentType.Cash }//,
             //new RestaurantModel { Id = 2, RestaurantName = "Kebdaky" }
             );
         #endregion
 
+
+
+
+
+        modelBuilder.Entity<Location>().HasData(
+        new Location { LocationId = 1, Latitude = .33, Longitude = .22 },
+        new Location { LocationId = 2, Latitude = .53, Longitude = .62 }
+    );
+
+        #region Customer Seed
+        modelBuilder.Entity<CustomerModel>().HasData(
+   new CustomerModel
+   {
+       Id = 2,
+       UserName = "testmohamed",
+       NormalizedUserName = "testmohamed",
+       Email = "hassan@gmail.com",
+       BirthDate = new DateTime(1999, 3, 24),
+       CustomerAddressLocationId = 1,
+       
+   },
+        new CustomerModel
+        {
+           Id=3,
+            UserName = "ramymohamed",
+            NormalizedUserName = "ramymohamed",
+            Email = "hamdy@gmail.com",
+            BirthDate = new DateTime(2002, 3, 24),
+            CustomerAddressLocationId = 2,
+            
+            
+        }
+    
+
+            );
+        modelBuilder.Entity<CreditCard>().HasData(
+new CreditCard { CreditId = 1, Card_Expiration_Date = new DateTime(2024, 3, 12), Card_Number = "1234123412341234", CVV = "333", CustomerId = 2 },
+new CreditCard { CreditId = 2, Card_Expiration_Date = new DateTime(2026, 7, 22), Card_Number = "1212121212121212", CVV = "229", CustomerId = 3 });
+
+        #endregion
 
 
 

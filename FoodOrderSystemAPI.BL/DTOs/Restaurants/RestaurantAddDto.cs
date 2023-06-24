@@ -15,5 +15,5 @@ public class RestaurantAddDto
       ErrorMessage = "The password must contain at least 8 characters, including one lowercase letter," +
         " one uppercase letter, one digit, and one special character.")]
     public string Password { get; set; }
-    public String UserName { get; set; }
+    public string UserName { get; set; }
 }

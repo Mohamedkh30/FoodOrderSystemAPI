@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-
+// import { CustomersComponent } from './customers/customers.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
 import { InputTextModule } from 'primeng/inputtext';
@@ -23,7 +23,9 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     HomePageComponent,
     HomeFilterComponent,
-    HomeCardComponent
+    HomeCardComponent,
+    // CustomersComponent
+
   ],
   imports: [
     CommonModule

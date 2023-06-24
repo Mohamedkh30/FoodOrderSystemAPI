@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderSystemAPI.BL;
 
-public class CustomerToLogin
+public class UserLogin
 {
     public String UserName  { get; set; }
     public String Password   { get; set; }
