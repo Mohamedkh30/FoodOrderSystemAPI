@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AddCardComponent } from '../AddCard/add-card.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { FullProductCardDto } from '../_models/product/FullProductCardDto';
 import {
   FormBuilder,
   FormGroup,
@@ -127,6 +129,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   productsList: FullProduct[] | null = [];
+
 
   calculateTotal(): number {
     let total = 0;

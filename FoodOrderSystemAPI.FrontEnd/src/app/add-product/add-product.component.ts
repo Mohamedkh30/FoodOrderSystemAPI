@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl ,ValidationErrors } from '@angular/forms';
 import { AuthentcationService } from '../services/authentcation.service';
+import { ImageService } from '../services/image.service';
 import {ProductService} from '../services/product.service'
 
 
@@ -14,13 +15,14 @@ export class AddProductComponent implements OnInit {
   productForm: FormGroup;
   isSubmitted: boolean = false;
   photo: string = '';
+  imageUrl: string = '';
  
 
-  constructor(private formBuilder: FormBuilder , private ProductService : ProductService ,private  AuthenticationService : AuthentcationService) {
+  constructor(private formBuilder: FormBuilder , public ProductService : ProductService ,private  AuthenticationService : AuthentcationService ,public imageservice : ImageService) {
     this.productForm = this.formBuilder.group({
       ProductName : ['',Validators.required],
-      ProductPrice : [ 0 ,Validators.required],
-     ProductImg : ['' ,Validators.required],
+      ProductPrice : [ null ,Validators.required],
+     ProductImg : [ null,Validators.required],
      ProductDescription : [],
      ProductOffer : [0],
     //  ProductTag: this.formBuilder.group({
@@ -57,23 +59,12 @@ get ProductOffer() {
   
   ngOnInit() {}
 
-  onFileInputClick() {
-    document.getElementById('productImage')?.click();
-  }
-
-  // Method to delete the uploaded photo
-  deletePhoto(): void {
-    this.photo = '';
-    const fileInput = document.getElementById('productImage') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.value = ''; // Reset the value of the file input
-      fileInput.disabled = false; // Re-enable the file input
-    }
-  }
+  
   
 
-
   
+ 
+ 
 
   validateForm() {
     Object.keys(this.productForm.controls).forEach((field) => {
@@ -85,17 +76,27 @@ get ProductOffer() {
  
 
   submitForm() {
-   this.ProductService.productToAdd.productname = this.ProductName.value
-   this.ProductService.productToAdd.describtion = this.ProductDescription.value
-   this.ProductService.productToAdd.price = this.ProductPrice.value
-   this.ProductService.productToAdd.img = this.ProductImg.value
-   this.ProductService.productToAdd.offer = this.ProductOffer.value
-    this.ProductService.productToAdd.restaurantID = this.AuthenticationService.UserLogin?.id!!;
-    console.log(this.ProductService.productToAdd)
-    this.ProductService.AddProduct().subscribe((productid:number) => {
-    }, (error:HttpErrorResponse) => {
-      console.log(error)
-    })
+    if (this.productForm.valid) {
+      this.AssigingFormToToProductService();
+      console.log(this.ProductService.productToAdd)
+     console.log( this.ProductService.productToAdd.img)
+      // Send Request to server Add Product 
+      this.ProductService.AddProduct().subscribe((productid: number) => {
+      }, (error: HttpErrorResponse) => {
+        console.log(error)
+      })
+    }
+    this.validateForm();
+    
+  }
+
+
+  AssigingFormToToProductService() {
+    this.ProductService.productToAdd.productname = this.ProductName.value
+    this.ProductService.productToAdd.describtion = this.ProductDescription.value
+    this.ProductService.productToAdd.price = this.ProductPrice.value
+    this.ProductService.productToAdd.offer = this.ProductOffer.value
+     this.ProductService.productToAdd.restaurantID = this.AuthenticationService.UserLogin?.id!!;
   }
 }
 

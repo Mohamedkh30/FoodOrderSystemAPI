@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FullProductDto } from 'src/app/_models/product/FullProductDto';
+import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
 import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { RestaurantProductsDto } from 'src/app/types/Restaurant/Restaurant-Products-dto';
@@ -17,6 +17,7 @@ export class RestaurantPageComponent implements OnInit {
   _products: RestaurantProductsDto = new RestaurantProductsDto();
 
   constructor(private restaurantService: RestaurantService, private activatedRoute: ActivatedRoute) {}
+  productsList:FullProductCardDto[]|null = [];
 
   ngOnInit(): void {
     this.getRestaurantProducts();

@@ -32,6 +32,7 @@ const Router: Routes = [
       ),
   },
   {path:'home',component:HomePageComponent},
+  {path:'product/:id',component:ProductDetailsComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'addproduct',component:AddProductComponent},
   {path:'addcard',component:AddCardComponent},

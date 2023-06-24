@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ResturantRegister } from 'src/app/types/resturant-register';
 import { AuthentcationService } from 'src/app/services/authentcation.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ImageService } from 'src/app/services/image.service';
 @Component({
   selector: 'app-register-as-resturant',
   templateUrl: './register-as-resturant.component.html',
@@ -18,9 +19,10 @@ export class RegisterAsResturantComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private RegisterService: RegistrationService,
+    public RegisterService: RegistrationService,
     private router: Router,
-    private AuthentcationService: AuthentcationService
+    private AuthentcationService: AuthentcationService,
+    public imageservice: ImageService
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +66,8 @@ export class RegisterAsResturantComponent implements OnInit {
         Password: [
           '',
           [Validators.required,
-           ]],
+          ]],
+          ResturnatLogo : [ null,Validators.required],
       }
     ); // Add the confirmPasswordValidator
   }
@@ -90,6 +93,9 @@ export class RegisterAsResturantComponent implements OnInit {
   }
   get ResturantPassword() {
     return this.ResturantForm.get('Password')!!;
+  }
+  get ResturnatLogo() {
+    return this.ResturantForm.get('ResturnatLogo')!!;
   }
 
 
