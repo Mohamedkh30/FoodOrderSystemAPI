@@ -13,9 +13,6 @@ namespace FoodOrderSystemAPI.BL.Managers.Classes
         }
         public int Add(OrderAddDto orderDto)
         {
-            var order = _unit.Orders.GetById(orderDto.OrderId);
-            if (order is null)
-                throw new Exception("Not Found Order Id");
 
             // product model dto collection 
             List<OrderProductModel> NewOrderProducts = new List<OrderProductModel>();
@@ -24,15 +21,13 @@ namespace FoodOrderSystemAPI.BL.Managers.Classes
                 NewOrderProducts.Add(
                     new OrderProductModel
                     {
-                        OrderId = orderDto.OrderId,
+                        //OrderId = NewOrder.OrderId,
                         ProductId = orderProductDto.ProductId,
                         Quantity = orderProductDto.Quantity,
                     });
             }
-
             OrderModel NewOrder = new OrderModel
             {
-                OrderId = orderDto.OrderId,
                 CustomerId = orderDto.CustomerId,
                 TotalPrice = orderDto.TotalPrice,
                 OrderDate = orderDto.OrderDate,

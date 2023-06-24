@@ -10,7 +10,7 @@ namespace FoodOrderSystemAPI.BL
     {
         List<ProductCardDto> GetAll();
         ProductCardDto? GetById(int id);
-        int Add(ProductCardDto productDto);
+        int Add(ProductAddDto productDto);
         void update(ProductCardDto productDto);
         void delete(int id);
     }

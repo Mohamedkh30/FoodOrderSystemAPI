@@ -74,15 +74,51 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
             new RestaurantModel { Id = 5, RestaurantName = "Chez Gaby", UserName = "ChezGaby", NormalizedUserName = "ChezGaby", Address = "off of Fouad Street, close to the Alexandria Opera House", Email = "www.ChezGaby.com", PaymentMethods = PaymentType.Cash, Logo = "https://www.zumtaugwald.ch/uploads/8iADQWOr/chezgaby_farbig_gross_198.gif", Phone = "+20 111 111 1111" },
             new RestaurantModel { Id = 6, RestaurantName = "Negro", UserName = "Negro", NormalizedUserName = "Negro", Address = "test", Email = "www.Negro.com", PaymentMethods = PaymentType.Cash, Logo = "https://cerronegrorestaurant.com/wp-content/uploads/2022/06/logo-1.png", Phone = "+20 111 111 1111" },
             new RestaurantModel { Id = 7, RestaurantName = "The Seafood Shack", UserName = "seafoodshack", NormalizedUserName = "seafoodshack", Address = "test", Email = "567 Walnut Lane", PaymentMethods = PaymentType.Cash, Logo = "https://img.freepik.com/premium-vector/fresh-seafood-restaurant-premium-logo_187482-625.jpg?w=2000", Phone = "+20 111 111 1111" });
+
         #endregion
 
 
+
+
+
+        modelBuilder.Entity<Location>().HasData(
+        new Location { LocationId = 1, Latitude = .33, Longitude = .22 },
+        new Location { LocationId = 2, Latitude = .53, Longitude = .62 }
+    );
+
         #region Customer Seed
-        //modelBuilder.Entity<CustomerModel>().HasData(
-        //    new CustomerModel() { Id = 1, UserName = "hassan mohamed", Email = "hassan@gmail.com", BirthDate = new DateTime(1999, 3, 24), CustomerAddress = new Location() { LocationId = 1, Latitude = .33, Longitude = .22 } , CustomerCreditCard = new CreditCard() { Card_Expiration_Date = new DateTime(2024, 3, 12), Card_Number = "1234123412341234", CVV = "333" }, Role = RoleOptions.Customer },
-        //    new CustomerModel() { Id = 2 ,  UserName = "hamdy mohamed", Email = "hamdy@gmail.com", BirthDate = new DateTime(2002, 3, 24), CustomerAddress = new Location() { LocationId = 2 ,  Latitude = .53, Longitude = .62 }, CustomerCreditCard = new CreditCard() { Card_Expiration_Date = new DateTime(2026, 7, 22), Card_Number = "1212121212121212", CVV = "229" }, Role = RoleOptions.Customer }
-        //    );
-        #endregion 
+        modelBuilder.Entity<CustomerModel>().HasData(
+   new CustomerModel
+   {
+       Id = 2,
+       UserName = "testmohamed",
+       NormalizedUserName = "testmohamed",
+       Email = "hassan@gmail.com",
+       BirthDate = new DateTime(1999, 3, 24),
+       CustomerAddressLocationId = 1,
+       
+   },
+        new CustomerModel
+        {
+           Id=3,
+            UserName = "ramymohamed",
+            NormalizedUserName = "ramymohamed",
+            Email = "hamdy@gmail.com",
+            BirthDate = new DateTime(2002, 3, 24),
+            CustomerAddressLocationId = 2,
+            
+            
+        }
+    
+
+            );
+        modelBuilder.Entity<CreditCard>().HasData(
+new CreditCard { CreditId = 1, Card_Expiration_Date = new DateTime(2024, 3, 12), Card_Number = "1234123412341234", CVV = "333", CustomerId = 2 },
+new CreditCard { CreditId = 2, Card_Expiration_Date = new DateTime(2026, 7, 22), Card_Number = "1212121212121212", CVV = "229", CustomerId = 3 });
+
+        #endregion
+
+
 
         base.OnModelCreating(modelBuilder);
 

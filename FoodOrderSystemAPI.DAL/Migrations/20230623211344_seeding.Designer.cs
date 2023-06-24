@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20230623132932_resturant-Update")]
-    partial class resturantUpdate
+    [Migration("20230623211344_seeding")]
+    partial class seeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,24 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("CreditCards");
+
+                    b.HasData(
+                        new
+                        {
+                            CreditId = 1,
+                            CVV = "333",
+                            Card_Expiration_Date = new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Card_Number = "1234123412341234",
+                            CustomerId = 2
+                        },
+                        new
+                        {
+                            CreditId = 2,
+                            CVV = "229",
+                            Card_Expiration_Date = new DateTime(2026, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Card_Number = "1212121212121212",
+                            CustomerId = 3
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.DAL.ProductTag", b =>
@@ -121,6 +139,20 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasKey("LocationId");
 
                     b.ToTable("Location");
+
+                    b.HasData(
+                        new
+                        {
+                            LocationId = 1,
+                            Latitude = 0.33000000000000002,
+                            Longitude = 0.22
+                        },
+                        new
+                        {
+                            LocationId = 2,
+                            Latitude = 0.53000000000000003,
+                            Longitude = 0.62
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
@@ -507,6 +539,42 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasIndex("CustomerAddressLocationId");
 
                     b.ToTable("CustomerModel", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d9f32085-ce9e-4fe9-8a97-b2c87b8d3bc6",
+                            Email = "hassan@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "testmohamed",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "testmohamed",
+                            BirthDate = new DateTime(1999, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerAddressLocationId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "17326f17-f7ec-4816-a959-da862999584b",
+                            Email = "hamdy@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "ramymohamed",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "ramymohamed",
+                            BirthDate = new DateTime(2002, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerAddressLocationId = 2
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.RestaurantModel", b =>
@@ -541,7 +609,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c468e681-9301-4fab-9e64-024ad0164373",
+                            ConcurrencyStamp = "407772a6-88d8-4f43-9db5-573f8f2b2b32",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,

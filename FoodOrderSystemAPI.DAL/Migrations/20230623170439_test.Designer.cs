@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20230623161306_mohand")]
-    partial class mohand
+    [Migration("20230623170439_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -541,7 +541,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8f772f35-32a2-4a7f-9b5f-bece2f6da731",
+                            ConcurrencyStamp = "d5720aad-8b6e-4c57-86e4-1020ab1c9757",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,

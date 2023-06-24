@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerToRegisterDto } from 'src/app/types/customer-to-register-dto';
+import { CustomerToRegisterDto } from 'src/app/types/Customer/customer-to-register-dto';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { RegistrationService } from 'src/app/services/registration.service';
 import { Router } from '@angular/router';

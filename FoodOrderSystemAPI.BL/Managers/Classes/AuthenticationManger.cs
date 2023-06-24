@@ -123,7 +123,7 @@ namespace FoodOrderSystemAPI.BL;
     public async Task<TokenDto> LoginAsUser(UserLogin _UserLogin)
     {
        var customerResult =  LoginAsCustomer(_UserLogin);
-        if (customerResult != null)
+        if (customerResult.Result != null)
             return await customerResult;
         else
         {
