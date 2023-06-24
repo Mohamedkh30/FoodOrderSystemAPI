@@ -59,5 +59,9 @@ export class CartService {
     }
     return totalPrice;
   }
+
+  emptyCart(): void {
+    localStorage.removeItem(this._localStorageCartName);
+  }
   //#endregion
 }
