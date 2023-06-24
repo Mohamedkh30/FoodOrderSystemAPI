@@ -67,9 +67,14 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
 
         #region Restaurant seed
         modelBuilder.Entity<RestaurantModel>().HasData(
-            new RestaurantModel { Id = 1, RestaurantName = "Mohamed Ahmed", UserName = "Mohamed Ahmed", Address = "test", Email = "test", PaymentMethods = PaymentType.Cash }//,
-            //new RestaurantModel { Id = 2, RestaurantName = "Kebdaky" }
-            );
+            new RestaurantModel { Id = 1, RestaurantName = "Mohamed Ahmed",UserName= "MohamedAhmed", NormalizedUserName= "MohamedAhmed", Address="test", Email="test" ,PaymentMethods= PaymentType.Cash, Logo= "https://images.deliveryhero.io/image/talabat/restaurants/21167986_13580950369_637438183491941065.jpg?width=180", Phone="+20 111 111 1111" },
+            new RestaurantModel { Id = 2, RestaurantName = "KFC", UserName = "KFC", NormalizedUserName = "KFC", Address = "test", Email = "test", PaymentMethods = PaymentType.Cash, Logo = "https://upload.wikimedia.org/wikipedia/sco/b/bf/KFC_logo.svg", Phone = "+20 111 111 1111" },
+            new RestaurantModel { Id = 3, RestaurantName = "Central", UserName = "Central", NormalizedUserName = "Central", Address = "Av. Pedro de Osma 301, Barranco, Lima, Peru", Email = "test", PaymentMethods = PaymentType.Both, Logo = "https://centralrestaurante.com.pe/assets/images/facebook.jpg", Phone = "+51 1 242 8515" },
+            new RestaurantModel { Id = 4, RestaurantName = "The Tasty Bistro", UserName = "TheTastyBistro", NormalizedUserName = "TheTastyBistro", Address = "123 Main Street", Email = "info@tastybistro.com", PaymentMethods = PaymentType.Cash, Logo = "https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148987940.jpg?size=626&ext=jpg&ga=GA1.1.118802800.1685470637&semt=ais", Phone = "+20 111 111 1111" },
+            new RestaurantModel { Id = 5, RestaurantName = "Chez Gaby", UserName = "ChezGaby", NormalizedUserName = "ChezGaby", Address = "off of Fouad Street, close to the Alexandria Opera House", Email = "www.ChezGaby.com", PaymentMethods = PaymentType.Cash, Logo = "https://www.zumtaugwald.ch/uploads/8iADQWOr/chezgaby_farbig_gross_198.gif", Phone = "+20 111 111 1111" },
+            new RestaurantModel { Id = 6, RestaurantName = "Negro", UserName = "Negro", NormalizedUserName = "Negro", Address = "test", Email = "www.Negro.com", PaymentMethods = PaymentType.Cash, Logo = "https://cerronegrorestaurant.com/wp-content/uploads/2022/06/logo-1.png", Phone = "+20 111 111 1111" },
+            new RestaurantModel { Id = 7, RestaurantName = "The Seafood Shack", UserName = "seafoodshack", NormalizedUserName = "seafoodshack", Address = "test", Email = "567 Walnut Lane", PaymentMethods = PaymentType.Cash, Logo = "https://img.freepik.com/premium-vector/fresh-seafood-restaurant-premium-logo_187482-625.jpg?w=2000", Phone = "+20 111 111 1111" });
+
         #endregion
 
 
