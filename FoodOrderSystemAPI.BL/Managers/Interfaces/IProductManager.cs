@@ -1,4 +1,5 @@
 ﻿using FoodOrderSystemAPI.DAL;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,9 @@ namespace FoodOrderSystemAPI.BL
         List<float> GetProductPricesBounds();
         List<ProductCardDto> GetAll();
         List<ProductCardDto> GetAllFilterTag(List<string> FilterTags);
+        List<ProductCardDto> GetAllFilterRestaurant(List<string> FilterRestaurants);
+        List<ProductCardDto> GetAllFilterPrice(List<float> FilterPrices);
+        List<ProductCardDto> searchProductByName(string word);
         ProductCardDto? GetById(int id);
         int Add(ProductCardDto productDto);
         void update(ProductCardDto productDto);

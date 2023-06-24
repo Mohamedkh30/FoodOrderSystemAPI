@@ -46,9 +46,30 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpGet]
+        [Route("searchProduct")]
+        public ActionResult<List<ProductCardDto>> searchProductByName([FromQuery] string query)
+        {
+            return _productManager.searchProductByName(query);
+        }
+
+        [HttpGet]
+        [Route("FilterRestaurants")]
+
+        public ActionResult<List<ProductCardDto>> GetAllFilterRestaurant([FromQuery] List<string> FilterRestaurants)
+        {
+            return _productManager.GetAllFilterRestaurant(FilterRestaurants);
+        }
+
+        [HttpGet]
+        [Route("FilterPrices")]
+        public ActionResult<List<ProductCardDto>> GetAllFilterPrice([FromQuery] List<float> FilterPrices)
+        {
+            return _productManager.GetAllFilterPrice(FilterPrices);
+        }
+
+        [HttpGet]
         [Route("{id}")]
         //[Authorize]
-
         public ActionResult<ProductCardDto> GetById(int id)
         {
             ProductCardDto? product = _productManager.GetById(id);

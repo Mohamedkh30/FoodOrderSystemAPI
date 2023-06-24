@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -79,6 +80,29 @@ namespace FoodOrderSystemAPI.BL
 
         }
 
+        public List<ProductCardDto> searchProductByName(string word)
+        {
+            var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto()
+            {
+                ProductID = p.ProductId,
+                describtion = p.describtion,
+                img = p.img,
+                offer = p.offer,
+                price = p.price,
+                Productname = p.Productname,
+                rate = p.rate,
+                restaurantID = p.RestaurantID,
+                restaurantName = p.restaurant.RestaurantName,
+            }).ToList();
+
+            foreach (var product in products)
+            {
+                product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
+            }
+            return products.Where(p => p.Productname.ToLower().Contains(word.ToLower())).ToList();
+
+        }
+
         public List<ProductCardDto> GetAllFilterTag(List<string> FilterTags)
         {
             var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto()
@@ -99,6 +123,52 @@ namespace FoodOrderSystemAPI.BL
                 product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
             }
             return products.Where(p=> p.tags.Any(item => FilterTags.Contains(item))).ToList();
+
+        }
+
+        public List<ProductCardDto> GetAllFilterRestaurant(List<string> FilterRestaurants)
+        {
+            var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto()
+            {
+                ProductID = p.ProductId,
+                describtion = p.describtion,
+                img = p.img,
+                offer = p.offer,
+                price = p.price,
+                Productname = p.Productname,
+                rate = p.rate,
+                restaurantID = p.RestaurantID,
+                restaurantName = p.restaurant.RestaurantName,
+            }).ToList();
+
+            foreach (var product in products)
+            {
+                product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
+            }
+            return products.Where(p => FilterRestaurants.Contains(p.restaurantName)).ToList();
+
+        }
+
+        public List<ProductCardDto> GetAllFilterPrice(List<float> FilterPrices)
+        {
+            var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto()
+            {
+                ProductID = p.ProductId,
+                describtion = p.describtion,
+                img = p.img,
+                offer = p.offer,
+                price = p.price,
+                Productname = p.Productname,
+                rate = p.rate,
+                restaurantID = p.RestaurantID,
+                restaurantName = p.restaurant.RestaurantName,
+            }).ToList();
+
+            foreach (var product in products)
+            {
+                product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
+            }
+            return products.Where(p => p.price*p.offer >= FilterPrices.Min() && p.price*p.offer <= FilterPrices.Max()).ToList();
 
         }
 
@@ -157,6 +227,8 @@ namespace FoodOrderSystemAPI.BL
 
             return bounds;
         }
+
+
 
     }
 }

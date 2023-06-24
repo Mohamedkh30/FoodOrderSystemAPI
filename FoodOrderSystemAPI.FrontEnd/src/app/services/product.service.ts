@@ -23,9 +23,35 @@ export class ProductService {
 
   getAllCategoryFiltered(cat:string[]){
     let baseUrl: string = this.configService.getBaseApiUrl();
-    console.log(`${baseUrl}Products/FilterTags?${cat.map((value) => encodeURIComponent(value)).join('&')}`)
-		return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/FilterTags?${cat.map((value) => encodeURIComponent(value)).join('&')}`)		
-	}
+    if(cat.length==0)
+      return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)	
+    else
+		  return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/FilterTags?${cat.map((value) => `FilterTags=${value}`).join('&')}`)		
+  }
+
+  getAllResaurantFiltered(cat:string[]){
+    let baseUrl: string = this.configService.getBaseApiUrl();
+    if(cat.length==0)
+      return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)	
+    else
+		  return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/FilterRestaurants?${cat.map((value) => `FilterRestaurants=${value}`).join('&')}`)		
+  }
+
+  getAllPricesFiltered(cat:Number[]){
+    let baseUrl: string = this.configService.getBaseApiUrl();
+    if(cat.length==0)
+      return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)	
+    else
+		  return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/FilterPrices?${cat.map((value) => `FilterPrices=${value}`).join('&')}`)		
+  }
+
+  searchProductByName(searchString:string){
+    let baseUrl: string = this.configService.getBaseApiUrl();
+    if(searchString.length==0)
+      return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)	
+    else
+		  return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/searchProduct?query=${searchString}`)		
+  }
 
   getAllTags(){
     let baseUrl: string = this.configService.getBaseApiUrl();
@@ -36,6 +62,8 @@ export class ProductService {
     let baseUrl: string = this.configService.getBaseApiUrl();
 		return this.http.get<number[]>(`${baseUrl}Products/PriceBounds`)
   }
+
+
 
 
 }

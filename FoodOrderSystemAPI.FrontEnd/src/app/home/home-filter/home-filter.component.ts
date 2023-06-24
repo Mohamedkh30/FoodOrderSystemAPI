@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,OnDestroy } from '@angular/core';
+import { Component, Input, OnInit,OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -8,10 +8,17 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./home-filter.component.css']
 })
 export class HomeFilterComponent {
+
+  constructor(private productService:ProductService){}
+
   @Input() Categories:string[] = [];
   @Input() Restaurants:string[] = [];
 
-  constructor(private productService:ProductService){}
+  @Output() filterByCategoryEvent:EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() filterByRestaurantEvent:EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() filterByPriceEvent:EventEmitter<Number[]> = new EventEmitter<Number[]>();
+
+
 
   boundSub:Subscription|null=null;
   BoundValues:number[] = [0,0];
@@ -41,6 +48,21 @@ export class HomeFilterComponent {
 
   ngOnDestroy(): void {
     this.boundSub?.unsubscribe();
+  }
+
+    filterByCategory()
+  {
+    this.filterByCategoryEvent.emit(this.selectedCategories);  
+  }
+
+  filterByRestaurant()
+  {
+    this.filterByRestaurantEvent.emit(this.selectedRestaurants);  
+  }
+
+  filterByPrice()
+  {
+    this.filterByPriceEvent.emit(this.rangeValues);  
   }
 
   
