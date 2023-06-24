@@ -36,6 +36,10 @@ public class RestaurantManager : IRestaurantManager
         //return _mapper.Map<List<RestaurantsReadDto>>(AllRestaurants);
         return AllRestaurants.Select(r => new RestaurantsReadDto()
         {
+            RestaurantId = r.Id,
+            UserName = r.UserName,
+            Email = r.Email,
+            NormalizedUserName = r.NormalizedUserName,
             RestaurantName = r.RestaurantName,
             Address = r.Address,
             Logo = r.Logo,
@@ -69,6 +73,10 @@ public class RestaurantManager : IRestaurantManager
         //return _mapper.Map<RestaurantDetailsDto>(RestaurantDetails);
         return new RestaurantDetailsDto()
         {
+            RestaurantId = RestaurantDetails.Id,
+            UserName = RestaurantDetails.UserName,
+            Email = RestaurantDetails.Email,
+            NormalizedUserName = RestaurantDetails.NormalizedUserName,
             RestaurantName = RestaurantDetails.RestaurantName,
             Address = RestaurantDetails.Address,
             Logo = RestaurantDetails.Logo,
@@ -84,11 +92,25 @@ public class RestaurantManager : IRestaurantManager
         {
             return null;
         }
-        //return _mapper.Map<RestaurantProductsDto>(RestaurantProducts);
-        return new RestaurantProductsDto()
+        var RestaurantProductsDto = new RestaurantProductsDto();
+        RestaurantProductsDto.Products = RestaurantProducts.Select(p => new ProductCardDto()
         {
-            Products = RestaurantProducts.ToList()
-        };
+            ProductID = p.ProductId,
+            describtion = p.describtion,
+            img = p.img,
+            offer = p.offer,
+            price = p.price,
+            Productname = p.Productname,
+            rate = p.rate,
+            restaurantID = p.RestaurantID,
+            restaurantName = p.restaurant.RestaurantName,
+        }).ToList();
+
+        foreach (var product in RestaurantProductsDto.Products)
+        {
+            product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
+        }
+        return RestaurantProductsDto;
     }
 
     public RestaurantPaymentMethodDto? GetRestaurantPaymentMethodsById(int id)

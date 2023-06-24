@@ -4,6 +4,7 @@ using FoodOrderSystemAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    partial class SystemContextModelSnapshot : ModelSnapshot
+    [Migration("20230623202143_add-some-fake-data")]
+    partial class addsomefakedata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,24 +52,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("CreditCards");
-
-                    b.HasData(
-                        new
-                        {
-                            CreditId = 1,
-                            CVV = "333",
-                            Card_Expiration_Date = new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Card_Number = "1234123412341234",
-                            CustomerId = 2
-                        },
-                        new
-                        {
-                            CreditId = 2,
-                            CVV = "229",
-                            Card_Expiration_Date = new DateTime(2026, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Card_Number = "1212121212121212",
-                            CustomerId = 3
-                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.DAL.ProductTag", b =>
@@ -136,20 +121,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasKey("LocationId");
 
                     b.ToTable("Location");
-
-                    b.HasData(
-                        new
-                        {
-                            LocationId = 1,
-                            Latitude = 0.33000000000000002,
-                            Longitude = 0.22
-                        },
-                        new
-                        {
-                            LocationId = 2,
-                            Latitude = 0.53000000000000003,
-                            Longitude = 0.62
-                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
@@ -536,42 +507,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasIndex("CustomerAddressLocationId");
 
                     b.ToTable("CustomerModel", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d9f32085-ce9e-4fe9-8a97-b2c87b8d3bc6",
-                            Email = "hassan@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "testmohamed",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "testmohamed",
-                            BirthDate = new DateTime(1999, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerAddressLocationId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "17326f17-f7ec-4816-a959-da862999584b",
-                            Email = "hamdy@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "ramymohamed",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "ramymohamed",
-                            BirthDate = new DateTime(2002, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerAddressLocationId = 2
-                        });
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.RestaurantModel", b =>
@@ -606,143 +541,21 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "407772a6-88d8-4f43-9db5-573f8f2b2b32",
-
+                            ConcurrencyStamp = "919abc56-efae-4f3b-bce5-dc7e21e0d8b5",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "",
-                            NormalizedUserName = "MohamedAhmed",
+                            NormalizedUserName = "",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
-                            UserName = "MohamedAhmed",
+                            UserName = "Mohamed Ahmed",
                             Address = "test",
-                            Logo = "https://images.deliveryhero.io/image/talabat/restaurants/21167986_13580950369_637438183491941065.jpg?width=180",
+                            Logo = "",
                             PaymentMethods = 1,
-                            Phone = "+20 111 111 1111",
+                            Phone = "",
                             RestaurantName = "Mohamed Ahmed"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "e80b5b9c-85c1-45a6-8467-875e1ed7d2a4",
-                            Email = "test",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "KFC",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "KFC",
-                            Address = "test",
-                            Logo = "https://upload.wikimedia.org/wikipedia/sco/b/bf/KFC_logo.svg",
-                            PaymentMethods = 1,
-                            Phone = "+20 111 111 1111",
-                            RestaurantName = "KFC"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "87ffa2d7-a8d7-444f-b635-9c7bde9007eb",
-                            Email = "test",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "Central",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "Central",
-                            Address = "Av. Pedro de Osma 301, Barranco, Lima, Peru",
-                            Logo = "https://centralrestaurante.com.pe/assets/images/facebook.jpg",
-                            PaymentMethods = 2,
-                            Phone = "+51 1 242 8515",
-                            RestaurantName = "Central"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b36e6553-2894-4db5-b44c-ce44bd862cf2",
-                            Email = "info@tastybistro.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "TheTastyBistro",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "TheTastyBistro",
-                            Address = "123 Main Street",
-                            Logo = "https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148987940.jpg?size=626&ext=jpg&ga=GA1.1.118802800.1685470637&semt=ais",
-                            PaymentMethods = 1,
-                            Phone = "+20 111 111 1111",
-                            RestaurantName = "The Tasty Bistro"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "92256cfc-18bd-4056-b959-4991b10f8588",
-                            Email = "www.ChezGaby.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "ChezGaby",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "ChezGaby",
-                            Address = "off of Fouad Street, close to the Alexandria Opera House",
-                            Logo = "https://www.zumtaugwald.ch/uploads/8iADQWOr/chezgaby_farbig_gross_198.gif",
-                            PaymentMethods = 1,
-                            Phone = "+20 111 111 1111",
-                            RestaurantName = "Chez Gaby"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "bfd72951-5a7d-4bc4-96c9-cc53b920de73",
-                            Email = "www.Negro.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "Negro",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "Negro",
-                            Address = "test",
-                            Logo = "https://cerronegrorestaurant.com/wp-content/uploads/2022/06/logo-1.png",
-                            PaymentMethods = 1,
-                            Phone = "+20 111 111 1111",
-                            RestaurantName = "Negro"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "40cd6f0a-63b1-4761-af4c-b2e4124c112a",
-                            Email = "567 Walnut Lane",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "",
-                            NormalizedUserName = "seafoodshack",
-                            PhoneNumberConfirmed = false,
-                            Role = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "seafoodshack",
-                            Address = "test",
-                            Logo = "https://img.freepik.com/premium-vector/fresh-seafood-restaurant-premium-logo_187482-625.jpg?w=2000",
-                            PaymentMethods = 1,
-                            Phone = "+20 111 111 1111",
-                            RestaurantName = "The Seafood Shack"
                         });
                 });
 
