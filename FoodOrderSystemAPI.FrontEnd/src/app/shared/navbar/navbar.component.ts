@@ -40,6 +40,7 @@ export class NavbarComponent implements OnInit{
     this.authService.IsLoggedIn$.subscribe((isLoggedIn) => {
       // Assign the Observable Value WHen Change to The  Coponent Property => this.UserIsLoggedIn
       this.UserIsLoggedIn = isLoggedIn;
+
     })
     
 
@@ -54,7 +55,7 @@ export class NavbarComponent implements OnInit{
       this.UserdropdownMenu!!.classList.toggle('hidden')
     }
     else {
-      console.log(` UserIsLoggedIn = ${this.UserIsLoggedIn} ///////// islogged for service = ${this.authService.IsLoggedIn$.value}`)
+      // console.log(` UserIsLoggedIn = ${this.UserIsLoggedIn} ///////// islogged for service = ${this.authService.IsLoggedIn$.value}`)
 
      this.UserdropdownMenu!!.classList.toggle('hidden')
 

@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 // import { CustomersComponent } from './customers/customers.component';
@@ -13,26 +15,29 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SliderModule } from 'primeng/slider';
 import { CardModule } from 'primeng/card';
 import { RatingModule } from 'primeng/rating';
+import { ImageModule } from 'primeng/image';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeFilterComponent } from './home-filter/home-filter.component';
 import { HomeCardComponent } from './home-card/home-card.component';
 import { FormsModule } from '@angular/forms';
+import { HomeRestaurantsComponent } from './home-restaurants/home-restaurants.component';
 
 @NgModule({
   declarations: [
     HomePageComponent,
     HomeFilterComponent,
     HomeCardComponent,
-    // CustomersComponent
-
+    HomeRestaurantsComponent,
   ],
   imports: [
     CommonModule
+    ,BrowserModule
     ,BrowserAnimationsModule
     ,InputTextModule,CarouselModule,TagModule,ButtonModule,PanelModule,CheckboxModule,SliderModule,CardModule,RatingModule
     ,FormsModule
     , RouterModule
+    , ImageModule
   ],
   exports:[
     HomePageComponent
