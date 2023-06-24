@@ -20,7 +20,7 @@ namespace FoodOrderSystemAPI.BL
         List<ProductCardDto> searchProductByName(string word);
         //List<ProductCardDto> GetAllFiltered(List<string> FilterRestaurants, string? word, List<string> FilterTags, List<float> FilterPrices);
         ProductCardDto? GetById(int id);
-        int Add(ProductCardDto productDto);
+        int Add(ProductAddDto productDto);
         void update(ProductCardDto productDto);
         void delete(int id);
     }

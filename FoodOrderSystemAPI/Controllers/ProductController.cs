@@ -82,9 +82,12 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> Add(ProductCardDto product)
+        public ActionResult<int> Add(ProductAddDto product)
         {
-            return _productManager.Add(product);
+            var addresult =  _productManager.Add(product);
+            if (addresult == 0)
+                return BadRequest(0);
+            return Ok(addresult);
         }
 
         [HttpDelete]

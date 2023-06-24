@@ -18,28 +18,28 @@ namespace FoodOrderSystemAPI.BL
             _unitOfWork=unitOfWork;
         }
 
-        public int Add(ProductCardDto productDto)           //not working (move to DAL? | )
+        public int Add(ProductAddDto productDto)           //not working (move to DAL? | )
         {
             var product = new ProductModel()
             {
-                ProductId= productDto.ProductID,
                 describtion = productDto.describtion,
                 img = productDto.img,
                 offer = productDto.offer,
                 price = productDto.price,
                 Productname = productDto.Productname,
                 rate = productDto.rate,
+                RestaurantID = productDto.restaurantID
             };
             _unitOfWork.Products.Add(product);
-            _unitOfWork.Save();
+           _unitOfWork.Save();
             foreach (var tag in productDto.tags)
             {
-                _unitOfWork.ProductTags.Add(new ProductTag { ProductId= productDto.ProductID,tag= tag});
+                _unitOfWork.ProductTags.Add(new ProductTag { ProductId= product.ProductId,tag= tag});
             }
 
             
             _unitOfWork.Save();
-            return productDto.ProductID;
+            return product.ProductId;
         }
 
         public void delete(int id)
