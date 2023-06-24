@@ -16,42 +16,12 @@ export class ProductService {
     return this.http.get<FullProduct>(`${baseUrl}Products/${productId}`);
   }
 
-  getAll(){
+  getAll(searchString:string,cat:string[],restaurant:string[],prices:Number[]){
     let baseUrl: string = this.configService.getBaseApiUrl();
-		return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)		
+    console.log(`${baseUrl}Products?${cat.map((value) => `FilterTags=${value}`).join('&')}&${restaurant.map((value) => `FilterRestaurants=${value}`).join('&')}&${prices.map((value) => `FilterPrices=${value}`).join('&')}&query=${searchString}`)
+		return this.http.get<FullProductCardDto[]>(`${baseUrl}Products?${cat.map((value) => `FilterTags=${value}`).join('&')}&${restaurant.map((value) => `FilterRestaurants=${value}`).join('&')}&${prices.map((value) => `FilterPrices=${value}`).join('&')}&word=${searchString}`)		
 	}
 
-  getAllCategoryFiltered(cat:string[]){
-    let baseUrl: string = this.configService.getBaseApiUrl();
-    if(cat.length==0)
-      return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)	
-    else
-		  return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/FilterTags?${cat.map((value) => `FilterTags=${value}`).join('&')}`)		
-  }
-
-  getAllResaurantFiltered(cat:string[]){
-    let baseUrl: string = this.configService.getBaseApiUrl();
-    if(cat.length==0)
-      return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)	
-    else
-		  return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/FilterRestaurants?${cat.map((value) => `FilterRestaurants=${value}`).join('&')}`)		
-  }
-
-  getAllPricesFiltered(cat:Number[]){
-    let baseUrl: string = this.configService.getBaseApiUrl();
-    if(cat.length==0)
-      return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)	
-    else
-		  return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/FilterPrices?${cat.map((value) => `FilterPrices=${value}`).join('&')}`)		
-  }
-
-  searchProductByName(searchString:string){
-    let baseUrl: string = this.configService.getBaseApiUrl();
-    if(searchString.length==0)
-      return this.http.get<FullProductCardDto[]>(`${baseUrl}Products`)	
-    else
-		  return this.http.get<FullProductCardDto[]>(`${baseUrl}Products/searchProduct?query=${searchString}`)		
-  }
 
   getAllTags(){
     let baseUrl: string = this.configService.getBaseApiUrl();

@@ -57,13 +57,38 @@ namespace FoodOrderSystemAPI.BL
             _unitOfWork.Save();
         }
 
-        public List<ProductCardDto> GetAll()
+        //public List<ProductCardDto> GetAll()
+        //{
+        //    var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto() 
+        //    {
+        //        ProductID = p.ProductId,
+        //        describtion= p.describtion,
+        //        img= p.img,
+        //        offer = p.offer,
+        //        price = p.price,
+        //        Productname = p.Productname,
+        //        rate = p.rate,
+        //        restaurantID = p.RestaurantID,
+        //        restaurantName = p.restaurant.RestaurantName,
+        //    }).ToList();
+
+        //    foreach (var product in products)
+        //    {
+        //        product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
+        //    }
+        //    return products;
+
+        //}
+        public List<ProductCardDto> GetAll(List<string> FilterRestaurants, string word, List<string> FilterTags , List<float> FilterPrices)
         {
-            var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto() 
+            //if(word is null || FilterRestaurants.Count==0 || FilterTags.Count == 0 || FilterPrices.Count == 0 )
+            //    return new List<ProductCardDto>() { };
+
+            var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto()
             {
                 ProductID = p.ProductId,
-                describtion= p.describtion,
-                img= p.img,
+                describtion = p.describtion,
+                img = p.img,
                 offer = p.offer,
                 price = p.price,
                 Productname = p.Productname,
@@ -76,10 +101,23 @@ namespace FoodOrderSystemAPI.BL
             {
                 product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
             }
+
+
+            if (word is not null)
+                products=products.Where(p => p.Productname.ToLower().Contains(word.ToLower())).ToList();
+
+            if (FilterTags.Count != 0)
+                products = products.Where(p => p.tags.Any(item => FilterTags.Contains(item))).ToList();
+
+            if (FilterRestaurants.Count != 0)
+                products = products.Where(p => FilterRestaurants.Contains(p.restaurantName)).ToList();
+
+            if (FilterPrices.Count != 0)
+                products = products.Where(p => p.price * p.offer >= FilterPrices.Min() && p.price * p.offer <= FilterPrices.Max()).ToList();
+
             return products;
 
         }
-
         public List<ProductCardDto> searchProductByName(string word)
         {
             var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto()

@@ -33,21 +33,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     ErrorModule,
     HomeModule,
-    FormsModule,
     HttpClientModule,
     RestaurantModule,
-
     BrowserAnimationsModule,
     SharedModule,
-    AppRoutingModule,
-    ErrorModule,
     CommonModule,
     NgbModule,
-    FormsModule,
     CheckoutModule,
     AddProductModule,
     ProductModule,
-
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyBPfbHdhiBn2prqXNfZKa0yFYVPOWMVvKU', // Replace with your actual API key
     // }),

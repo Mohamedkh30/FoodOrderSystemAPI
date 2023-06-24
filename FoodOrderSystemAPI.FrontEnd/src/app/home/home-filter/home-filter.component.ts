@@ -1,5 +1,6 @@
 import { Component, Input, OnInit,OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { EventData } from 'src/app/_models/eventData';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,9 +15,7 @@ export class HomeFilterComponent {
   @Input() Categories:string[] = [];
   @Input() Restaurants:string[] = [];
 
-  @Output() filterByCategoryEvent:EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() filterByRestaurantEvent:EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() filterByPriceEvent:EventEmitter<Number[]> = new EventEmitter<Number[]>();
+  @Output() OnFilter:EventEmitter<EventData> = new EventEmitter<EventData>();
 
 
 
@@ -50,20 +49,18 @@ export class HomeFilterComponent {
     this.boundSub?.unsubscribe();
   }
 
-    filterByCategory()
+
+
+  filter()
   {
-    this.filterByCategoryEvent.emit(this.selectedCategories);  
+    this.OnFilter.emit(new EventData(
+      this.selectedRestaurants,
+      this.selectedCategories,
+      this.rangeValues
+    )
+      );  
   }
 
-  filterByRestaurant()
-  {
-    this.filterByRestaurantEvent.emit(this.selectedRestaurants);  
-  }
-
-  filterByPrice()
-  {
-    this.filterByPriceEvent.emit(this.rangeValues);  
-  }
 
   
 }

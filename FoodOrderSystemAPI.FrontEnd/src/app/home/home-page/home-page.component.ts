@@ -1,8 +1,9 @@
 import { Component,OnDestroy,OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { EventData } from 'src/app/_models/eventData';
 import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
-import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
 import { ProductService } from 'src/app/services/product.service';
+import { RestaurantService } from 'src/app/services/restaurant.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,21 +14,18 @@ export class HomePageComponent implements OnInit ,OnDestroy{
 
   productsSub:Subscription|null = null;
   categoriesSub:Subscription|null = null;
-  categroyFilterSub:Subscription|null = null;
-  restaurantFilterSub:Subscription|null = null;
-  priceFilterSub:Subscription|null = null;
-
+  restaurantSub:Subscription|null = null;
 
   filterCategories:string[] = []
-  filterRestaurants:string[] = ["KFC","Baraka","sultan ayoub"].sort()
+  filterRestaurants:string[] = []
   searchString:string = "";
 
-  constructor(private productService:ProductService){}
+  constructor(private productService:ProductService,private restaurantService:RestaurantService){}
 
   productsList:FullProductCardDto[] = [];
 
   ngOnInit(): void {
-    this.productsSub=this.productService.getAll().subscribe(
+    this.productsSub=this.productService.getAll("",[],[],[]).subscribe(
       (data) => {
         this.productsList = data;
       },
@@ -44,55 +42,34 @@ export class HomePageComponent implements OnInit ,OnDestroy{
       console.log(`error: ${error}`);
     }
   );
+    //------------
+  this.restaurantSub=this.restaurantService.getAllRestaurants().subscribe(
+    (data) => {
+      data.forEach(Restaurant => {
+        this.filterRestaurants.push(Restaurant.restaurantName)
+      });
+      this.filterRestaurants.sort();
+  },
+  (error) => {
+    console.log(`error: ${error}`);
+  });
   }
+
 
   ngOnDestroy(): void {
     this.productsSub?.unsubscribe();
     this.categoriesSub?.unsubscribe();
-    this.categroyFilterSub?.unsubscribe();
-    this.restaurantFilterSub?.unsubscribe();
-    this.priceFilterSub?.unsubscribe();
+    this.restaurantSub?.unsubscribe();
   }
 
-  search(){
-    this.categroyFilterSub=this.productService.searchProductByName(this.searchString).subscribe(
+  getFilterdCards(obj:any|null){
+    if(obj == null)
+      obj=new EventData([],[],[]);
+      
+    this.productsSub=this.productService.getAll(this.searchString,obj.Categories,obj.restaurants,obj.range).subscribe(
       (data) => {
         this.productsList = data;
         console.log(this.productsList);
-      },
-      (error) => {
-        console.log(`error: ${error}`);
-      }
-    );
-  }
-
-  filterByCategory(Categories:string[]){
-    this.categroyFilterSub=this.productService.getAllCategoryFiltered(Categories).subscribe(
-      (data) => {
-        this.productsList = data;
-        console.log(this.productsList);
-      },
-      (error) => {
-        console.log(`error: ${error}`);
-      }
-    );
-  }
-
-  filterByRestaurant(restaurants:string[]){
-    this.restaurantFilterSub=this.productService.getAllResaurantFiltered(restaurants).subscribe(
-      (data) => {
-        this.productsList = data;
-      },
-      (error) => {
-        console.log(`error: ${error}`);
-      }
-    );
-  }
-
-  filterByPrice(prices:Number[]){
-    this.priceFilterSub=this.productService.getAllPricesFiltered(prices).subscribe(
-      (data) => {
-        this.productsList = data;
       },
       (error) => {
         console.log(`error: ${error}`);

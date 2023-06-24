@@ -13,11 +13,12 @@ namespace FoodOrderSystemAPI.BL
     {
         List<string> GetProductTags();
         List<float> GetProductPricesBounds();
-        List<ProductCardDto> GetAll();
+        List<ProductCardDto> GetAll(List<string> FilterRestaurants, string word, List<string> FilterTags, List<float> FilterPrices);
         List<ProductCardDto> GetAllFilterTag(List<string> FilterTags);
         List<ProductCardDto> GetAllFilterRestaurant(List<string> FilterRestaurants);
         List<ProductCardDto> GetAllFilterPrice(List<float> FilterPrices);
         List<ProductCardDto> searchProductByName(string word);
+        //List<ProductCardDto> GetAllFiltered(List<string> FilterRestaurants, string? word, List<string> FilterTags, List<float> FilterPrices);
         ProductCardDto? GetById(int id);
         int Add(ProductCardDto productDto);
         void update(ProductCardDto productDto);
