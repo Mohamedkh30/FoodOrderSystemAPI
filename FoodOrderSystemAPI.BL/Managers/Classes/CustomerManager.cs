@@ -21,16 +21,19 @@ public class CustomerManager:ICustomerManager
     private readonly UserManager<CustomerModel> _UserMangager;
     private readonly IConfiguration _configuration;
     private readonly ICustomerRepo _CustomerRepo;
+    private readonly IAuthenticationManager _AuthenticationManager;
 
-    public CustomerManager(IUnitOfWork unitOfWork , UserManager <CustomerModel> UserMangager , IConfiguration configuration , ICustomerRepo customerRepo)
+
+    public CustomerManager(IUnitOfWork unitOfWork, UserManager<CustomerModel> UserMangager, IConfiguration configuration, ICustomerRepo customerRepo, IAuthenticationManager authenticationManager)
     {
         _unitOfWork = unitOfWork;
         _UserMangager = UserMangager;
-       _configuration = configuration;
+        _configuration = configuration;
         _CustomerRepo = customerRepo;
+        _AuthenticationManager = authenticationManager;
     }
 
-   
+
 
     public List<CustomerModel> GetAllCutomers()
     {
@@ -117,12 +120,12 @@ public class CustomerManager:ICustomerManager
             //_unitOfWork.Customers.Add(CustomerToAdd);
             _unitOfWork.Save();
             // Instantiate An New User to Login from the user that Register
-            CustomerToLogin RegisteredCustomerToLogin = new CustomerToLogin()
+            UserLogin RegisteredCustomerToLogin = new UserLogin()
             {
                 UserName = CustomerToAdd.UserName,
                 Password = RegisterdCustomer.Password
             };
-            return await Login(RegisteredCustomerToLogin);
+            return await _AuthenticationManager.LoginAsCustomer(RegisteredCustomerToLogin);
              
         }
         return null;
@@ -156,51 +159,47 @@ public class CustomerManager:ICustomerManager
 
     }
 
-    public async Task<TokenDto> Login(CustomerToLogin NewLoginCustomer )
-    {
-        var Customer =await _UserMangager.FindByNameAsync(NewLoginCustomer.UserName);
-        if (Customer is null ||await  _UserMangager.IsLockedOutAsync(Customer))
-        {
-        return null;
-        }
-        bool isAuthenticated = await _UserMangager.CheckPasswordAsync(Customer , NewLoginCustomer.Password);
-        if (! isAuthenticated ) {
-        _UserMangager.AccessFailedAsync(Customer);
-            return null;
-        }
+    //public async Task<TokenDto> Login(CustomerToLogin NewLoginCustomer )
+    //{
+    //    var Customer =await _UserMangager.FindByNameAsync(NewLoginCustomer.UserName);
+    //    if (Customer is null ||await  _UserMangager.IsLockedOutAsync(Customer))
+    //    {
+    //    return null;
+    //    }
+    //    bool isAuthenticated = await _UserMangager.CheckPasswordAsync(Customer , NewLoginCustomer.Password);
+    //    if (! isAuthenticated ) {
+    //    _UserMangager.AccessFailedAsync(Customer);
+    //        return null;
+    //    }
 
-        var CustomerClaims = await _UserMangager.GetClaimsAsync(Customer);
+    //    var CustomerClaims = await _UserMangager.GetClaimsAsync(Customer);
 
-        // Generate Tkey 
-        var secretkey = _configuration["secretkey"];
-        var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
-        var key = new SymmetricSecurityKey(secretkeyinbytes);
+    //    // Generate Tkey 
+    //    var secretkey = _configuration["secretkey"];
+    //    var secretkeyinbytes = Encoding.ASCII.GetBytes(secretkey);
+    //    var key = new SymmetricSecurityKey(secretkeyinbytes);
        
-        // Generate Hashing Result 
-        var HashingResult = new SigningCredentials(key , SecurityAlgorithms.HmacSha256Signature);
+    //    // Generate Hashing Result 
+    //    var HashingResult = new SigningCredentials(key , SecurityAlgorithms.HmacSha256Signature);
 
-        //Generate JWt Token 
-        // Calc Expiration Date 
-        var ExpirationDate = DateTime.Now.AddMinutes(30);
-        var Jwt = new JwtSecurityToken(
-            claims: CustomerClaims,
-            notBefore:DateTime.Now,
-            expires: ExpirationDate,
-            signingCredentials: HashingResult 
-            );
+    //    //Generate JWt Token 
+    //    // Calc Expiration Date 
+    //    var ExpirationDate = DateTime.Now.AddMinutes(30);
+    //    var Jwt = new JwtSecurityToken(
+    //        claims: CustomerClaims,
+    //        notBefore:DateTime.Now,
+    //        expires: ExpirationDate,
+    //        signingCredentials: HashingResult 
+    //        );
 
-        var TokenHandler = new JwtSecurityTokenHandler();
-        string TokenString  = TokenHandler.WriteToken(Jwt);
+    //    var TokenHandler = new JwtSecurityTokenHandler();
+    //    string TokenString  = TokenHandler.WriteToken(Jwt);
 
-        return new TokenDto()
-        { Token = TokenString,
-            ExpirationDate = ExpirationDate
-        };
-
-
-
-
-    }
+    //    return new TokenDto()
+    //    { Token = TokenString,
+    //        ExpirationDate = ExpirationDate
+    //    };
+    //}
 
     public CreditToRead UpdateCardCutomerData(int Customerid, CreditToUpdate creditCard)
     {

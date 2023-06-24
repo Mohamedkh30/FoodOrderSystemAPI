@@ -15,9 +15,11 @@ namespace FoodOrderSystemAPI.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerManager _customerManager;
-        public CustomerController(ICustomerManager customerManager )
+        private readonly IAuthenticationManager _AuthenticationManager;
+        public CustomerController(ICustomerManager customerManager, IAuthenticationManager authenticationManager)
         {
             _customerManager = customerManager;
+            _AuthenticationManager = authenticationManager;
         }
         // GET: api/<CustomerController>
         [HttpGet]
@@ -43,7 +45,7 @@ namespace FoodOrderSystemAPI.Controllers
         // POST api/<CustomerController>
         [HttpPost]
 
-        public async Task< ActionResult<TokenDto> >Post(CustomerToRegister ResgiteredCustomer)
+        public async Task <ActionResult<TokenDto>> Post(CustomerToRegister ResgiteredCustomer)
         {
             var result =  await _customerManager.Register(ResgiteredCustomer);
             if(result == null) {
@@ -88,19 +90,9 @@ namespace FoodOrderSystemAPI.Controllers
 
         }
 
-        // DELETE api/<CustomerController>/5
-        [HttpPost]
-        [Route("/Login")]
-
-        public async Task <ActionResult <string>>  Login_Presention_Layer(CustomerToLogin customerToLogin)
-        {
-            var LoginResult = await _customerManager.Login(customerToLogin);
-            if(LoginResult == null) {
-            return Unauthorized(LoginResult);
-            }
-            return Ok(LoginResult);
-        }
+      
         // Delete api/<CustomerController>/5
+
         [HttpDelete("{id}")]
         public ActionResult DeleteCustomer(int id)
         {
