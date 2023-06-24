@@ -4,20 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { AddCardModule } from '../AddCard/add-card.module';
 import { CheckoutComponent } from './checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
-  declarations: [
-    CheckoutComponent,
-  ],
+  declarations: [CheckoutComponent],
   imports: [
     CommonModule,
     FormsModule,
     AddCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonModule,
   ],
-  exports: [
-    
-  ]
+  exports: [],
 })
-export class CheckoutModule { }
-
+export class CheckoutModule {}

@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { FullProductDto } from 'src/app/_models/product/FullProductDto';
+import { CartItem } from 'src/app/_models/cartItem/CartItem';
+import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
 import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
+import { CartService } from 'src/app/services/cart.service';
+import { FullProduct } from 'src/app/types/Product/full-product-dto';
+import { RestaurantDetailsDto } from 'src/app/types/Restaurant/Restaurants-Read-dto';
 
 @Component({
   selector: 'app-home-card',
@@ -8,25 +12,26 @@ import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
   styleUrls: ['./home-card.component.css']
 })
 export class HomeCardComponent {
-  @Input() product:FullProductDto = new FullProductDto(
-    0,"Flafel",10,"flafel so5na","https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg",0.45555,4,"vegetrian",new RestaurantDto(0,"KFC")
+  @Input() product:FullProductCardDto = new FullProductCardDto(
+    0,"",10,"","https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png",0,0,[],0,""
   );
 
-    
+  constructor(private cartService:CartService){}
 
-    addToCart(){
-      let cartListString = localStorage.getItem('cartList');
-
-      if(cartListString === null){
-        let cartList:FullProductDto[] = [];
-        cartList.push(this.product)
-        console.log(cartList);
-        localStorage.setItem('cartList',JSON.stringify(cartList));
-      }else{
-        let cartList:FullProductDto[] = JSON.parse(cartListString);
-        cartList.push(this.product)
-        console.log(cartList);
-        localStorage.setItem('cartList',JSON.stringify(cartList));
-      }
-    }
+  addToCart(): void {
+    let newCartItem: CartItem;
+    let fullProduct:FullProduct = new FullProduct (
+      this.product.productID,
+      this.product.productname,
+      this.product.price,
+      this.product.describtion,
+      this.product.img,
+      this.product.offer,
+      this.product.rate,
+      this.product.tags[0],
+      new RestaurantDetailsDto(this.product.restaurantID,this.product.restaurantName), 
+      )
+    newCartItem = new CartItem(fullProduct, 1);
+    this.cartService.addToCart(newCartItem);
+  }
 }

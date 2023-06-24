@@ -41,6 +41,7 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
 
   getProduct() {
     let urlProductId = this.activeRoute.snapshot.paramMap.get('id');
+    console.log(urlProductId)
     if (urlProductId) {
       let productId = parseInt(urlProductId);
       this.productService.getProduct(productId).subscribe(

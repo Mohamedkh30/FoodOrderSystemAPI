@@ -2,5 +2,5 @@
 
 public interface IProductRepo : IEntityRepo<ProductModel>
 {
-
+    public IEnumerable<String> GetProductTags();
 }
