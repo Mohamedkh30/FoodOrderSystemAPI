@@ -1,42 +1,46 @@
 import { Injectable } from '@angular/core';
-import { FullProductDto } from '../_models/product/FullProductDto';
+import { CartItem } from '../_models/cartItem/CartItem';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  private _localStorageCartName: string = 'Cart';
   constructor() {}
-  addToCart(newProduct: FullProductDto) {
-    let cartList: FullProductDto[] = [];
-    let cartListString = localStorage.getItem('cartList');
-    if (cartListString !== null) {
-      cartList = JSON.parse(cartListString);
+  addToCart(newCartItem: CartItem) {
+    let cartItems: CartItem[] = [];
+    let cartItemsString = localStorage.getItem(this._localStorageCartName);
+    if (cartItemsString !== null) {
+      cartItems = JSON.parse(cartItemsString);
     }
-    cartList.push(newProduct);
-    console.log(cartList);
-    localStorage.setItem('cartList', JSON.stringify(cartList));
+    cartItems.push(newCartItem);
+    localStorage.setItem(this._localStorageCartName, JSON.stringify(cartItems));
   }
 
-  removeFromCart(productToRemove: FullProductDto) {
-    let cartList: FullProductDto[] = [];
-    let cartListString = localStorage.getItem('cartList');
-    if (cartListString !== null) {
-      cartList = JSON.parse(cartListString);
+  removeFromCart(cartItemToRemove: CartItem) {
+    let cartItems: CartItem[] = [];
+    let cartItemsString = localStorage.getItem(this._localStorageCartName);
+    if (cartItemsString !== null) {
+      cartItems = JSON.parse(cartItemsString);
     }
-    for (let index = 0; index < cartList.length; index++) {
-      if (cartList[index].ProductID == productToRemove.ProductID) {
-        cartList.splice(index, 1);
+    for (let index = 0; index < cartItems.length; index++) {
+      const element = cartItems[index];
+      if (
+        cartItems[index].product.productID == cartItemToRemove.product.productID
+      ) {
+        cartItems.splice(index, 1);
         break;
       }
     }
+    localStorage.setItem(this._localStorageCartName, JSON.stringify(cartItems));
   }
 
-  getCart(): FullProductDto[] {
-    let cartList: FullProductDto[] = [];
-    let cartListString = localStorage.getItem('cartList');
-    if (cartListString !== null) {
-      cartList = JSON.parse(cartListString);
+  getCart(): CartItem[] {
+    let cartItems: CartItem[] = [];
+    let cartItemsString = localStorage.getItem(this._localStorageCartName);
+    if (cartItemsString !== null) {
+      cartItems = JSON.parse(cartItemsString);
     }
-    return cartList;
+    return cartItems;
   }
 }
