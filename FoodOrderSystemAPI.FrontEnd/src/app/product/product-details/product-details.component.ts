@@ -1,5 +1,7 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/_models/cartItem/CartItem';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { FullProduct } from 'src/app/types/Product/full-product-dto';
 
@@ -22,7 +24,8 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
   productQuantity: number = 1;
   constructor(
     private activeRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    public cartService: CartService
   ) {}
   ngOnInit(): void {
     this.getProduct();
@@ -49,5 +52,11 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
         }
       );
     }
+  }
+
+  addToCart(): void {
+    let newCartItem: CartItem;
+    newCartItem = new CartItem(this.product, this.productQuantity);
+    this.cartService.addToCart(newCartItem);
   }
 }
