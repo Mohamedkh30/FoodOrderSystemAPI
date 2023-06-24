@@ -182,15 +182,15 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.OrderProductModel", b =>
                 {
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId", "ProductId");
@@ -243,7 +243,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 1,
                             Productname = "Flafel",
-                            RestaurantID = 1,
+                            RestaurantID = 100,
                             describtion = "flafel so5na",
                             img = "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg",
                             offer = 0.45555f,
@@ -254,7 +254,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 2,
                             Productname = "fool",
-                            RestaurantID = 1,
+                            RestaurantID = 100,
                             describtion = "fool so5n",
                             img = "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg",
                             offer = 0f,
@@ -265,7 +265,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 3,
                             Productname = "Koshary",
-                            RestaurantID = 1,
+                            RestaurantID = 101,
                             describtion = "Koshary so5n",
                             img = "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg",
                             offer = 0.5f,
@@ -276,7 +276,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 4,
                             Productname = "kebda",
-                            RestaurantID = 1,
+                            RestaurantID = 102,
                             describtion = "kebda so5na",
                             img = "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg",
                             offer = 0.1f,
@@ -542,7 +542,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d9f32085-ce9e-4fe9-8a97-b2c87b8d3bc6",
+                            ConcurrencyStamp = "fd7035c2-ab0c-466d-bc37-8320fd9af7aa",
                             Email = "hassan@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -559,7 +559,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "17326f17-f7ec-4816-a959-da862999584b",
+                            ConcurrencyStamp = "97b3049e-117c-40e5-afcc-4094c932a80d",
                             Email = "hamdy@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -604,23 +604,143 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 100,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "407772a6-88d8-4f43-9db5-573f8f2b2b32",
+                            ConcurrencyStamp = "9c5abc0f-6828-498b-9aca-5ac897dd6b4d",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "",
-                            NormalizedUserName = "",
+                            NormalizedUserName = "MohamedAhmed",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
-                            UserName = "Mohamed Ahmed",
+                            UserName = "MohamedAhmed",
                             Address = "test",
-                            Logo = "",
+                            Logo = "https://images.deliveryhero.io/image/talabat/restaurants/21167986_13580950369_637438183491941065.jpg?width=180",
                             PaymentMethods = 1,
-                            Phone = "",
+                            Phone = "+20 111 111 1111",
                             RestaurantName = "Mohamed Ahmed"
+                        },
+                        new
+                        {
+                            Id = 101,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f13943e7-8127-4de6-b8e9-a70a4ad543f9",
+                            Email = "test",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "KFC",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "KFC",
+                            Address = "test",
+                            Logo = "https://upload.wikimedia.org/wikipedia/sco/b/bf/KFC_logo.svg",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "KFC"
+                        },
+                        new
+                        {
+                            Id = 102,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "76777546-397f-4212-960d-827ef5adb4cf",
+                            Email = "test",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "Central",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "Central",
+                            Address = "Av. Pedro de Osma 301, Barranco, Lima, Peru",
+                            Logo = "https://centralrestaurante.com.pe/assets/images/facebook.jpg",
+                            PaymentMethods = 2,
+                            Phone = "+51 1 242 8515",
+                            RestaurantName = "Central"
+                        },
+                        new
+                        {
+                            Id = 103,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0f59f1d9-11a9-43e9-90f0-965cd1c8963d",
+                            Email = "info@tastybistro.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "TheTastyBistro",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "TheTastyBistro",
+                            Address = "123 Main Street",
+                            Logo = "https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148987940.jpg?size=626&ext=jpg&ga=GA1.1.118802800.1685470637&semt=ais",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "The Tasty Bistro"
+                        },
+                        new
+                        {
+                            Id = 104,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e678f2ec-c668-4770-835e-b268b09e054e",
+                            Email = "www.ChezGaby.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "ChezGaby",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "ChezGaby",
+                            Address = "off of Fouad Street, close to the Alexandria Opera House",
+                            Logo = "https://www.zumtaugwald.ch/uploads/8iADQWOr/chezgaby_farbig_gross_198.gif",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "Chez Gaby"
+                        },
+                        new
+                        {
+                            Id = 105,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "03ca8f37-046f-4a95-b367-d463eca42637",
+                            Email = "www.Negro.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "Negro",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "Negro",
+                            Address = "test",
+                            Logo = "https://cerronegrorestaurant.com/wp-content/uploads/2022/06/logo-1.png",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "Negro"
+                        },
+                        new
+                        {
+                            Id = 106,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "40560825-d74d-4405-ad89-ce1604043c1d",
+                            Email = "567 Walnut Lane",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "seafoodshack",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "seafoodshack",
+                            Address = "test",
+                            Logo = "https://img.freepik.com/premium-vector/fresh-seafood-restaurant-premium-logo_187482-625.jpg?w=2000",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "The Seafood Shack"
                         });
                 });
 
@@ -660,15 +780,15 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             modelBuilder.Entity("FoodOrderSystemAPI.OrderProductModel", b =>
                 {
                     b.HasOne("FoodOrderSystemAPI.OrderModel", "Order")
-                        .WithMany()
+                        .WithMany("OrderProducts")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FoodOrderSystemAPI.ProductModel", "Product")
-                        .WithMany()
+                        .WithMany("orderProducts")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -692,13 +812,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasOne("FoodOrderSystemAPI.CustomerModel", "Customer")
                         .WithMany("Reviews")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FoodOrderSystemAPI.ProductModel", "Product")
-                        .WithMany()
+                        .WithMany("reviews")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -781,6 +901,18 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         .HasForeignKey("FoodOrderSystemAPI.RestaurantModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
+                {
+                    b.Navigation("OrderProducts");
+                });
+
+            modelBuilder.Entity("FoodOrderSystemAPI.ProductModel", b =>
+                {
+                    b.Navigation("orderProducts");
+
+                    b.Navigation("reviews");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.CustomerModel", b =>

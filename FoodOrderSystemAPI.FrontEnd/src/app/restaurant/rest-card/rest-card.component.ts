@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { FullProductDto } from 'src/app/_models/product/FullProductDto';
+import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
 import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
+import { RestaurantApiTestComponent } from '../restaurant-api-test/restaurant-api-test.component';
 
 @Component({
   selector: 'app-rest-card',
@@ -8,22 +9,23 @@ import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
   styleUrls: ['./rest-card.component.css']
 })
 export class RestCardComponent {
-  @Input() product:FullProductDto = new FullProductDto(
-    0,"Flafel",10,"flafel so5na","https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg",0.45555,4,"vegetrian",new RestaurantDto(0,"KFC")
-  );
+  @Input() product:FullProductCardDto = new FullProductCardDto();
 
+
+  getRestaurantDetailsById(): void {
     
+  }
 
     addToCart(){
       let cartListString = localStorage.getItem('cartList');
 
       if(cartListString === null){
-        let cartList:FullProductDto[] = [];
+        let cartList:FullProductCardDto[] = [];
         cartList.push(this.product)
         console.log(cartList);
         localStorage.setItem('cartList',JSON.stringify(cartList));
       }else{
-        let cartList:FullProductDto[] = JSON.parse(cartListString);
+        let cartList:FullProductCardDto[] = JSON.parse(cartListString);
         cartList.push(this.product)
         console.log(cartList);
         localStorage.setItem('cartList',JSON.stringify(cartList));

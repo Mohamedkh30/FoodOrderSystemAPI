@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl ,ValidationErrors } from '@angular/forms';
-
+import { AuthentcationService } from '../services/authentcation.service';
+import { ImageService } from '../services/image.service';
+import {ProductService} from '../services/product.service'
 
 
 @Component({
@@ -12,67 +15,56 @@ export class AddProductComponent implements OnInit {
   productForm: FormGroup;
   isSubmitted: boolean = false;
   photo: string = '';
+  imageUrl: string = '';
+ 
 
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder , public ProductService : ProductService ,private  AuthenticationService : AuthentcationService ,public imageservice : ImageService) {
     this.productForm = this.formBuilder.group({
-      photo: [''],
-      product: ['', Validators.required],
-      description: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(1)]]
+      ProductName : ['',Validators.required],
+      ProductPrice : [ null ,Validators.required],
+     ProductImg : [ null,Validators.required],
+     ProductDescription : [],
+     ProductOffer : [0],
+    //  ProductTag: this.formBuilder.group({
+    //   VueJS: false,
+    //   React: false,
+    //   Angular: false,
+    //   Laravel: false
+    // })
+      
+
     });
   }
 
+ //  Get Properties To All Inputs Groups in Form 
+ 
+get ProductName() {
+  return this.productForm.get('ProductName')!!;
+}
+get ProductPrice() {
+  return this.productForm.get('ProductPrice')!!;
+}
+get ProductImg() {
+  return this.productForm.get('ProductImg')!!;
+}
+get ProductDescription() {
+  return this.productForm.get('ProductDescription')!!;
+}
+get ProductOffer() {
+  return this.productForm.get('ProductOffer')!!;
+}
+
+
+
+  
   ngOnInit() {}
 
-  onFileInputClick() {
-    document.getElementById('productImage')?.click();
-  }
-
-  // Method to delete the uploaded photo
-  deletePhoto(): void {
-    this.photo = '';
-    const fileInput = document.getElementById('productImage') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.value = ''; // Reset the value of the file input
-      fileInput.disabled = false; // Re-enable the file input
-    }
-  }
-  
-
-
-  onFileChange(event: any): void {
-    const fileInput = event.target as HTMLInputElement;
-    if (fileInput?.files && fileInput.files.length) {
-      this.photo = fileInput.files[0].name;
-      fileInput.disabled = true;
-    }
-  }
   
   
 
-
-  getFileName(): string {
-    if (this.photo) {
-      const fileInput = document.getElementById('productImage') as HTMLInputElement;
-      return fileInput?.files && fileInput.files.length ? fileInput.files[0].name : '';
-    }
-    return '';
-  }
   
-
-
-
-  onSubmit() {
-    this.isSubmitted = true;
-    this.validateForm();
-
-    if (this.productForm.valid) {
-      // handle the form submission
-    }
-  }
-
-
+ 
+ 
 
   validateForm() {
     Object.keys(this.productForm.controls).forEach((field) => {
@@ -81,16 +73,30 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-  getControlErrorMessage(controlName: string): string {
-    const control = this.productForm.get(controlName);
+ 
 
-    if (this.isSubmitted && control?.invalid) {
-      if (control?.errors?.['required']) {
-        return 'This field is required.';
-      }
+  submitForm() {
+    if (this.productForm.valid) {
+      this.AssigingFormToToProductService();
+      console.log(this.ProductService.productToAdd)
+     console.log( this.ProductService.productToAdd.img)
+      // Send Request to server Add Product 
+      this.ProductService.AddProduct().subscribe((productid: number) => {
+      }, (error: HttpErrorResponse) => {
+        console.log(error)
+      })
     }
+    this.validateForm();
+    
+  }
 
-    return '';
+
+  AssigingFormToToProductService() {
+    this.ProductService.productToAdd.productname = this.ProductName.value
+    this.ProductService.productToAdd.describtion = this.ProductDescription.value
+    this.ProductService.productToAdd.price = this.ProductPrice.value
+    this.ProductService.productToAdd.offer = this.ProductOffer.value
+     this.ProductService.productToAdd.restaurantID = this.AuthenticationService.UserLogin?.id!!;
   }
 }
 
