@@ -49,7 +49,7 @@
       <!-- FORM -->
       <div class="col-12 col-md-7 my-5">
         <!-- momken badl onSubmit tb2a PostOrder() -->
-        <form [formGroup]="checkoutForm" action="" (ngSubmit)="onSubmit()">
+        <form [formGroup]="checkoutForm">
           <div class="checkout-container">
             <div class="row">
               <div>
@@ -413,16 +413,6 @@
               </ul>
             </div>
           </div>
-          <div class="d-flex justify-content-center py-2" style="width: 18rem">
-            <button
-              type="button"
-              id="button1"
-              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-              (click)="returnToCart()"
-            >
-              Return to Cart
-            </button>
-          </div>
         </div>
       </div>
 
@@ -435,15 +425,17 @@
 
     <br />
     <div class="text-center pb-2">
-      <button
+      <p-button (click)="PostOrder()" styleClass="p-button-warning"
+        >Proceed
+      </p-button>
+      <!-- <button
         type="submit"
         (click)="PostOrder()"
-        [disabled]="!isProceedEnabled"
         data-bs-toggle="button"
-        class="btn btn-success"
+        class="btn btn-primary"
       >
         Proceed
-      </button>
+      </button> -->
     </div>
 
     <!-- </form> -->

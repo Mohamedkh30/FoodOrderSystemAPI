@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AddCardComponent } from '../AddCard/add-card.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { FullProductCardDto } from '../_models/product/FullProductCardDto';
 import {
   FormBuilder,
   FormGroup,
@@ -10,12 +9,9 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import { FullProductDto } from '../_models/product/FullProductDto';
-import { RestaurantDto } from '../_models/restaurant/RestaurantDto';
 import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
 import { AuthentcationService } from '../services/authentcation.service';
-import { UserTokenClaims } from '../types/user-token-claims';
 import { FullProduct } from 'src/app/types/Product/full-product-dto';
 import { FormControl, ValidatorFn } from '@angular/forms';
 import { AddOrderDTO, OrderProduct } from '../types/Order/add-order-dto';
@@ -129,7 +125,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   productsList: FullProduct[] | null = [];
-
 
   calculateTotal(): number {
     let total = 0;
