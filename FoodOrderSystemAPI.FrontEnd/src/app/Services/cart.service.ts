@@ -6,7 +6,10 @@ import { CartItem } from '../_models/cartItem/CartItem';
 })
 export class CartService {
   private _localStorageCartName: string = 'Cart';
+
   constructor() {}
+
+  //#region  methods
   addToCart(newCartItem: CartItem) {
     let cartItems: CartItem[] = [];
     let cartItemsString = localStorage.getItem(this._localStorageCartName);
@@ -43,4 +46,18 @@ export class CartService {
     }
     return cartItems;
   }
+
+  calculateTotalPrice(): number {
+    let cartItems: CartItem[] = [];
+    let cartItemsString = localStorage.getItem(this._localStorageCartName);
+    if (cartItemsString !== null) {
+      cartItems = JSON.parse(cartItemsString);
+    }
+    let totalPrice = 0;
+    for (let index = 0; index < cartItems.length; index++) {
+      totalPrice += cartItems[index].product.price * cartItems[index].quantity;
+    }
+    return totalPrice;
+  }
+  //#endregion
 }
