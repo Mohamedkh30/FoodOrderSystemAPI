@@ -4,7 +4,7 @@ export class ResturantRegister {
   public  userName: string|null = null
   public  email: string|null =null
   public address: string = '';
-  public logo: string | null = 'sdfsd';
+  public logo: string | null = '';
   public phone: string | null = null;
   public paymentMethods: number | null = null;
   public password: string | null = null;

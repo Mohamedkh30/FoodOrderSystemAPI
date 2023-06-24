@@ -1,6 +1,7 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
+import { CartItem } from 'src/app/_models/cartItem/CartItem';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { FullProduct } from 'src/app/types/Product/full-product-dto';
 
@@ -23,7 +24,8 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
   productQuantity: number = 1;
   constructor(
     private activeRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    public cartService: CartService
   ) {}
   ngOnInit(): void {
     this.getProduct();
@@ -53,34 +55,9 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
     }
   }
 
-  addToCart(){
-    let cartListString = localStorage.getItem('cartList');
-
-    let toBeAddedProduct: FullProductCardDto = new FullProductCardDto(
-      this.product?.productID,
-      this.product?.productname,
-      this.product?.price,
-      this.product?.describtion,
-      this.product?.img,
-      this.product?.offer,
-      this.product?.rate,
-      [],
-      this.product?.restaurant?.id,
-      this.product?.restaurant?.restaurantName
-    );
-
-    if(cartListString === null){
-      let cartList:FullProductCardDto[] = [];
-      cartList.push(toBeAddedProduct)
-      console.log(cartList);
-      localStorage.setItem('cartList',JSON.stringify(cartList));
-    }else{
-      let cartList:FullProductCardDto[] = JSON.parse(cartListString);
-      cartList.push(toBeAddedProduct)
-      console.log(cartList);
-      localStorage.setItem('cartList',JSON.stringify(cartList));
-    }
+  addToCart(): void {
+    let newCartItem: CartItem;
+    newCartItem = new CartItem(this.product, this.productQuantity);
+    this.cartService.addToCart(newCartItem);
   }
-
-  
 }
