@@ -6,8 +6,17 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 function cardNumberValidator(control: AbstractControl): ValidationErrors | null {
   const cardNumber = control.value;
+
   if (cardNumber && cardNumber.length !== 16) {
     return { invalidCardNumber: true };
+  }
+  return null;
+}
+
+function cardNameValidator(control: AbstractControl): ValidationErrors | null {
+  const cardName = control.value;
+  if (cardName && (cardName.length < 4 || !/^[a-zA-Z]+$/.test(cardName))) {
+    return { invalidCardName: true };
   }
   return null;
 }
@@ -26,7 +35,7 @@ export class AddCardComponent implements OnInit {
   constructor(public formBuilder: FormBuilder, public activeModal: NgbActiveModal) {
     this.cardForm = this.formBuilder.group({
       cardNumber: ['', [Validators.required, cardNumberValidator]],
-      cardName: ['', Validators.required],
+      cardName: ['', [Validators.required, cardNameValidator]],
       expiryMonth: ['', Validators.required],
       expiryYear: ['', Validators.required],
       cvv: ['', Validators.required]
