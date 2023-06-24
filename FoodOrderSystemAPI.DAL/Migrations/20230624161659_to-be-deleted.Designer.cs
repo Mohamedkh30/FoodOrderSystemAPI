@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20230623203522_to-be-deleted")]
+    [Migration("20230624161659_to-be-deleted")]
     partial class tobedeleted
     {
         /// <inheritdoc />
@@ -541,27 +541,27 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e2c0f8eb-c55b-421b-8c84-d7e60a20b514",
+                            ConcurrencyStamp = "486ad818-eda1-4822-92b9-071f43c262c6",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "",
-                            NormalizedUserName = "Mohamed Ahmed",
+                            NormalizedUserName = "MohamedAhmed",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
-                            UserName = "Mohamed Ahmed",
+                            UserName = "MohamedAhmed",
                             Address = "test",
-                            Logo = "",
+                            Logo = "https://images.deliveryhero.io/image/talabat/restaurants/21167986_13580950369_637438183491941065.jpg?width=180",
                             PaymentMethods = 1,
-                            Phone = "",
+                            Phone = "+20 111 111 1111",
                             RestaurantName = "Mohamed Ahmed"
                         },
                         new
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a20e63ea-7d6a-4381-a248-b31f4541e45e",
+                            ConcurrencyStamp = "e80b5b9c-85c1-45a6-8467-875e1ed7d2a4",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -572,10 +572,110 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                             TwoFactorEnabled = false,
                             UserName = "KFC",
                             Address = "test",
-                            Logo = "",
+                            Logo = "https://upload.wikimedia.org/wikipedia/sco/b/bf/KFC_logo.svg",
                             PaymentMethods = 1,
-                            Phone = "",
+                            Phone = "+20 111 111 1111",
                             RestaurantName = "KFC"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "87ffa2d7-a8d7-444f-b635-9c7bde9007eb",
+                            Email = "test",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "Central",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "Central",
+                            Address = "Av. Pedro de Osma 301, Barranco, Lima, Peru",
+                            Logo = "https://centralrestaurante.com.pe/assets/images/facebook.jpg",
+                            PaymentMethods = 2,
+                            Phone = "+51 1 242 8515",
+                            RestaurantName = "Central"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b36e6553-2894-4db5-b44c-ce44bd862cf2",
+                            Email = "info@tastybistro.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "TheTastyBistro",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "TheTastyBistro",
+                            Address = "123 Main Street",
+                            Logo = "https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148987940.jpg?size=626&ext=jpg&ga=GA1.1.118802800.1685470637&semt=ais",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "The Tasty Bistro"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "92256cfc-18bd-4056-b959-4991b10f8588",
+                            Email = "www.ChezGaby.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "ChezGaby",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "ChezGaby",
+                            Address = "off of Fouad Street, close to the Alexandria Opera House",
+                            Logo = "https://www.zumtaugwald.ch/uploads/8iADQWOr/chezgaby_farbig_gross_198.gif",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "Chez Gaby"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bfd72951-5a7d-4bc4-96c9-cc53b920de73",
+                            Email = "www.Negro.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "Negro",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "Negro",
+                            Address = "test",
+                            Logo = "https://cerronegrorestaurant.com/wp-content/uploads/2022/06/logo-1.png",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "Negro"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "40cd6f0a-63b1-4761-af4c-b2e4124c112a",
+                            Email = "567 Walnut Lane",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "",
+                            NormalizedUserName = "seafoodshack",
+                            PhoneNumberConfirmed = false,
+                            Role = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "seafoodshack",
+                            Address = "test",
+                            Logo = "https://img.freepik.com/premium-vector/fresh-seafood-restaurant-premium-logo_187482-625.jpg?w=2000",
+                            PaymentMethods = 1,
+                            Phone = "+20 111 111 1111",
+                            RestaurantName = "The Seafood Shack"
                         });
                 });
 

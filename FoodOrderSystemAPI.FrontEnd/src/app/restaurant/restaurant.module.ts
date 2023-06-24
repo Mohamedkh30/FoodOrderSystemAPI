@@ -19,15 +19,13 @@ import { RestaurantPageComponent } from './restaurant-page/restaurant-page.compo
 import { RestaurantFilterComponent } from './restaurant-filter/restaurant-filter.component';
 import { FormsModule } from '@angular/forms';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
-import { RestaurantApiTestComponent } from './restaurant-api-test/restaurant-api-test.component';
 
 @NgModule({
   declarations: [
     RestCardComponent,
     RestaurantPageComponent,
     RestaurantFilterComponent,
-    RestaurantDetailsComponent,
-    RestaurantApiTestComponent
+    RestaurantDetailsComponent
   ],
   imports: [
     CommonModule

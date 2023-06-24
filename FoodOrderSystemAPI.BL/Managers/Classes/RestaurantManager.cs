@@ -36,6 +36,10 @@ public class RestaurantManager : IRestaurantManager
         //return _mapper.Map<List<RestaurantsReadDto>>(AllRestaurants);
         return AllRestaurants.Select(r => new RestaurantsReadDto()
         {
+            RestaurantId = r.Id,
+            UserName = r.UserName,
+            Email = r.Email,
+            NormalizedUserName = r.NormalizedUserName,
             RestaurantName = r.RestaurantName,
             Address = r.Address,
             Logo = r.Logo,
@@ -69,6 +73,10 @@ public class RestaurantManager : IRestaurantManager
         //return _mapper.Map<RestaurantDetailsDto>(RestaurantDetails);
         return new RestaurantDetailsDto()
         {
+            RestaurantId = RestaurantDetails.Id,
+            UserName = RestaurantDetails.UserName,
+            Email = RestaurantDetails.Email,
+            NormalizedUserName = RestaurantDetails.NormalizedUserName,
             RestaurantName = RestaurantDetails.RestaurantName,
             Address = RestaurantDetails.Address,
             Logo = RestaurantDetails.Logo,
