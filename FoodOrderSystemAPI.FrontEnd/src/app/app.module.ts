@@ -1,5 +1,6 @@
 // import { AgmCoreModule } from '@agm/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -29,21 +30,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     ErrorModule,
     HomeModule,
-    FormsModule,
+    HttpClientModule,
     RestaurantModule,
-
     BrowserAnimationsModule,
     SharedModule,
-    AppRoutingModule,
-    ErrorModule,
     CommonModule,
     NgbModule,
-    FormsModule,
     CheckoutModule,
     AddProductModule,
     ProductModule,
     RouterModule,
-
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyBPfbHdhiBn2prqXNfZKa0yFYVPOWMVvKU', // Replace with your actual API key
     // }),

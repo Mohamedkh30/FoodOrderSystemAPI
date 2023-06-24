@@ -1,15 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
-
 /* Use Tailwind Library  */
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~primeng/resources/themes/saga-blue/theme.css';
-@import '~primeng/resources/primeng.min.css';
-@import "primeicons/primeicons.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities'; */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~primeng/resources/themes/saga-orange/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import "primeicons/primeicons.css";
 
 
+*{
+    color: #2A2C41;
+    font-family: 'Cairo';
+}

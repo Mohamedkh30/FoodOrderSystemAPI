@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
+import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
+import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
+
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { RestaurantDetailsByIdDto } from 'src/app/types/Restaurant/Restaurant-Details-By-Id-dto';
 import { ActivatedRoute } from '@angular/router';
@@ -38,6 +42,9 @@ export class RestaurantDetailsComponent implements OnInit {
       
     }
   }
+  productsList:FullProductCardDto[]|null = [];
+
+  
 
   /*
   getRestaurantDetails(id: number): void {
