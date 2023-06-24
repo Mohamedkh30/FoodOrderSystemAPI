@@ -5,7 +5,14 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 import { FullProductDto } from '../_models/product/FullProductDto';
 import { RestaurantDto } from '../_models/restaurant/RestaurantDto';
 import { Router } from '@angular/router';
+import { CartService } from '../services/cart.service';
+import { AuthentcationService } from '../services/authentcation.service';
+import { UserTokenClaims } from '../types/user-token-claims';
+import { FullProduct } from 'src/app/types/Product/full-product-dto';
 import { FormControl, ValidatorFn } from '@angular/forms';
+import { AddOrderDTO, OrderProduct } from '../types/Order/add-order-dto';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from '../services/config.service';
 
 
 function nameValidator(control: AbstractControl): ValidationErrors | null {
@@ -42,7 +49,8 @@ export class CheckoutComponent implements OnInit {
   phone: string = ''; 
 
 
-  constructor(private modalService: NgbModal ,private formBuilder: FormBuilder ,private router: Router) {
+  constructor(private modalService: NgbModal ,private formBuilder: FormBuilder ,private router: Router, private cartService: CartService,private authService: AuthentcationService, private http: HttpClient,private configService: ConfigService
+  ) {
 
     this.checkoutForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -56,28 +64,81 @@ export class CheckoutComponent implements OnInit {
  
   }
 
-  returnToCart(): void {
-    // Use the router to navigate to the cart page
-    this.router.navigate(['/cart']); // Replace '/cart' with the actual URL of your cart page
-  }
+
+
+
+
+
+
   
+  PostOrder(): void {
+
+    this.checkoutForm.markAllAsTouched();
+    if (this.selectedCard) {
+      // Proceed with the checkout using the selectedCard
+    }
+    // Disable the "Proceed" button only for the "cashOnDelivery" payment method
+    this.isProceedEnabled = this.selectedPaymentMethod !== 'cashOnDelivery';
 
 
 
-  productsList:FullProductDto[]|null = [
-    new FullProductDto(
-      0,"Flafel",3,"flafel so5na","https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg",0.45555,4,"vegetrian",new RestaurantDto(0,"KFC")
-    ),
-    new FullProductDto(
-      1,"fool",5,"flafel so5na","https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg",0,4,"vegetrian",new RestaurantDto(0,"KFC")
-    ),
-    new FullProductDto(
-      3,"Koshary",20,"flafel so5na","https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg",0.5,4,"vegetrian",new RestaurantDto(0,"KFC")
-    ),
-    new FullProductDto(
-      2,"kebda",30,"flafel so5na","https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg",0.1,4,"sandwitch",new RestaurantDto(0,"KFC")
-    ),
-  ];
+
+
+
+
+    // Get the user ID from the authentication service
+    const CustomerClaims: number|undefined = this.authService.UserLogin?.id;             
+    
+    
+    const cartItems = this.cartService.getCart();
+    const totalPrice = this.cartService.calculateTotalPrice();    
+
+    let PostOrderProdcuts: OrderProduct[] = [] 
+
+    for (const cartItem of cartItems) {
+      let NewItem = new OrderProduct (cartItem.product.productID,cartItem.quantity) 
+      PostOrderProdcuts.push(NewItem)
+    }
+
+
+    const currentDateTime: string = new Date().toISOString();
+    
+
+    // Create the order object
+    let order = new AddOrderDTO (
+      CustomerClaims,
+      totalPrice,     
+      currentDateTime,
+      PostOrderProdcuts
+
+    )
+     
+    
+    this.http.post(this.configService.getBaseApiUrl()+"orders", order)
+    .subscribe(
+    (response) => {
+      this.cartService.emptyCart();
+      console.log(response);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+
+  }
+
+  ngOnInit(): void {
+
+     let cartItems = this.cartService.getCart();
+     cartItems.forEach(element => {
+      this.productsList?.push(element.product)
+     });
+    
+  }
+
+
+  productsList:FullProduct[]|null = [];
+
 
   calculateTotal(): number {
     let total = 0;
@@ -90,6 +151,42 @@ export class CheckoutComponent implements OnInit {
 
     return total;
   }
+
+
+
+  
+
+
+
+
+
+  // productsList:FullProductDto[]|null = [
+  //   new FullProductDto(
+  //     0,"Flafel",3,"flafel so5na","https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg",0.45555,4,"vegetrian",new RestaurantDto(0,"KFC")
+  //   ),
+  //   new FullProductDto(
+  //     1,"fool",5,"flafel so5na","https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg",0,4,"vegetrian",new RestaurantDto(0,"KFC")
+  //   ),
+  //   new FullProductDto(
+  //     3,"Koshary",20,"flafel so5na","https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg",0.5,4,"vegetrian",new RestaurantDto(0,"KFC")
+  //   ),
+  //   new FullProductDto(
+  //     2,"kebda",30,"flafel so5na","https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg",0.1,4,"sandwitch",new RestaurantDto(0,"KFC")
+  //   ),
+  // ];
+
+
+
+
+  returnToCart(): void {
+    // Use the router to navigate to the cart page
+    this.router.navigate(['/cart']); // Replace '/cart' with the actual URL of your cart page
+  }
+  
+ 
+  
+
+
 
 
   
@@ -187,10 +284,7 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
 
-  
-  }
 
 
 
@@ -203,14 +297,18 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm.updateValueAndValidity();
   }
 
-  proceedToCheckout(): void {
-    this.checkoutForm.markAllAsTouched();
-    if (this.selectedCard) {
-      // Proceed with the checkout using the selectedCard
-    }
-    // Disable the "Proceed" button only for the "cashOnDelivery" payment method
-    this.isProceedEnabled = this.selectedPaymentMethod !== 'cashOnDelivery';
-  }
+
+
+  // proceedToCheckout(): void {
+  //   this.checkoutForm.markAllAsTouched();
+  //   if (this.selectedCard) {
+  //     // Proceed with the checkout using the selectedCard
+  //   }
+  //   // Disable the "Proceed" button only for the "cashOnDelivery" payment method
+  //   this.isProceedEnabled = this.selectedPaymentMethod !== 'cashOnDelivery';
+  // }
+
+
 
 
  

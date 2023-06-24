@@ -20,7 +20,8 @@ export class RestaurantService {
 
     getRestaurantDetailsById(RestaurantId: number): Observable<RestaurantDetailsByIdDto> {
         let baseUrl: string = this.configService.getBaseApiUrl();
-        return this.http.get<RestaurantDetailsByIdDto>(`${baseUrl}Restaurant/Products/${RestaurantId}`)
+        console.log(`${baseUrl}Restaurant/Products/${RestaurantId}`);
+        return this.http.get<RestaurantDetailsByIdDto>(`${baseUrl}Restaurant/Products/${RestaurantId}`);
     }
 
     getRestaurantProducts(RestaurantId: number): Observable<RestaurantProductsDto> {
