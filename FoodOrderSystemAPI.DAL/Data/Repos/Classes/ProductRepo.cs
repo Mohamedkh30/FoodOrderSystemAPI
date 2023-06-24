@@ -21,4 +21,9 @@ public class ProductRepo : EntityRepo<ProductModel>, IProductRepo
     {
         return _dbContext.Set<ProductModel>().Include(p => p.restaurant).FirstOrDefault(p=>p.ProductId==id);
     }
+
+    public IEnumerable<String> GetProductTags()
+    {
+        return _dbContext.Set<ProductTag>().Select(t=>t.tag).Distinct();
+    }
 }

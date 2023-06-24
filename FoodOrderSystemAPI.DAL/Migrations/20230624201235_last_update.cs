@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class seeding : Migration
+    public partial class last_update : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -337,14 +337,12 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         name: "FK_ReviewModel_CustomerModel_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "CustomerModel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ReviewModel_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "ProductId");
                 });
 
             migrationBuilder.CreateTable(
@@ -353,7 +351,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: true)
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -362,14 +360,12 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         name: "FK_OrdersProducts_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "OrderId");
                     table.ForeignKey(
                         name: "FK_OrdersProducts_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "ProductId");
                 });
 
             migrationBuilder.InsertData(
@@ -377,9 +373,15 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "407772a6-88d8-4f43-9db5-573f8f2b2b32", "test", false, false, null, "", "", null, null, false, 0, null, false, "Mohamed Ahmed" },
-                    { 2, 0, "d9f32085-ce9e-4fe9-8a97-b2c87b8d3bc6", "hassan@gmail.com", false, false, null, "", "testmohamed", null, null, false, 0, null, false, "testmohamed" },
-                    { 3, 0, "17326f17-f7ec-4816-a959-da862999584b", "hamdy@gmail.com", false, false, null, "", "ramymohamed", null, null, false, 0, null, false, "ramymohamed" }
+                    { 2, 0, "fd7035c2-ab0c-466d-bc37-8320fd9af7aa", "hassan@gmail.com", false, false, null, "", "testmohamed", null, null, false, 0, null, false, "testmohamed" },
+                    { 3, 0, "97b3049e-117c-40e5-afcc-4094c932a80d", "hamdy@gmail.com", false, false, null, "", "ramymohamed", null, null, false, 0, null, false, "ramymohamed" },
+                    { 100, 0, "9c5abc0f-6828-498b-9aca-5ac897dd6b4d", "test", false, false, null, "", "MohamedAhmed", null, null, false, 0, null, false, "MohamedAhmed" },
+                    { 101, 0, "f13943e7-8127-4de6-b8e9-a70a4ad543f9", "test", false, false, null, "", "KFC", null, null, false, 0, null, false, "KFC" },
+                    { 102, 0, "76777546-397f-4212-960d-827ef5adb4cf", "test", false, false, null, "", "Central", null, null, false, 0, null, false, "Central" },
+                    { 103, 0, "0f59f1d9-11a9-43e9-90f0-965cd1c8963d", "info@tastybistro.com", false, false, null, "", "TheTastyBistro", null, null, false, 0, null, false, "TheTastyBistro" },
+                    { 104, 0, "e678f2ec-c668-4770-835e-b268b09e054e", "www.ChezGaby.com", false, false, null, "", "ChezGaby", null, null, false, 0, null, false, "ChezGaby" },
+                    { 105, 0, "03ca8f37-046f-4a95-b367-d463eca42637", "www.Negro.com", false, false, null, "", "Negro", null, null, false, 0, null, false, "Negro" },
+                    { 106, 0, "40560825-d74d-4405-ad89-ce1604043c1d", "567 Walnut Lane", false, false, null, "", "seafoodshack", null, null, false, 0, null, false, "seafoodshack" }
                 });
 
             migrationBuilder.InsertData(
@@ -403,7 +405,16 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "RestaurantModel",
                 columns: new[] { "Id", "Address", "Logo", "PaymentMethods", "Phone", "RestaurantName" },
-                values: new object[] { 1, "test", "", 1, "", "Mohamed Ahmed" });
+                values: new object[,]
+                {
+                    { 100, "test", "https://images.deliveryhero.io/image/talabat/restaurants/21167986_13580950369_637438183491941065.jpg?width=180", 1, "+20 111 111 1111", "Mohamed Ahmed" },
+                    { 101, "test", "https://upload.wikimedia.org/wikipedia/sco/b/bf/KFC_logo.svg", 1, "+20 111 111 1111", "KFC" },
+                    { 102, "Av. Pedro de Osma 301, Barranco, Lima, Peru", "https://centralrestaurante.com.pe/assets/images/facebook.jpg", 2, "+51 1 242 8515", "Central" },
+                    { 103, "123 Main Street", "https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148987940.jpg?size=626&ext=jpg&ga=GA1.1.118802800.1685470637&semt=ais", 1, "+20 111 111 1111", "The Tasty Bistro" },
+                    { 104, "off of Fouad Street, close to the Alexandria Opera House", "https://www.zumtaugwald.ch/uploads/8iADQWOr/chezgaby_farbig_gross_198.gif", 1, "+20 111 111 1111", "Chez Gaby" },
+                    { 105, "test", "https://cerronegrorestaurant.com/wp-content/uploads/2022/06/logo-1.png", 1, "+20 111 111 1111", "Negro" },
+                    { 106, "test", "https://img.freepik.com/premium-vector/fresh-seafood-restaurant-premium-logo_187482-625.jpg?w=2000", 1, "+20 111 111 1111", "The Seafood Shack" }
+                });
 
             migrationBuilder.InsertData(
                 table: "CreditCards",
@@ -419,10 +430,10 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 columns: new[] { "ProductId", "Productname", "RestaurantID", "describtion", "img", "offer", "price", "rate" },
                 values: new object[,]
                 {
-                    { 1, "Flafel", 1, "flafel so5na", "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg", 0.45555f, 3f, 4f },
-                    { 2, "fool", 1, "fool so5n", "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg", 0f, 5f, 2f },
-                    { 3, "Koshary", 1, "Koshary so5n", "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg", 0.5f, 20f, 4f },
-                    { 4, "kebda", 1, "kebda so5na", "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg", 0.1f, 30f, 3f }
+                    { 1, "Flafel", 100, "flafel so5na", "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg", 0.45555f, 3f, 4f },
+                    { 2, "fool", 100, "fool so5n", "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg", 0f, 5f, 2f },
+                    { 3, "Koshary", 101, "Koshary so5n", "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg", 0.5f, 20f, 4f },
+                    { 4, "kebda", 102, "kebda so5na", "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg", 0.1f, 30f, 3f }
                 });
 
             migrationBuilder.InsertData(

@@ -18,15 +18,59 @@ namespace FoodOrderSystemAPI.Controllers
         [HttpGet]
         //[Authorize]
 
-        public ActionResult<List<ProductCardDto>> GetAll()
+        public ActionResult<List<ProductCardDto>> GetAll([FromQuery] List<string> FilterRestaurants, [FromQuery] string? word, [FromQuery] List<string> FilterTags, [FromQuery] List<float> FilterPrices)
         {
-            return _productManager.GetAll();
+            return _productManager.GetAll(FilterRestaurants, word, FilterTags, FilterPrices);
         }
+
+        [HttpGet]
+        [Route("Tags")]
+        public ActionResult<List<string>> GetProductTags() 
+        { 
+            return _productManager.GetProductTags();
+        }
+
+
+        [HttpGet]
+        [Route("PriceBounds")]
+        public ActionResult<List<float>> GetProductPricesBounds()
+        {
+            return _productManager.GetProductPricesBounds();
+        }
+
+        //[HttpGet]
+        //[Route("FilterTags")]
+        
+        //public ActionResult<List<ProductCardDto>> GetAllFilterTag([FromQuery] List<string> FilterTags)
+        //{
+        //    return _productManager.GetAllFilterTag(FilterTags);
+        //}
+
+        //[HttpGet]
+        //[Route("searchProduct")]
+        //public ActionResult<List<ProductCardDto>> searchProductByName([FromQuery] string query)
+        //{
+        //    return _productManager.searchProductByName(query);
+        //}
+
+        //[HttpGet]
+        //[Route("FilterRestaurants")]
+
+        //public ActionResult<List<ProductCardDto>> GetAllFilterRestaurant([FromQuery] List<string> FilterRestaurants)
+        //{
+        //    return _productManager.GetAllFilterRestaurant(FilterRestaurants);
+        //}
+
+        //[HttpGet]
+        //[Route("FilterPrices")]
+        //public ActionResult<List<ProductCardDto>> GetAllFilterPrice([FromQuery] List<float> FilterPrices)
+        //{
+        //    return _productManager.GetAllFilterPrice(FilterPrices);
+        //}
 
         [HttpGet]
         [Route("{id}")]
         //[Authorize]
-
         public ActionResult<ProductCardDto> GetById(int id)
         {
             ProductCardDto? product = _productManager.GetById(id);

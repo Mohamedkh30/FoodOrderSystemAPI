@@ -9,7 +9,7 @@
                 <p-checkbox name="Category" [value]="category" [label]="category" [(ngModel)]="selectedCategories"></p-checkbox>
             </div>
             <div class="d-flex justify-content-end">
-                <p-button>set</p-button>
+                <p-button (onClick)="filter()">set</p-button>
             </div>
         </p-panel>
 
@@ -18,7 +18,7 @@
                 <p-checkbox name="Restaurant" [value]="restaurant" [label]="restaurant" [(ngModel)]="selectedRestaurants"></p-checkbox>
             </div>
             <div class="d-flex justify-content-end">
-                <p-button>set</p-button>
+                <p-button (onClick)="filter()">set</p-button>
             </div>
         </p-panel>
 
@@ -29,7 +29,7 @@
                 <span>{{rangeValues[1]}}</span>
             </div>
             <div class="d-flex justify-content-center">
-                <p-button>set</p-button>
+                <p-button (onClick)="filter()">set</p-button>
             </div>
             
         </p-panel>
