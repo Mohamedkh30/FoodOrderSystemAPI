@@ -7,7 +7,7 @@ import { CartItem } from '../_models/cartItem/CartItem';
 @Injectable({
   providedIn: 'root',
 })
-export class CartService implements OnInit {
+export class CartService {
   //#region  feilds
   private _localStorageCartName: string = 'Cart';
 
@@ -16,23 +16,25 @@ export class CartService implements OnInit {
   public TotalPrice: number = 0;
   //#endregion
 
-  constructor() {}
-
-  ngOnInit(): void {
+  constructor() {
     //#region filling CartItems
     this.CartItems = [];
     let cartItemsString = localStorage.getItem(this._localStorageCartName);
     if (cartItemsString !== null) {
       this.CartItems = JSON.parse(cartItemsString);
     }
+    console.log(`added from localStorage: ${this.CartItems}`);
     //#endregion
 
     //#region filling NumberOfItems
     this.TotalNumberOfItems = this.calculateTotalNumberOfItems();
     //#endregion
+    console.log(`calculated #items: ${this.TotalNumberOfItems}`);
 
     //#region filling TotalPrice
     this.TotalPrice = this.calculateTotalPrice();
+    console.log(`calculated totalprice: ${this.TotalPrice}`);
+
     //#endregion
   }
 
@@ -68,7 +70,6 @@ export class CartService implements OnInit {
       cartItems = JSON.parse(cartItemsString);
     }
     for (let index = 0; index < cartItems.length; index++) {
-      const element = cartItems[index];
       if (
         cartItems[index].product.productID == cartItemToRemove.product.productID
       ) {
