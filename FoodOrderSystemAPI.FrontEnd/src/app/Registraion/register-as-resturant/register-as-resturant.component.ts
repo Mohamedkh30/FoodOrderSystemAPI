@@ -30,22 +30,29 @@ export class RegisterAsResturantComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.minLength(4),
-            Validators.maxLength(30),
+           
+          ],
+        ],
+       
+        Email: [
+          '',
+          [
+            Validators.required,
+            Validators.email
+           
           ],
         ],
         Address: [
           '',
           [
             Validators.required,
-            Validators.minLength(4),
-            Validators.maxLength(30),
+            
           ],
         ],
-        Logo: [
-          '',
-          [Validators.required,
-          ]],
+        // Logo: [
+        //   '',
+        //   [Validators.required,
+        //   ]],
         Phone: [
           '',
           [Validators.required,
@@ -53,7 +60,7 @@ export class RegisterAsResturantComponent implements OnInit {
         PaymentMethods: [
           '',
           [Validators.required,
-            Validators.email]],
+           ]],
         Password: [
           '',
           [Validators.required,
@@ -66,12 +73,15 @@ export class RegisterAsResturantComponent implements OnInit {
   get ResturantName() {
   return this.ResturantForm.get('Name')!!;
   }
+  get EmailAddress() {
+    return this.ResturantForm.get('Email')!!;
+  }
   get ResturantAddress() {
     return this.ResturantForm.get('Address')!!;
   }
-  get ResturantLogo() {
-    return this.ResturantForm.get('Logo')!!;
-  }
+  // get ResturantLogo() {
+  //   return this.ResturantForm.get('Logo')!!;
+  // }
   get ResturantPhone() {
     return this.ResturantForm.get('Phone')!!;
   }
@@ -91,17 +101,26 @@ export class RegisterAsResturantComponent implements OnInit {
       this.RegisterService.RegisterResturant.restaurantName =
         this.ResturantName.value;
       
+      this.RegisterService.RegisterResturant.email =
+        this.EmailAddress.value;
+      
+      this.RegisterService.RegisterResturant.userName =
+        this.EmailAddress.value;
+      
       this.RegisterService.RegisterResturant.address =
         this.ResturantAddress.value;
       
-      this.RegisterService.RegisterResturant.logo =
-        this.ResturantLogo.value;
       
       this.RegisterService.RegisterResturant.phone =
         this.ResturantPhone.value;
       
       this.RegisterService.RegisterResturant.paymentMethods =
-        this.ResturantPaymentMehods.value;
+      Number.parseInt( this.ResturantPaymentMehods.value);
+      
+      this.RegisterService.RegisterResturant.password =
+        this.ResturantPassword.value;
+      
+      console.log(this.RegisterService.RegisterResturant)
       this.RegisterService.RegisterAsResturant().subscribe( (RegisterResturantToken) => {
         console.log(RegisterResturantToken);
         this.AuthentcationService.SetUserDataAfterLogin(RegisterResturantToken);
@@ -114,13 +133,30 @@ export class RegisterAsResturantComponent implements OnInit {
     } else {
       // Form is invalid, handle validation errors
       this.markFormGroupTouched(this.ResturantForm); // Mark form controls as touched to display validation errors
-      this.RegisterResturant.restaurantName = this.ResturantName.value;
-      this.RegisterResturant.address = this.ResturantAddress.value;
-      this.RegisterResturant.phone = this.ResturantPhone.value;
-      this.RegisterResturant.logo = this.ResturantLogo.value;
-      this.RegisterResturant.paymentMethods = this.ResturantPaymentMehods.value;
+     
+      this.RegisterService.RegisterResturant.restaurantName =
+        this.ResturantName.value;
+      
+      this.RegisterService.RegisterResturant.email =
+        this.EmailAddress.value;
+      
+      this.RegisterService.RegisterResturant.userName =
+        this.EmailAddress.value;
+      
+      this.RegisterService.RegisterResturant.address =
+        this.ResturantAddress.value;
+      
+      
+      this.RegisterService.RegisterResturant.phone =
+        this.ResturantPhone.value;
+      
+      this.RegisterService.RegisterResturant.paymentMethods =
+        Number.parseInt(this.ResturantPaymentMehods.value)
+      
+      this.RegisterService.RegisterResturant.password =
+        this.ResturantPassword.value;
       console.log(' Not valid ');
-      console.log(this.RegisterResturant);
+      console.log(this.RegisterService.RegisterResturant);
     }
   }
 
@@ -137,4 +173,6 @@ export class RegisterAsResturantComponent implements OnInit {
   
 }
  
+
+
 
