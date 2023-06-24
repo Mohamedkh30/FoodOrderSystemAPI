@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
 import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
+import { RestaurantApiTestComponent } from '../restaurant-api-test/restaurant-api-test.component';
 
 @Component({
   selector: 'app-rest-card',
@@ -10,7 +11,10 @@ import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
 export class RestCardComponent {
   @Input() product:FullProductCardDto = new FullProductCardDto();
 
+
+  getRestaurantDetailsById(): void {
     
+  }
 
     addToCart(){
       let cartListString = localStorage.getItem('cartList');

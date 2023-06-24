@@ -2,6 +2,6 @@
 {
     public class RestaurantProductsDto
     {
-        public ICollection<ProductModel> Products { set; get; } = new HashSet<ProductModel>();
+        public ICollection<ProductCardDto> Products { set; get; } = new HashSet<ProductCardDto>();
     }
 }

@@ -1,4 +1,4 @@
-export class RestaurantDetailsDto {
+export class RestaurantDetailsByIdDto {
     constructor(
         public restaurantId: number,
         public restaurantName: string = '',
