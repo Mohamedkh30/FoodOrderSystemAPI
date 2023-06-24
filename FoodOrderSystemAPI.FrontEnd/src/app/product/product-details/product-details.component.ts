@@ -9,7 +9,7 @@ import { FullProduct } from 'src/app/types/Product/full-product-dto';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit, DoCheck {
-  product: null | FullProduct = null;
+  product: FullProduct = new FullProduct();
   productRating: number = 0;
   productCategory: string = '';
   sizesOptions: any[] = [
@@ -18,7 +18,8 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
     { label: 'Large', value: 'large' },
   ];
   selectedSizeIndex: number = 0;
-  testValue: string = 'small';
+  uiSizeValue: string = 'small';
+  productQuantity: number = 1;
   constructor(
     private activeRoute: ActivatedRoute,
     private productService: ProductService
