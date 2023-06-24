@@ -27,9 +27,7 @@ export class NavbarComponent implements OnInit{
   constructor(public authService : AuthentcationService){}// Inject Service TO Subscipe On Behavior Subject is Logged In To An Action When It's Value CHange
 
   ngOnInit(): void { // Hook Method TO Perform Any logic Related TO Observable subscribe intial values intead of ctor
-console.log(this.UserIsLoggedIn)
-    console.log(this.UserdropdownMenu)
-    console.log(this.authService.IsLoggedIn$.value)
+
     // Catch Element Related to Mobile menu Show & Hide 
     this.menuButton = document.querySelector('[aria-controls="mobile-menu"]') as HTMLButtonElement;
     this.mobileMenu  = document.getElementById('mobile-menu') as HTMLElement;
@@ -42,7 +40,6 @@ console.log(this.UserIsLoggedIn)
     this.authService.IsLoggedIn$.subscribe((isLoggedIn) => {
       // Assign the Observable Value WHen Change to The  Coponent Property => this.UserIsLoggedIn
       this.UserIsLoggedIn = isLoggedIn;
-      console.log(` UserIsLoggedIn = ${this.UserIsLoggedIn} ///////// islogged for service = ${isLoggedIn}`)
     })
     
 
@@ -55,7 +52,6 @@ console.log(this.UserIsLoggedIn)
       // Toggle the "hidden" class on the dropdown menu to show or hide it
     if (this.UserdropdownMenu) {
       this.UserdropdownMenu!!.classList.toggle('hidden')
-      console.log(this.authService.UserLogin?.TokenExpirationDate)
     }
     else {
       console.log(` UserIsLoggedIn = ${this.UserIsLoggedIn} ///////// islogged for service = ${this.authService.IsLoggedIn$.value}`)
