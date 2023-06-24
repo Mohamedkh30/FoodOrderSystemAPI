@@ -139,9 +139,6 @@ export class CheckoutComponent implements OnInit {
 
   productsList:FullProduct[]|null = [];
 
-  productsList:FullProductCardDto[]|null = [
-    
-  ];
 
 
   calculateTotal(): number {
