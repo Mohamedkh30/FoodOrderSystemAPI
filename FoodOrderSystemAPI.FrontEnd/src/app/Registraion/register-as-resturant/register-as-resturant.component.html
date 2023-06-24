@@ -49,7 +49,26 @@
               />
             </div>
 
-        
+            <div class="mb-6">
+              <label
+               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Email Address</label
+              >
+              <!-- Alert On InValid Email  -->
+
+              <p
+                *ngIf="EmailAddress.invalid && EmailAddress.touched"
+                class="text-red-500 text-xs italic"
+              >
+               Enter Valid Email Address
+              </p>
+              <input
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                formControlName="Email"
+                required
+              />
+            </div>
           
             <div class="mb-6">
               <label
@@ -141,26 +160,7 @@
                 required
               />
             </div>
-            <div class="mb-6">
-              <label
-               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Resturant Logo</label
-              >
-              <!-- Alert On InValid Email  -->
-
-              <p
-                *ngIf="ResturantLogo.invalid && ResturantLogo.touched"
-                class="text-red-500 text-xs italic"
-              >
-               Logo Is Required
-              </p>
-              <input
-                type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                formControlName="Logo"
-                required
-              />
-            </div>
+           
 
 
 
@@ -207,11 +207,10 @@
                 *ngIf="ResturantPaymentMehods.invalid && ResturantPaymentMehods.touched"
                 class="text-red-500 text-xs italic"
               >
-               Payment Method 
+               Payment Method  is required
               </p>
-              <select id="large" class="block w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected>Choose a Payment Method</option>
-                <option value="0">Card</option>
+              <select formControlName="PaymentMethods" id="large" class="block w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option  value="0" selected>Card</option>
                 <option value="1">Cash</option>
                 <option value="2">Both</option>
               </select>
