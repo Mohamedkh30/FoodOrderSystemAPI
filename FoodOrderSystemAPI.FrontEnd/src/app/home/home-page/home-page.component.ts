@@ -1,35 +1,64 @@
-import { Component } from '@angular/core';
-import { FullProductDto } from 'src/app/_models/product/FullProductDto';
+import { Component,OnDestroy,OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
 import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
-  filterCategories:string[] = ["pasta","seafood","burger","pizza","vegetrian"].sort()
+export class HomePageComponent implements OnInit ,OnDestroy{
+
+  productsSub:Subscription|null = null;
+  categoriesSub:Subscription|null = null;
+
+  filterCategories:string[] = []
   filterRestaurants:string[] = ["KFC","Baraka","sultan ayoub"].sort()
   searchString:string = "";
 
-  productsList:FullProductDto[]|null = [
-    new FullProductDto(
-      0,"Flafel",3,"flafel so5na","https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg",0.45555,4,"vegetrian",new RestaurantDto(0,"KFC")
-    ),
-    new FullProductDto(
-      1,"fool",5,"flafel so5na","https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg",0,4,"vegetrian",new RestaurantDto(0,"KFC")
-    ),
-    new FullProductDto(
-      3,"Koshary",20,"flafel so5na","https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg",0.5,4,"vegetrian",new RestaurantDto(0,"KFC")
-    ),
-    new FullProductDto(
-      2,"kebda",30,"flafel so5na","https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg",0.1,4,"sandwitch",new RestaurantDto(0,"KFC")
-    ),
-  ];
+  constructor(private productService:ProductService){}
 
-  
+  productsList:FullProductCardDto[] = [];
+
+  ngOnInit(): void {
+    this.productsSub=this.productService.getAll().subscribe(
+      (data) => {
+        this.productsList = data;
+      },
+      (error) => {
+        console.log(`error: ${error}`);
+      }
+    );
+      //-------------
+    this.categoriesSub=this.productService.getAllTags().subscribe(
+      (data) => {
+      this.filterCategories = data.sort();
+    },
+    (error) => {
+      console.log(`error: ${error}`);
+    }
+  );
+  }
+
+  ngOnDestroy(): void {
+    this.productsSub?.unsubscribe();
+    this.categoriesSub?.unsubscribe();
+  }
 
   search(){
     console.log(this.searchString)
   }
+
+  // filterByCategory(){
+  //   this.productsSub=this.productService.getAllCategoryFiltered(["local"]).subscribe(
+  //     (data) => {
+  //       this.productsList = data;
+  //     },
+  //     (error) => {
+  //       console.log(`error: ${error}`);
+  //     }
+  //   );
+  // }
 }

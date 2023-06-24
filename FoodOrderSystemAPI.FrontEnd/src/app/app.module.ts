@@ -1,5 +1,6 @@
 // import { AgmCoreModule } from '@agm/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 // import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +24,7 @@ import { ProductModule } from './product/product.module';
     ErrorModule,
     HomeModule,
     FormsModule,
+    HttpClientModule,
 
     BrowserAnimationsModule,
     SharedModule,

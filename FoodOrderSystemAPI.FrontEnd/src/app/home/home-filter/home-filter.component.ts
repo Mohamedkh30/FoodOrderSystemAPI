@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit,OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-home-filter',
@@ -9,14 +11,37 @@ export class HomeFilterComponent {
   @Input() Categories:string[] = [];
   @Input() Restaurants:string[] = [];
 
+  constructor(private productService:ProductService){}
+
+  boundSub:Subscription|null=null;
+  BoundValues:number[] = [0,0];
+
   rangeValues:number[] = [0,0];
-  
+
+
   selectedRestaurants:string[] = [];
   selectedCategories:string[] = [];
 
   updateSlider(){
-    this.rangeValues[0]=this.rangeValues[0]*5;
-    this.rangeValues[1]=this.rangeValues[1]*5;
+    this.rangeValues[0]=this.rangeValues[0]*this.BoundValues[1]/100;
+    this.rangeValues[1]=this.rangeValues[1]*this.BoundValues[1]/100;
   }
 
+  ngOnInit(): void {
+    this.boundSub=this.productService.getPriceBounds().subscribe(
+      (data) => {
+        this.BoundValues = data;
+      },
+      (error) => {
+        console.log(`error: ${error}`);
+      }
+    );
+      
+  }
+
+  ngOnDestroy(): void {
+    this.boundSub?.unsubscribe();
+  }
+
+  
 }

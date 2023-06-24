@@ -1,16 +1,17 @@
 import { RestaurantDto } from "../restaurant/RestaurantDto";
 
-export class FullProductDto {
+export class FullProductCardDto {
     constructor(
-        public ProductID:number = 0,
-        public Productname:string = "",
+        public productID:number = 0,
+        public productname:string = "",
         public price:number = 0,
         public describtion:String  = "",
         public img :String  = "",
         public offer:number = 0 ,
         public rate:number = 0 ,
-        public type:String = "",
-        public RestaurantModel:RestaurantDto
+        public tags:String[] = [],
+        public restaurantID:number = 0,
+        public restaurantName:string = "",
     ){
 
     }

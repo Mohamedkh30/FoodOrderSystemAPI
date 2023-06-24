@@ -1,5 +1,6 @@
 ﻿using FoodOrderSystemAPI.DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -78,6 +79,29 @@ namespace FoodOrderSystemAPI.BL
 
         }
 
+        public List<ProductCardDto> GetAllFilterTag(List<string> FilterTags)
+        {
+            var products = _unitOfWork.Products.GetAll().Select(p => new ProductCardDto()
+            {
+                ProductID = p.ProductId,
+                describtion = p.describtion,
+                img = p.img,
+                offer = p.offer,
+                price = p.price,
+                Productname = p.Productname,
+                rate = p.rate,
+                restaurantID = p.RestaurantID,
+                restaurantName = p.restaurant.RestaurantName,
+            }).ToList();
+
+            foreach (var product in products)
+            {
+                product.tags = _unitOfWork.ProductTags.GetAll().Where(t => t.ProductId == product.ProductID).Select(t => t.tag).ToList();
+            }
+            return products.Where(p=> p.tags.Any(item => FilterTags.Contains(item))).ToList();
+
+        }
+
         public ProductCardDto? GetById(int id)
         {
             ProductModel? ProductToRead = _unitOfWork.Products.GetById(id);
@@ -114,5 +138,25 @@ namespace FoodOrderSystemAPI.BL
             _unitOfWork.Products.Update(ProductfromDb);
             _unitOfWork.Save();
         }
+
+         
+        public List<string> GetProductTags()
+        {
+            return _unitOfWork.Products.GetProductTags().ToList();
+        }
+
+        public List<float> GetProductPricesBounds()
+        {
+            var prices =_unitOfWork.Products.GetAll().Select(p=>p.price*p.offer);
+            List<float> bounds = new List<float>
+            {
+               (float)Math.Floor(prices.Min()),
+               (float)Math.Ceiling(prices.Max())
+            };
+            //bounds.Sort();
+
+            return bounds;
+        }
+
     }
 }

@@ -24,6 +24,28 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
         [HttpGet]
+        [Route("Tags")]
+        public ActionResult<List<string>> GetProductTags() 
+        { 
+            return _productManager.GetProductTags();
+        }
+
+        [HttpGet]
+        [Route("PriceBounds")]
+        public ActionResult<List<float>> GetProductPricesBounds()
+        {
+            return _productManager.GetProductPricesBounds();
+        }
+
+        [HttpGet]
+        [Route("FilterTags")]
+        
+        public ActionResult<List<ProductCardDto>> GetAllFilterTag([FromQuery] List<string> FilterTags)
+        {
+            return _productManager.GetAllFilterTag(FilterTags);
+        }
+
+        [HttpGet]
         [Route("{id}")]
         //[Authorize]
 

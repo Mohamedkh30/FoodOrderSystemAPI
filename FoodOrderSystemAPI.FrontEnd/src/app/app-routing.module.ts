@@ -31,6 +31,7 @@ const Router: Routes = [
   //     ),
   // },
   {path:'home',component:HomePageComponent},
+  {path:'product/:id',component:ProductDetailsComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'**',component:NotFoundComponent}
 ]

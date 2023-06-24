@@ -1,5 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
 import { ProductService } from 'src/app/services/product.service';
 import { FullProduct } from 'src/app/types/Product/full-product-dto';
 
@@ -37,6 +38,7 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
 
   getProduct() {
     let urlProductId = this.activeRoute.snapshot.paramMap.get('id');
+    console.log(urlProductId)
     if (urlProductId) {
       let productId = parseInt(urlProductId);
       this.productService.getProduct(productId).subscribe(
@@ -49,4 +51,35 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
       );
     }
   }
+
+  addToCart(){
+    let cartListString = localStorage.getItem('cartList');
+
+    let toBeAddedProduct: FullProductCardDto = new FullProductCardDto(
+      this.product?.productID,
+      this.product?.productname,
+      this.product?.price,
+      this.product?.describtion,
+      this.product?.img,
+      this.product?.offer,
+      this.product?.rate,
+      [],
+      this.product?.restaurant?.id,
+      this.product?.restaurant?.restaurantName
+    );
+
+    if(cartListString === null){
+      let cartList:FullProductCardDto[] = [];
+      cartList.push(toBeAddedProduct)
+      console.log(cartList);
+      localStorage.setItem('cartList',JSON.stringify(cartList));
+    }else{
+      let cartList:FullProductCardDto[] = JSON.parse(cartListString);
+      cartList.push(toBeAddedProduct)
+      console.log(cartList);
+      localStorage.setItem('cartList',JSON.stringify(cartList));
+    }
+  }
+
+  
 }
