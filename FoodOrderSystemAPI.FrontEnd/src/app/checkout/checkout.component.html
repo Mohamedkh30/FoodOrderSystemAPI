@@ -50,15 +50,15 @@
     
         <!-- FORM -->
         <div class="col-12 col-md-7 my-5">
-    
-        <form [formGroup]="checkoutForm" action="" (ngSubmit)="onSubmit()">
+                                                              <!-- momken badl onSubmit tb2a PostOrder() -->
+        <form [formGroup]="checkoutForm" action="" (ngSubmit)="onSubmit()">     
         <div class="checkout-container">
           <div class="row">
             <div>
               <div class="mb-3">
                 <div class="d-flex justify-content-between align-items-center h5">
-                  <h3 class="mb-0">Contact Information</h3>
-                  <h5 class="mb-0">Already have an account? <a href="#" style="color: blue;">Log in</a></h5>
+                  <b class="mb-0" style="font-size: 25px;">Contact Information</b>
+                  <h5 class="mb-0">Already have an account? <a href="http://localhost:4200/authentcation/login" style="color: blue;">Log in</a></h5>
                 </div>
                 <br>
                 <div class="mb-3">
@@ -158,9 +158,9 @@
              
       </form>
 
-
+      <br>
       <div>
-        <h3>Payment Details</h3>
+        <b style="font-size: 20px;">Payment Details</b>
         <br>
         <div class="d-flex justify-content-even">
         <div class="form-check form-check-inline">
@@ -225,10 +225,10 @@
       <div class="col-12 col-md-3">
         <div class="card-container flex-column d-flex align-items-center">
           <div class="card" style="width: 18rem; background-color: wheat;">
-            <h5 class="text-center" style="color: #B76E79;">Order Summary</h5>
+            <b class="text-center" style="color: #B76E79; font-size: 20px;">Order Summary</b>
             <div *ngFor="let product of productsList">
               <img [src]="product.img" class="card-img-top" alt="...">
-              <p class="card-text">{{ product.Productname }} {{ product.price }}$.</p>
+              <p class="card-text">{{ product.productname }} {{ product.price }}$.</p>
             </div>
       
             <div class="card-body"></div>
@@ -278,7 +278,7 @@
  
         <br>
         <div class="text-center pb-2">
-          <button type="submit" (click)="proceedToCheckout()" [disabled]="!isProceedEnabled" data-bs-toggle="button" class=" btn bg-sky-500 hover:bg-sky-700">Proceed</button>
+          <button type="submit" (click)="PostOrder()" [disabled]="!isProceedEnabled" data-bs-toggle="button" class="btn btn-success">Proceed</button>
 
         </div>
 

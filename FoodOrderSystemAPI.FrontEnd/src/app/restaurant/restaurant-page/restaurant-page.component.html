@@ -1,11 +1,9 @@
 <div class="container py-5 headerDiv">
-    <!--  -->
     <app-restaurant-details></app-restaurant-details>
-
     <div class="row my-4 ">
         <app-restaurant-filter [Categories]="filterCategories" class="col-12 col-md-3"></app-restaurant-filter>
         <div class="col-12 col-md-9 d-flex flex-row justify-content-evenly flex-wrap">
-            <app-rest-card *ngFor="let product of productsList" [product]="product" ></app-rest-card>
+            <app-rest-card *ngFor="let product of _products.products" [product]="product" ></app-rest-card>
         </div>
     </div>
 </div>
