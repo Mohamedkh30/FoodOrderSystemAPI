@@ -12,6 +12,6 @@ export class ProductService {
 
   getProduct(productId: number): Observable<FullProduct> {
     let baseUrl: string = this.configService.getBaseApiUrl();
-    return this.http.get<FullProduct>(`${baseUrl}/product/${productId}`);
+    return this.http.get<FullProduct>(`${baseUrl}products/${productId}`);
   }
 }
