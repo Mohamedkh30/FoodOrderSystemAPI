@@ -24,6 +24,7 @@ export class RestaurantPageComponent implements OnInit {
 
   getRestaurantProducts(): void {
     let urlRestaurantId = this.activatedRoute.snapshot.paramMap.get('id');
+    
     if (urlRestaurantId) {
       let restaurantId = parseInt(urlRestaurantId);
       this.restaurantService.getRestaurantProducts(restaurantId)
@@ -31,7 +32,7 @@ export class RestaurantPageComponent implements OnInit {
           console.log(`error: ${error}`);
         });
     }
-      // console.log(this._products);
+      console.log(this._products);
   }
 
   search(){
