@@ -243,7 +243,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 1,
                             Productname = "Flafel",
-                            RestaurantID = 1,
+                            RestaurantID = 100,
                             describtion = "flafel so5na",
                             img = "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg",
                             offer = 0.45555f,
@@ -254,7 +254,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 2,
                             Productname = "fool",
-                            RestaurantID = 1,
+                            RestaurantID = 100,
                             describtion = "fool so5n",
                             img = "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg",
                             offer = 0f,
@@ -265,7 +265,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 3,
                             Productname = "Koshary",
-                            RestaurantID = 1,
+                            RestaurantID = 101,
                             describtion = "Koshary so5n",
                             img = "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg",
                             offer = 0.5f,
@@ -276,7 +276,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 4,
                             Productname = "kebda",
-                            RestaurantID = 1,
+                            RestaurantID = 102,
                             describtion = "kebda so5na",
                             img = "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg",
                             offer = 0.1f,
@@ -542,7 +542,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d9f32085-ce9e-4fe9-8a97-b2c87b8d3bc6",
+                            ConcurrencyStamp = "8ad6c98e-fcc5-4204-91e5-3b2a3b0b0e9a",
                             Email = "hassan@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -559,7 +559,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "17326f17-f7ec-4816-a959-da862999584b",
+                            ConcurrencyStamp = "981e6e0a-2f66-4f0d-8e10-83de75cfd90e",
                             Email = "hamdy@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -604,11 +604,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 100,
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "407772a6-88d8-4f43-9db5-573f8f2b2b32",
-
+                            ConcurrencyStamp = "c1239ca7-ea1f-453e-9677-6e172274d3fe",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -626,9 +624,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 101,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e80b5b9c-85c1-45a6-8467-875e1ed7d2a4",
+                            ConcurrencyStamp = "2ab5725a-30c9-4375-a28c-87e26745aef4",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -646,9 +644,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 102,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "87ffa2d7-a8d7-444f-b635-9c7bde9007eb",
+                            ConcurrencyStamp = "846a2ee3-e0cd-4be6-81d4-8e1b7c5d718c",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -666,9 +664,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 103,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b36e6553-2894-4db5-b44c-ce44bd862cf2",
+                            ConcurrencyStamp = "5b2ccd79-602d-4aaa-936e-053078ddeaae",
                             Email = "info@tastybistro.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -686,9 +684,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 104,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "92256cfc-18bd-4056-b959-4991b10f8588",
+                            ConcurrencyStamp = "036f5b4c-38ba-4c6d-9e20-3636aea4d301",
                             Email = "www.ChezGaby.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -706,9 +704,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 105,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bfd72951-5a7d-4bc4-96c9-cc53b920de73",
+                            ConcurrencyStamp = "a138d864-1fb6-4fea-850b-fa9d03cbdbc5",
                             Email = "www.Negro.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -726,9 +724,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 106,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "40cd6f0a-63b1-4761-af4c-b2e4124c112a",
+                            ConcurrencyStamp = "5c5f42f2-c7f1-4191-90ad-d131ddbbaf30",
                             Email = "567 Walnut Lane",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -784,13 +782,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasOne("FoodOrderSystemAPI.OrderModel", "Order")
                         .WithMany("OrderProducts")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FoodOrderSystemAPI.ProductModel", "Product")
-                        .WithMany()
+                        .WithMany("orderProducts")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -814,13 +812,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.HasOne("FoodOrderSystemAPI.CustomerModel", "Customer")
                         .WithMany("Reviews")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FoodOrderSystemAPI.ProductModel", "Product")
-                        .WithMany()
+                        .WithMany("reviews")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -908,6 +906,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
             modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
                 {
                     b.Navigation("OrderProducts");
+                });
+
+            modelBuilder.Entity("FoodOrderSystemAPI.ProductModel", b =>
+                {
+                    b.Navigation("orderProducts");
+
+                    b.Navigation("reviews");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.CustomerModel", b =>
