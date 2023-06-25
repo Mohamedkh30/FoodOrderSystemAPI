@@ -1,4 +1,4 @@
-<div class="container ">
+<div class="container">
     <div class="row searchDiv headerDiv">
         
         <div class="col-12 d-flex justify-content-center py-5 ">
@@ -9,7 +9,13 @@
         </div>
     </div>
 
-    <app-home-restaurants></app-home-restaurants>
+<div class="container ">
+    
+
+    <div class="my-2 row">
+    <app-home-restaurants ></app-home-restaurants>
+
+    </div>
     
     <div class="row my-4 ">
         <app-home-filter [Categories]="filterCategories" [Restaurants]="filterRestaurants" (OnFilter)="getFilterdCards($event)" class="col-12 col-md-3"></app-home-filter>

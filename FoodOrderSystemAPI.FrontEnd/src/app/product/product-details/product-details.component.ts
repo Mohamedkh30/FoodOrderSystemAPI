@@ -1,6 +1,7 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartItem } from 'src/app/_models/cartItem/CartItem';
+import { AuthentcationService } from 'src/app/services/authentcation.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { FullProduct } from 'src/app/types/Product/full-product-dto';
@@ -11,6 +12,7 @@ import { FullProduct } from 'src/app/types/Product/full-product-dto';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit, DoCheck {
+  Logged:boolean=false;
   product: FullProduct = new FullProduct();
   productRating: number = 0;
   productCategory: string = '';
@@ -25,7 +27,9 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
   constructor(
     private activeRoute: ActivatedRoute,
     private productService: ProductService,
-    public cartService: CartService
+    public cartService: CartService,
+    private activatedRoute: ActivatedRoute,
+    private authentcationService:AuthentcationService
   ) {}
   ngOnInit(): void {
     this.getProduct();
@@ -59,5 +63,14 @@ export class ProductDetailsComponent implements OnInit, DoCheck {
     let newCartItem: CartItem;
     newCartItem = new CartItem(this.product, this.productQuantity);
     this.cartService.addToCart(newCartItem);
+  }
+
+  checkUser(){
+    let urlRestaurantId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (urlRestaurantId) {
+      let restaurantId = parseInt(urlRestaurantId);
+      this.Logged=(this.authentcationService.UserLogin?.id==restaurantId)&&(this.authentcationService.UserLogin?.Role=="Restaurant")
+    }
+    return this.Logged
   }
 }

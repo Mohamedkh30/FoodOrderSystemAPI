@@ -113,7 +113,7 @@ namespace FoodOrderSystemAPI.BL
                 products = products.Where(p => FilterRestaurants.Contains(p.restaurantName)).ToList();
 
             if (FilterPrices.Count != 0)
-                products = products.Where(p => p.price * p.offer >= FilterPrices.Min() && p.price * p.offer <= FilterPrices.Max()).ToList();
+                products = products.Where(p => p.price * (p.offer==0?1:p.offer) >= FilterPrices.Min() && p.price * (p.offer == 0 ? 1 : p.offer) <= FilterPrices.Max()).ToList();
 
             return products;
 

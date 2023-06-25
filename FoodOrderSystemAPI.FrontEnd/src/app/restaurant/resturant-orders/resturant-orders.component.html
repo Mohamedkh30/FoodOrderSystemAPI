@@ -64,6 +64,9 @@
                     Customer Name 
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Customer Phone
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Customer Location
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -96,13 +99,15 @@
                     {{Order.customerAddress}}
                 </td>
                 <td class="px-6 py-4">
-                  {{Order.customerPhone}}
+
+                  {{ Order.orderDate |  date:'yyyy-MM-dd HH:mm' }}
+
                 </td>
                 <td class="px-6 py-4">
                   {{Order.totalPrice}}
                 </td>
                 <td class="px-6 py-4">
-                    <button   (click)="toggleComponentVisibility(Order.orderProducts)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    <button   (click)="toggleComponentVisibility(Order.orderProducts , Order.totalPrice)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                         Products
                       </button>
                 </td>
@@ -177,21 +182,22 @@
                     <ul role="list" class="-my-6 divide-y divide-gray-200">
                       <li *ngFor="let product of this.OrderProducts" class="flex py-6">
                         <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                          <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
+                          <img [src]="product.img" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
                         </div>
   
                         <div class="ml-4 flex flex-1 flex-col">
                           <div>
                             <div class="flex justify-between text-base font-medium text-gray-900">
                               <h3>
-                                <a href="#">{{product.productname}}</a>
+                                <a href="#"> {{product.productname}}</a>
                               </h3>
-                              <p class="ml-4">{{product.price}}</p>
+                              <p class="ml-4"> ItemPrice : {{product.price}}</p>
                             </div>
-                            <p class="mt-1 text-sm text-gray-500">Salmon</p>
+                            <p class="mt-1 text-sm text-gray-500"> Total : {{product.quantityPrice}}</p>
                           </div>
                           <div class="flex flex-1 items-end justify-between text-sm">
-                            <p class="text-gray-500">Qty 1</p>
+                            <p class="text-gray-500">Quantity :{{product.quantity}}</p>
+                            <!-- <p class="text-gray-500">imgsrc :{{product.img}}</p> -->
   
                             <div class="flex">
                               <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
@@ -209,17 +215,21 @@
   
               <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                 <div class="flex justify-between text-base font-medium text-gray-900">
-                  <p>Subtotal</p>
-                  <p>$262.00</p>
+                  <p>Total :</p>
+                  <p> {{this.OrderTotalPrice}} $</p>
                 </div>
                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                 <div class="mt-6">
-                  <a href="#" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                  <div  class="flex items-center text-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                    
+                   <button>Ok</button> 
+                  
+                  </div>
                 </div>
                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                   <p>
                     or
-                    <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    <button (click)="toggleComponentVisibility()" type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
                       Continue Shopping
                       <span aria-hidden="true"> &rarr;</span>
                     </button>

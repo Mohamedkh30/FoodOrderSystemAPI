@@ -5,7 +5,8 @@ import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
 
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { RestaurantDetailsByIdDto } from 'src/app/types/Restaurant/Restaurant-Details-By-Id-dto';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthentcationService } from 'src/app/services/authentcation.service';
 
 @Component({
   selector: 'app-restaurant-details',
@@ -15,7 +16,12 @@ import { ActivatedRoute } from '@angular/router';
 export class RestaurantDetailsComponent implements OnInit {
   restaurantDetails: RestaurantDetailsByIdDto | null = null;
   searchString:string = "";
-  constructor(private restaurantService: RestaurantService, private activatedRoute: ActivatedRoute) {}
+  Logged:boolean=false;
+
+  constructor(private restaurantService: RestaurantService,
+    private activatedRoute: ActivatedRoute,
+    private authentcationService:AuthentcationService
+    ,private router: Router) {}
 
   ngOnInit(): void {
     this.getRestaurantDetailsById();
@@ -66,7 +72,18 @@ export class RestaurantDetailsComponent implements OnInit {
 }
   */
 
-  search(){
-    console.log(this.searchString)
+checkUser(){
+  let urlRestaurantId = this.activatedRoute.snapshot.paramMap.get('id');
+  if (urlRestaurantId) {
+    let restaurantId = parseInt(urlRestaurantId);
+    this.Logged=(this.authentcationService.UserLogin?.id==restaurantId)&&(this.authentcationService.UserLogin?.Role=="Restaurant")
   }
+  return this.Logged
+}
+
+redirectToEditPage(): void {
+  this.router.navigate(['/other-page']); // Replace '/other-page' with the actual URL of the page you want to redirect to
+}
+
+
 }
