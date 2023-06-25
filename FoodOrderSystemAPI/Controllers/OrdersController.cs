@@ -47,7 +47,7 @@ namespace FoodOrderSystemAPI.Controllers
                 return NotFound(new GeneralResponseDto { Message = $"{e.Message}" });
             }
             return CreatedAtAction(
-                "GetDetails",
+                nameof(GetById),
                 new { Id = newOrderId },
                 new GeneralResponseDto { Message = "Order Created Successfully" });
         }
