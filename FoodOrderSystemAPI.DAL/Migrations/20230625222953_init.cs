@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class lastupdate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -373,15 +373,15 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 2, 0, "e9e05d2e-62bb-417c-addd-ed25a0886905", "hassan@gmail.com", false, false, null, "", "testmohamed", null, null, false, 0, null, false, "testmohamed" },
-                    { 3, 0, "68b9bef8-195a-4780-a2de-629501f4c4b8", "hamdy@gmail.com", false, false, null, "", "ramymohamed", null, null, false, 0, null, false, "ramymohamed" },
-                    { 100, 0, "e7fdae8b-b8ce-4bf7-932f-e6d1dbcc3b8c", "test", false, false, null, "", "MohamedAhmed", null, null, false, 0, null, false, "MohamedAhmed" },
-                    { 101, 0, "355d3213-428c-4cf3-aee2-f38b09c05812", "test", false, false, null, "", "KFC", null, null, false, 0, null, false, "KFC" },
-                    { 102, 0, "45e658a5-ed1f-4ff8-a38c-08433e859273", "test", false, false, null, "", "Central", null, null, false, 0, null, false, "Central" },
-                    { 103, 0, "2a791202-319a-4b38-b181-97292111928c", "info@tastybistro.com", false, false, null, "", "TheTastyBistro", null, null, false, 0, null, false, "TheTastyBistro" },
-                    { 104, 0, "906cda7f-d424-4c42-963a-75b734227dd5", "www.ChezGaby.com", false, false, null, "", "ChezGaby", null, null, false, 0, null, false, "ChezGaby" },
-                    { 105, 0, "6ca1447f-f662-433c-947c-39dfc655e1ba", "www.Negro.com", false, false, null, "", "Negro", null, null, false, 0, null, false, "Negro" },
-                    { 106, 0, "f8e065cc-9315-43a5-b85f-fdc9a1460fd5", "567 Walnut Lane", false, false, null, "", "seafoodshack", null, null, false, 0, null, false, "seafoodshack" }
+                    { 2, 0, "3d49c675-e1ac-440f-9816-db6eb66f03d6", "hassan@gmail.com", false, false, null, "", "testmohamed", null, null, false, 0, null, false, "testmohamed" },
+                    { 3, 0, "500e663d-8300-4bc0-8f9c-4e53ecfdb80f", "hamdy@gmail.com", false, false, null, "", "ramymohamed", null, null, false, 0, null, false, "ramymohamed" },
+                    { 100, 0, "4c970624-2d95-4eb1-ad22-559e16bc7e37", "test", false, false, null, "", "MohamedAhmed", null, null, false, 0, null, false, "MohamedAhmed" },
+                    { 101, 0, "8c422cde-3d79-417d-bdbb-ef78a6903143", "test", false, false, null, "", "KFC", null, null, false, 0, null, false, "KFC" },
+                    { 102, 0, "bdbf614e-cf03-4464-9e91-ec1239a51b09", "test", false, false, null, "", "Central", null, null, false, 0, null, false, "Central" },
+                    { 103, 0, "efe3f2e2-f3fb-436c-ac87-920bcf3d1f04", "info@tastybistro.com", false, false, null, "", "TheTastyBistro", null, null, false, 0, null, false, "TheTastyBistro" },
+                    { 104, 0, "6023e25b-7aa2-42b5-93cc-ed7f55301369", "www.ChezGaby.com", false, false, null, "", "ChezGaby", null, null, false, 0, null, false, "ChezGaby" },
+                    { 105, 0, "527ec05d-cdc4-401e-8618-1f8a360f8a7c", "www.Negro.com", false, false, null, "", "Negro", null, null, false, 0, null, false, "Negro" },
+                    { 106, 0, "35bf8e32-e748-4105-bad1-785490ba162b", "567 Walnut Lane", false, false, null, "", "seafoodshack", null, null, false, 0, null, false, "seafoodshack" }
                 });
 
             migrationBuilder.InsertData(

@@ -808,7 +808,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e9e05d2e-62bb-417c-addd-ed25a0886905",
+                            ConcurrencyStamp = "3d49c675-e1ac-440f-9816-db6eb66f03d6",
                             Email = "hassan@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -825,7 +825,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "68b9bef8-195a-4780-a2de-629501f4c4b8",
+                            ConcurrencyStamp = "500e663d-8300-4bc0-8f9c-4e53ecfdb80f",
                             Email = "hamdy@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -872,7 +872,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 100,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e7fdae8b-b8ce-4bf7-932f-e6d1dbcc3b8c",
+                            ConcurrencyStamp = "4c970624-2d95-4eb1-ad22-559e16bc7e37",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -892,7 +892,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 101,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "355d3213-428c-4cf3-aee2-f38b09c05812",
+                            ConcurrencyStamp = "8c422cde-3d79-417d-bdbb-ef78a6903143",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -912,7 +912,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 102,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "45e658a5-ed1f-4ff8-a38c-08433e859273",
+                            ConcurrencyStamp = "bdbf614e-cf03-4464-9e91-ec1239a51b09",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -932,7 +932,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 103,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2a791202-319a-4b38-b181-97292111928c",
+                            ConcurrencyStamp = "efe3f2e2-f3fb-436c-ac87-920bcf3d1f04",
                             Email = "info@tastybistro.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -952,7 +952,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 104,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "906cda7f-d424-4c42-963a-75b734227dd5",
+                            ConcurrencyStamp = "6023e25b-7aa2-42b5-93cc-ed7f55301369",
                             Email = "www.ChezGaby.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -972,7 +972,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 105,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ca1447f-f662-433c-947c-39dfc655e1ba",
+                            ConcurrencyStamp = "527ec05d-cdc4-401e-8618-1f8a360f8a7c",
                             Email = "www.Negro.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -992,7 +992,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 106,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f8e065cc-9315-43a5-b85f-fdc9a1460fd5",
+                            ConcurrencyStamp = "35bf8e32-e748-4105-bad1-785490ba162b",
                             Email = "567 Walnut Lane",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
