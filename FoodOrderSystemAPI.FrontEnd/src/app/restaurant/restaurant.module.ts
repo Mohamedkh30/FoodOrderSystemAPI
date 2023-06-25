@@ -19,13 +19,20 @@ import { RestaurantPageComponent } from './restaurant-page/restaurant-page.compo
 import { RestaurantFilterComponent } from './restaurant-filter/restaurant-filter.component';
 import { FormsModule } from '@angular/forms';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
+import { ResturantOrdersComponent } from './resturant-orders/resturant-orders.component';
+import { ResturantRoutingModule } from './resturant-routing.module';
 
+const Router: Routes = [
+  
+  {path : 'Orders' , component: ResturantOrdersComponent},
+]
 @NgModule({
   declarations: [
     RestCardComponent,
     RestaurantPageComponent,
     RestaurantFilterComponent,
-    RestaurantDetailsComponent
+    RestaurantDetailsComponent,
+    ResturantOrdersComponent, 
   ],
   imports: [
     CommonModule
@@ -34,6 +41,7 @@ import { RestaurantDetailsComponent } from './restaurant-details/restaurant-deta
     ,FormsModule
     , RouterModule
     , ImageModule
+    
   ]
 })
 export class RestaurantModule { }
