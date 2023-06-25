@@ -222,7 +222,8 @@ public class RestaurantManager : IRestaurantManager
          CustomerName = o.Customer.UserName,
          CustomerAddress = "",               // Need To Change Langitude To String Address 
          CustomerPhone = o.Customer.PhoneNumber,
-        OrderProducts  = o.OrderProducts
+         TotalPrice = o.OrderProducts.Sum(op => (op.Product.price - op.Product.offer) * op.Quantity),
+        OrderProducts = o.OrderProducts
             .Select(op => new ProductOrder()
             {
                 Productname= op.Product.Productname,
@@ -230,6 +231,7 @@ public class RestaurantManager : IRestaurantManager
                 img = op.Product.img,
                 Quantity = op.Quantity,
                 QuantityPrice = (op.Product.price - op.Product.offer) * op.Quantity
+
                 // Set other properties as needed
             })
             .ToList()
