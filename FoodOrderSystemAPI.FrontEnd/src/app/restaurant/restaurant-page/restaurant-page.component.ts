@@ -28,8 +28,10 @@ export class RestaurantPageComponent implements OnInit {
     
     if (urlRestaurantId) {
       let restaurantId = parseInt(urlRestaurantId);
+      // console.log(restaurantId);
       this.restaurantService.getRestaurantProducts(restaurantId)
-        .subscribe(data => this._products = data, error => {
+        .subscribe(data => {this._products = data; console.log(this._products);
+        }, error => {
           console.log(`error: ${error}`);
         });
     }
