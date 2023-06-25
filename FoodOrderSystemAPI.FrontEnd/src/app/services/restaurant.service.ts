@@ -18,15 +18,15 @@ export class RestaurantService {
         return this.http.get<RestaurantDetailsDto[]>(`${baseUrl}Restaurant`);
     }
 
-    getRestaurantDetailsById(RestaurantId: number): Observable<RestaurantDetailsByIdDto> {
+    getRestaurantDetailsById(RestaurantId: number): Observable<RestaurantDetailsByIdDto | null> {
         let baseUrl: string = this.configService.getBaseApiUrl();
         console.log(`${baseUrl}Restaurant/Products/${RestaurantId}`);
-        return this.http.get<RestaurantDetailsByIdDto>(`${baseUrl}Restaurant/Products/${RestaurantId}`);
+        return this.http.get<RestaurantDetailsByIdDto>(`${baseUrl}Restaurant/${RestaurantId}`);
     }
 
     getRestaurantProducts(RestaurantId: number): Observable<RestaurantProductsDto> {
         let baseUrl: string = this.configService.getBaseApiUrl();
         // console.log(`${baseUrl}Restaurant/Products/${RestaurantId}`);
-        return this.http.get<RestaurantProductsDto>(`${baseUrl}Restaurant/${RestaurantId}`);
+        return this.http.get<RestaurantProductsDto>(`${baseUrl}Restaurant/Products/${RestaurantId}`);
     }
 }
