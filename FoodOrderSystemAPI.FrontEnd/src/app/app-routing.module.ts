@@ -11,6 +11,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddCardComponent } from './AddCard/add-card.component';
 import { NavigationRegisterComponent } from './Registraion/navigation-register/navigation-register.component';
+import { ResturantOrdersComponent } from './restaurant/resturant-orders/resturant-orders.component';
 
 const Router: Routes = [
   // (Lazy Loading ) Laod Module Only when Access authentiction in Url !!
@@ -35,9 +36,10 @@ const Router: Routes = [
   {path:'product/:id',component:ProductDetailsComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'addproduct',component:AddProductComponent},
-  {path:'addcard',component:AddCardComponent},
+  { path: 'addcard', component: AddCardComponent },
+  {path : 'ResturantOrders', component: ResturantOrdersComponent},
   // {path:'restaurant',component:RestaurantPageComponent},
-  {path:'restaurant/:id',component:RestaurantPageComponent},
+  {path:'restaurant/:id',component:RestaurantPageComponent ,loadChildren: ()=> import ('./restaurant/restaurant.module').then(m=>m.RestaurantModule)},
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'customer/:id', component: CustomerProfileDetailsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
