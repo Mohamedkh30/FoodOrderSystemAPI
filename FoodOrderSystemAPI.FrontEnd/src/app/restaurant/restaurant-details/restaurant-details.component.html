@@ -1,13 +1,14 @@
-<p-card *ngIf="restaurantDetails" [header]="restaurantDetails.restaurantName">
-    <div class="d-flex justify-content-center flex-column align-items-center">
-        <div class="">
-            <p-image [src]="restaurantDetails.logo" alt="Image" width="250" [preview]="true"></p-image>
-        </div>
+        <div class="card py-4 headerdiv" *ngIf="restaurantDetails" >
+            <div class="row">
+                <div class=" col-8">
+                    <img class="mx-5" [src]="restaurantDetails.logo" alt="Image" >
+                </div>
+                <div class="d-flex justify-content-center align-items-center flex-column col-4">
+                    <h1 class="my-2">{{ restaurantDetails.restaurantName }}</h1>
+                    <h2 class="my-1">{{ restaurantDetails.email }}</h2>
+                    <h2 class="my-1">{{ restaurantDetails.address }}</h2>
+                    <h2 class="my-1">{{ restaurantDetails.phone }}</h2>
+                </div>
 
-        <div class="d-flex align-items-center flex-column ">
-            <p class="m-0">{{ restaurantDetails.email }}</p>
-            <p class="m-0">{{ restaurantDetails.address }}</p>
-            <p class="m-0">{{ restaurantDetails.phone }}</p>
+            </div>
         </div>
-    </div>
-</p-card>
