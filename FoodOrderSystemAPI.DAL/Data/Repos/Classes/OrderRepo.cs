@@ -16,7 +16,7 @@ public class OrderRepo : EntityRepo<OrderModel>, IOrderRepo
     {
 
         //_dbContext.Orders.Include(Orders=>Orders.OrderProducts).ThenInclude(Orderproduct=>Orderproduct.Product).ThenInclude(product=>product.restaurant).Where(product=>product.)
-        var orders = _dbContext.Orders
+        var orders = _dbContext.Orders.Include(O=>O.Customer).Include(o=>o.OrderProducts).ThenInclude(p => p.Product)
         .Join(
             _dbContext.OrdersProducts,
             order => order.OrderId,

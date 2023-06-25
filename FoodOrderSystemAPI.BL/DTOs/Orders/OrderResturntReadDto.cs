@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodOrderSystemAPI.BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,13 @@ namespace FoodOrderSystemAPI;
 
 public  class OrderResturntReadDto
 {
+    public int OrderId { get; set; }
+    public string CustomerName { get; set; }
+    public string CustomerPhone { get; set; }
+    public string CustomerAddress { get; set; }
+    public DateTime OrderDate { get; set; }
+    public float TotalPrice { get; set; }
+    public List <ProductOrder > OrderProducts { get; set; }
+
 
 }

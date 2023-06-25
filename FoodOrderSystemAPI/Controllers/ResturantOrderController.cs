@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FoodOrderSystemAPI.BL;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FoodOrderSystemAPI.Controllers
 {
@@ -6,10 +7,18 @@ namespace FoodOrderSystemAPI.Controllers
     [ApiController]
     public class ResturantOrderController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<OrderResturntReadDto> GetAllOrdersByResturanId()
+        private readonly IRestaurantManager _ResturantMangager;
+        public ResturantOrderController(IRestaurantManager resturantMangager)
         {
-
+            _ResturantMangager = resturantMangager;
+        }
+        [HttpGet]
+        public ActionResult<OrderResturntReadDto> GetAllOrdersByResturanId(int ResturnatId)
+        {
+            var orders = _ResturantMangager.GetOrdersByResturantId(ResturnatId);
+            if (orders == null)
+                return BadRequest();
+            return Ok(orders);
         }
     }
 }

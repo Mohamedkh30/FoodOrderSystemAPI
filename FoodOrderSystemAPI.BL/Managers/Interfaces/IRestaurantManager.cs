@@ -11,5 +11,7 @@ public interface IRestaurantManager
     RestaurantProductsDto? GetRestaurentWithProductsById(int id);
     Task<TokenDto> AddRestaurant(RestaurantAddDto restaurantDto);
     UpdateStatusEnum UpdateRestaurant(RestaurantUpdateDto restaurantDto);
+    public List<OrderResturntReadDto> GetOrdersByResturantId(int ResturantId);
+
     DeleteStatusEnum DeleteRestaurant(int id);
 }
