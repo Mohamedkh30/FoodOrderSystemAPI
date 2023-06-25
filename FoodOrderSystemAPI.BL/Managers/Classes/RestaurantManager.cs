@@ -211,4 +211,36 @@ public class RestaurantManager : IRestaurantManager
     }
 
 
+    public List<OrderResturntReadDto> GetOrdersByResturantId(int ResturantId)
+    {
+        var Resturantorders = _unitOfWork.Orders.GetOrdersByResturantId(ResturantId)
+        
+     .Select(o => new OrderResturntReadDto()
+     {
+         OrderId = o.OrderId,
+         OrderDate = o.OrderDate,
+         CustomerName = o.Customer.UserName,
+         CustomerAddress = "",               // Need To Change Langitude To String Address 
+         CustomerPhone = o.Customer.PhoneNumber,
+        OrderProducts  = o.OrderProducts
+            .Select(op => new ProductOrder()
+            {
+                Productname= op.Product.Productname,
+                price = op.Product.price - op.Product.offer,
+                img = op.Product.img,
+                Quantity = op.Quantity,
+                QuantityPrice = (op.Product.price - op.Product.offer) * op.Quantity
+                // Set other properties as needed
+            })
+            .ToList()
+
+     })
+     .ToList();
+
+        return Resturantorders;
+
+    }
+
+
+
 }
