@@ -22,4 +22,8 @@
     <Folder Include="DTOs\Location\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\Location\" />
+  </ItemGroup>
+
 </Project>

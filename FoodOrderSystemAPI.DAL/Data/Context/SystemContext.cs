@@ -142,6 +142,7 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
        PhoneNumber = "1234567890",
 
 
+
    },
         new CustomerModel
         {
