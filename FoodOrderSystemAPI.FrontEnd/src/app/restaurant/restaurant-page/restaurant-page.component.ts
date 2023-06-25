@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FullProductCardDto } from 'src/app/_models/product/FullProductCardDto';
 import { RestaurantDto } from 'src/app/_models/restaurant/RestaurantDto';
 import { RestaurantService } from 'src/app/services/restaurant.service';
@@ -8,6 +8,7 @@ import { ProductCardDto } from 'src/app/types/Product/Product-Card-dto';
 import { EventData } from 'src/app/_models/eventData';
 import { ProductService } from 'src/app/services/product.service';
 import { RestaurantDetailsByIdDto } from 'src/app/types/Restaurant/Restaurant-Details-By-Id-dto';
+import { AuthentcationService } from 'src/app/services/authentcation.service';
 
 @Component({
   selector: 'app-restaurant-page',
@@ -15,13 +16,19 @@ import { RestaurantDetailsByIdDto } from 'src/app/types/Restaurant/Restaurant-De
   styleUrls: ['./restaurant-page.component.css']
 })
 export class RestaurantPageComponent implements OnInit {
+  Logged:boolean=false;
   filterCategories:string[] = []
   restaurantName:string="";
   searchString:string = "";
   
   _products: RestaurantProductsDto = new RestaurantProductsDto();
 
-  constructor(private restaurantService: RestaurantService, private activatedRoute: ActivatedRoute,private productService:ProductService) {}
+  constructor(private restaurantService: RestaurantService,
+    private activatedRoute: ActivatedRoute,
+    private productService:ProductService,
+    private authentcationService:AuthentcationService,
+    private router: Router
+    ) {}
   productsList:FullProductCardDto[]|null = [];
 
   ngOnInit(): void {
@@ -93,5 +100,18 @@ export class RestaurantPageComponent implements OnInit {
     );
       
     }
+  }
+
+  checkUser(){
+    let urlRestaurantId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (urlRestaurantId) {
+      let restaurantId = parseInt(urlRestaurantId);
+      this.Logged=(this.authentcationService.UserLogin?.id==restaurantId)&&(this.authentcationService.UserLogin?.Role=="Restaurant")
+    }
+    return this.Logged
+  }
+
+  redirectToAddPage(): void {
+    this.router.navigate(['/other-page']); // Replace '/other-page' with the actual URL of the page you want to redirect to
   }
 }

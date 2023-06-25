@@ -29,6 +29,7 @@ export class RestaurantService {
     );
   }
 
+
   getRestaurantProducts(
     RestaurantId: number
   ): Observable<RestaurantProductsDto> {
@@ -54,3 +55,4 @@ export class RestaurantService {
     return this.http.put<RestaurantUpdateDto>(apiUrl, restaurant);
   }
 }
+
