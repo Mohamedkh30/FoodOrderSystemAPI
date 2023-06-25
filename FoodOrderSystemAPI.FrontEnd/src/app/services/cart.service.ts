@@ -47,6 +47,14 @@ export class CartService {
     return count;
   }
 
+  private calculateTotalPrice(): number {
+    let totalPrice = 0;
+    for (let index = 0; index < this.CartItems.length; index++) {
+      totalPrice +=
+        this.CartItems[index].product.price * this.CartItems[index].quantity;
+    }
+    return totalPrice;
+  }
   //#endregion
 
   //#region  public methods
@@ -84,22 +92,11 @@ export class CartService {
       cartItemToRemove.product.price * cartItemToRemove.quantity;
   }
 
-  getCart(): CartItem[] {
-    return this.CartItems;
-  }
-
-  calculateTotalPrice(): number {
-    let totalPrice = 0;
-    for (let index = 0; index < this.CartItems.length; index++) {
-      totalPrice +=
-        this.CartItems[index].product.price * this.CartItems[index].quantity;
-    }
-    return totalPrice;
-  }
-
   emptyCart(): void {
     localStorage.removeItem(this._localStorageCartName);
     this.CartItems = [];
+    this.TotalNumberOfItems = 0;
+    this.TotalPrice = 0;
   }
   //#endregion
 }
