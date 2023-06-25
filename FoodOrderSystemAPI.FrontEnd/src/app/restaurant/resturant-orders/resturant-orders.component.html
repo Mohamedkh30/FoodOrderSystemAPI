@@ -55,10 +55,10 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-4">
-                   
+                  
                 </th>
                 <th scope="col" class="px-6 py-3">
-                   Order Id 
+                  Order Id 
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Customer Name 
@@ -78,10 +78,10 @@
             </tr>
         </thead>
         <tbody>
-           
+          
             <tr *ngFor="let Order of ComponentResturantOrders" class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="w-4 p-4">
-                   
+                  
                 </td>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{Order.orderId}}
@@ -90,16 +90,16 @@
                     {{Order.customerName}}
                 </td>
                 <td class="px-6 py-4">
-                   {{Order.customerPhone}}
+                  {{Order.customerPhone}}
                 </td>
                 <td class="px-6 py-4">
                     {{Order.customerAddress}}
                 </td>
                 <td class="px-6 py-4">
-                   {{Order.customerPhone}}
+                  {{Order.customerPhone}}
                 </td>
                 <td class="px-6 py-4">
-                   {{Order.totalPrice}}
+                  {{Order.totalPrice}}
                 </td>
                 <td class="px-6 py-4">
                     <button   (click)="toggleComponentVisibility(Order.orderProducts)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">

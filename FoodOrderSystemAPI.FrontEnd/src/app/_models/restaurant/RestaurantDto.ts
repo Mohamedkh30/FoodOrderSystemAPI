@@ -5,7 +5,5 @@ export class RestaurantDto {
         public Restaurantname:string = "",
     )
     {
-
     }
-
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    [Migration("20230624201235_last_update")]
-    partial class last_update
+    [Migration("20230625133224_lastupdate")]
+    partial class lastupdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,6 +119,96 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 4,
                             tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 11,
+                            tag = "local"
+                        },
+                        new
+                        {
+                            ProductId = 11,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 12,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 13,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 14,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 15,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 16,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 17,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 18,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 19,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 20,
+                            tag = "healthy"
+                        },
+                        new
+                        {
+                            ProductId = 20,
+                            tag = "vegetarian"
                         });
                 });
 
@@ -268,7 +358,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             ProductId = 3,
                             Productname = "Koshary",
-                            RestaurantID = 101,
+                            RestaurantID = 100,
                             describtion = "Koshary so5n",
                             img = "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg",
                             offer = 0.5f,
@@ -285,6 +375,182 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                             offer = 0.1f,
                             price = 30f,
                             rate = 3f
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            Productname = "Eggs With Pastrami Sandwich",
+                            RestaurantID = 100,
+                            describtion = "Served in Shami bread",
+                            img = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi8s-5oiHaDOOhdsh1Q8aylMWvDZKeUFMVpmnm2ottNGiHscgP",
+                            offer = 0f,
+                            price = 17f,
+                            rate = 5f
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            Productname = "Rizo Spicy",
+                            RestaurantID = 101,
+                            describtion = "Fried chicken and Rice",
+                            img = "https://images.deliveryhero.io/image/talabat/MenuItems/F0F5ED9174479F606B0221B326F9E866",
+                            offer = 0.1f,
+                            price = 45f,
+                            rate = 3.5f
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            Productname = "Twister Chilla Box",
+                            RestaurantID = 101,
+                            describtion = "Fried chicken,3 Sandwiches",
+                            img = "https://images.deliveryhero.io/image/talabat/MenuItems/3283E7BD37DFE8FEF2DE4E0151391E64",
+                            offer = 0.1f,
+                            price = 120f,
+                            rate = 2f
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            Productname = "Classic Bucket",
+                            RestaurantID = 101,
+                            describtion = "(9 pcs)",
+                            img = "https://images.deliveryhero.io/image/talabat/MenuItems/4CB1034B30EB60005948C7079C75BD3A",
+                            offer = 0.09f,
+                            price = 90f,
+                            rate = 4f
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            Productname = "Family Koshary Meal",
+                            RestaurantID = 102,
+                            describtion = "for 5 Persons",
+                            img = "https://images.deliveryhero.io/image/talabat/Menuitems/%D9%81%D8%A7%D9%85%D9%8A%D9%84%D9%89_%D9%81%D9%88%D9%8A%D9%84637879013422961404.jpg?width=172&amp",
+                            offer = 0.09f,
+                            price = 150f,
+                            rate = 1f
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            Productname = "Small Mineral",
+                            RestaurantID = 102,
+                            describtion = "Water Bottle",
+                            img = "https://t0.gstatic.com/images?q=tbn:ANd9GcRDvWTfXzH-61_ZP_fCAzjo6YPcd-CAKoL3dxAcKYe1tgjQ5yYO",
+                            offer = 0.09f,
+                            price = 15f,
+                            rate = 3f
+                        },
+                        new
+                        {
+                            ProductId = 11,
+                            Productname = "Tuna Salad",
+                            RestaurantID = 103,
+                            describtion = "tuna and mayonnaise",
+                            img = "https://littlesunnykitchen.com/wp-content/uploads/2022/12/Tuna-Salad-1.jpg",
+                            offer = 0f,
+                            price = 55f,
+                            rate = 4f
+                        },
+                        new
+                        {
+                            ProductId = 12,
+                            Productname = "Greek Salad",
+                            RestaurantID = 103,
+                            describtion = "pieces of tomatoes, cucumbers, onion, feta cheese, and olives and dressed with salt, Greek oregano, and olive oil",
+                            img = "https://hips.hearstapps.com/hmg-prod/images/greek-salad-index-642f292397bbf.jpg",
+                            offer = 0f,
+                            price = 40f,
+                            rate = 4f
+                        },
+                        new
+                        {
+                            ProductId = 13,
+                            Productname = "Chef",
+                            RestaurantID = 103,
+                            describtion = "hard-boiled eggs, a variety of julienned meats",
+                            img = "https://www.allrecipes.com/thmb/Q84xeMgnOJPZAUOdNyrb9dbFZr4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/285625-ChefsSalad_MFS_006-2550ecee70ae46dbaec530a58314c99c.jpg",
+                            offer = 0.09f,
+                            price = 70f,
+                            rate = 5f
+                        },
+                        new
+                        {
+                            ProductId = 14,
+                            Productname = "Turkey With Emmental Cheese",
+                            RestaurantID = 104,
+                            describtion = "Freshly made half baguette filled with turkey and Emmental cheese mixed with greens making it the perfect grab-and-go meal",
+                            img = "https://gourmetegypt.com/media/catalog/product/t/u/turkey-_-cheese-photo_nk70qlcuxsoq2rfw.jpg",
+                            offer = 0f,
+                            price = 50f,
+                            rate = 4f
+                        },
+                        new
+                        {
+                            ProductId = 15,
+                            Productname = "Roast Beef With Emmental",
+                            RestaurantID = 104,
+                            describtion = "Combine the white cheese with the mustard",
+                            img = "http://gourmetpedia.net/media/upload/recipe/3398.jpg",
+                            offer = 0f,
+                            price = 70f,
+                            rate = 5f
+                        },
+                        new
+                        {
+                            ProductId = 16,
+                            Productname = "italian sub sandwich",
+                            RestaurantID = 104,
+                            describtion = "tuna and mayonnaise",
+                            img = "https://static01.nyt.com/images/2022/02/07/dining/as-italian-sub/merlin_201238275_040c2bf1-9f7d-4653-9f83-9b262dd03a05-articleLarge.jpg",
+                            offer = 0f,
+                            price = 60f,
+                            rate = 3f
+                        },
+                        new
+                        {
+                            ProductId = 17,
+                            Productname = "Cabrito",
+                            RestaurantID = 104,
+                            describtion = "Mexico meal",
+                            img = "https://lh3.googleusercontent.com/WXWvHOubytJUkjYKXTTAi_WIsosuxjsgecB4XKCat1fyy1f60ELPn3p-NPXgzJcf5FixXd_k657H_4aOFPWjdviq6v6495vCKXJl37w",
+                            offer = 0f,
+                            price = 150f,
+                            rate = 4f
+                        },
+                        new
+                        {
+                            ProductId = 18,
+                            Productname = "Onion Rings",
+                            RestaurantID = 105,
+                            describtion = "A famous \"Shack Snack\", our onion rings are served with delicious whale sauce",
+                            img = "https://www.seafoodshack.com/wp-content/uploads/2015/04/Onion-Rings-Website-FI-500x375.jpg",
+                            offer = 0.7f,
+                            price = 80f,
+                            rate = 5f
+                        },
+                        new
+                        {
+                            ProductId = 19,
+                            Productname = "Almond stuffed rainbow trout",
+                            RestaurantID = 101,
+                            describtion = "A delicious frozen cocktail made with Tres Agaves Tequila, Triple Sec, Tres Agaves Organic Margarita Mix, fresh lime and a splash of orange juice",
+                            img = "https://www.seafoodshack.com/wp-content/uploads/2015/04/Mango-Margarita-Website-FI-500x375.jpg",
+                            offer = 0.2f,
+                            price = 220f,
+                            rate = 4f
+                        },
+                        new
+                        {
+                            ProductId = 20,
+                            Productname = "Fish Tacos",
+                            RestaurantID = 106,
+                            describtion = "Seasoned fresh local catch, colby jack cheese, napa cabbage and baja sauce served in crispy corn tortillas",
+                            img = "https://www.seafoodshack.com/wp-content/uploads/2015/04/FishTacos-Website-FI-500x375.jpg",
+                            offer = 0.5f,
+                            price = 130f,
+                            rate = 5f
                         });
                 });
 
@@ -545,7 +811,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fd7035c2-ab0c-466d-bc37-8320fd9af7aa",
+                            ConcurrencyStamp = "e9e05d2e-62bb-417c-addd-ed25a0886905",
                             Email = "hassan@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -562,7 +828,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "97b3049e-117c-40e5-afcc-4094c932a80d",
+                            ConcurrencyStamp = "68b9bef8-195a-4780-a2de-629501f4c4b8",
                             Email = "hamdy@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -609,7 +875,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 100,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9c5abc0f-6828-498b-9aca-5ac897dd6b4d",
+                            ConcurrencyStamp = "e7fdae8b-b8ce-4bf7-932f-e6d1dbcc3b8c",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -629,7 +895,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 101,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f13943e7-8127-4de6-b8e9-a70a4ad543f9",
+                            ConcurrencyStamp = "355d3213-428c-4cf3-aee2-f38b09c05812",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -649,7 +915,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 102,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "76777546-397f-4212-960d-827ef5adb4cf",
+                            ConcurrencyStamp = "45e658a5-ed1f-4ff8-a38c-08433e859273",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -663,13 +929,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                             Logo = "https://centralrestaurante.com.pe/assets/images/facebook.jpg",
                             PaymentMethods = 2,
                             Phone = "+51 1 242 8515",
-                            RestaurantName = "Central"
+                            RestaurantName = "Koshary El Tahrir"
                         },
                         new
                         {
                             Id = 103,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f59f1d9-11a9-43e9-90f0-965cd1c8963d",
+                            ConcurrencyStamp = "2a791202-319a-4b38-b181-97292111928c",
                             Email = "info@tastybistro.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -689,7 +955,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 104,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e678f2ec-c668-4770-835e-b268b09e054e",
+                            ConcurrencyStamp = "906cda7f-d424-4c42-963a-75b734227dd5",
                             Email = "www.ChezGaby.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -709,7 +975,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 105,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "03ca8f37-046f-4a95-b367-d463eca42637",
+                            ConcurrencyStamp = "6ca1447f-f662-433c-947c-39dfc655e1ba",
                             Email = "www.Negro.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -729,7 +995,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 106,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "40560825-d74d-4405-ad89-ce1604043c1d",
+                            ConcurrencyStamp = "f8e065cc-9315-43a5-b85f-fdc9a1460fd5",
                             Email = "567 Walnut Lane",
                             EmailConfirmed = false,
                             LockoutEnabled = false,

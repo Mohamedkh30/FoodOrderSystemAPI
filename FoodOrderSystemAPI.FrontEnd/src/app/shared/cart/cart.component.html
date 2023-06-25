@@ -83,13 +83,14 @@
     <div
       class="flex flex-row justify-content-center xl:flex-row xl:align-items-center p-4 gap-4"
     >
-      <p-button
-        styleClass="p-button-info"
+      <button
+        class="btn btn-primary"
         routerLink="/checkout"
         (click)="visible = false"
+        [disabled]="isCartEmpty()"
       >
         checkout
-      </p-button>
+      </button>
     </div>
   </div>
 </p-dialog>
