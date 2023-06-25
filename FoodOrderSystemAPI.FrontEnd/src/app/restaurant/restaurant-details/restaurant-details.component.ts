@@ -25,7 +25,7 @@ export class RestaurantDetailsComponent implements OnInit {
     let urlRestaurantId = this.activatedRoute.snapshot.paramMap.get('id');
     if (urlRestaurantId) {
       let restaurantId = parseInt(urlRestaurantId);
-      console.log(restaurantId);
+      // console.log(restaurantId);
       this.restaurantService.getRestaurantDetailsById(restaurantId)
       .subscribe((restaurantDetails: RestaurantDetailsByIdDto | null) => {
         if (restaurantDetails) {
