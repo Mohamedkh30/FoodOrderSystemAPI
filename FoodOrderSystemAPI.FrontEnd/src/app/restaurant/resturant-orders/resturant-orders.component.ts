@@ -24,11 +24,14 @@ export class ResturantOrdersComponent implements OnInit {
   ngOnInit(): void {
     const RestaurantId = this.AuthenticationService.UserLogin?.id;
     console.log(RestaurantId)
-    this.Resturantservice.GetResturantOrders(RestaurantId!).subscribe((ResturnatOrders) => {
-      console.log(ResturnatOrders);
-      console.log(RestaurantId);
-      this.ComponentResturantOrders = ResturnatOrders
-     })
+    setInterval(() => {
+      // Code to be executed at the specified interval
+      this.Resturantservice.GetResturantOrders(RestaurantId!).subscribe((ResturnatOrders) => {
+        console.log(ResturnatOrders);
+        console.log(RestaurantId);
+        this.ComponentResturantOrders = ResturnatOrders        
+      })
+    }, 10000); 
   }
   constructor(public Resturantservice: RestaurantService ,private AuthenticationService :AuthentcationService ) { }
   
