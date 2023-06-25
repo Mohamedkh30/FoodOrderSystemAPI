@@ -11,4 +11,6 @@ i:hover{
     cursor: pointer;
 }
 
-
+.headerDiv{
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}

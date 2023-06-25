@@ -22,6 +22,7 @@ import { ProductModule } from './product/product.module';
 import { NavigationRegisterComponent } from './Registraion/navigation-register/navigation-register.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderCondirmationComponent } from './order-confirmation/order-condirmation/order-condirmation.component';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, NavigationRegisterComponent],
@@ -40,6 +41,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddProductModule,
     ProductModule,
     RouterModule,
+    
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyBPfbHdhiBn2prqXNfZKa0yFYVPOWMVvKU', // Replace with your actual API key
     // }),

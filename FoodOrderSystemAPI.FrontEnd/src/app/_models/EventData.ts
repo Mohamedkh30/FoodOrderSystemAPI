@@ -4,9 +4,5 @@ export class EventData {
         public Categories:String[],
         public range:number[]
     ){
-
     }
 }
-
-      
-      
