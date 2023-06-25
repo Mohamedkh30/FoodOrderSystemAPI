@@ -35,10 +35,10 @@ export class AddProductComponent implements OnInit {
       ProductImg: [null, Validators.required],
       ProductDescription: [],
       ProductOffer: [0],
-      Vigiterian: [false, Validators.requiredTrue],
-      Pizza: [false, Validators.requiredTrue],
-      Pasta: [false, Validators.requiredTrue],
-      Chicken: [false, Validators.requiredTrue],
+      Vigiterian: [false, ],
+      Pizza: [false, ],
+      Pasta: [false, ],
+      Chicken: [false,],
     });
   }
 
@@ -85,17 +85,25 @@ export class AddProductComponent implements OnInit {
     
     
     if (this.productForm.valid) {
+      console.log("Valid")
+
       this.AssigingFormToToProductService();
+      console.log(this.ProductService.productToAdd.productname)
       console.log(this.ProductService.productToAdd)
-     console.log( this.ProductService.productToAdd.img)
+      console.log(this.ProductService.productToAdd.img)
       // Send Request to server Add Product
       this.ProductService.AddProduct().subscribe((productid: number) => {
+        console.log(productid)
+        this.productForm.reset();
       }, (error: HttpErrorResponse) => {
         console.log(error)
       })
     }
-    this.validateForm();
-  }
+    else {
+      console.log("notValid")
+      this.validateForm();
+    }
+  } 
 
   // Get Tags Values
 
@@ -105,7 +113,8 @@ GetTagsValues() :string []{
   Object.keys(this.productForm.controls).forEach((key) => {
     console.log(key)
     const control = this.productForm.get(key);
-    if (control?.value) {
+    if (control?.value === true) {
+      console.log(control);
       selectedTagsValues.push(key);
     }
   });
@@ -122,6 +131,6 @@ GetTagsValues() :string []{
     this.ProductService.productToAdd.price = this.ProductPrice.value;
     this.ProductService.productToAdd.offer = this.ProductOffer.value;
     this.ProductService.productToAdd.restaurantID =
-      this.AuthenticationService.UserLogin?.id!!;
+    this.AuthenticationService.UserLogin?.id!!;
   }
 }

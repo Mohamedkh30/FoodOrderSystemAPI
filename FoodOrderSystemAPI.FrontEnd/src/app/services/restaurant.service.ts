@@ -31,9 +31,10 @@ export class RestaurantService {
         return this.http.get<RestaurantProductsDto>(`${baseUrl}Restaurant/Products/${RestaurantId}`);
     }
     // Funtion Get Resturan Orders
-    GetResturantOrders(RestaurantId: number): Observable<ResturantOrderDto[]> {
+    GetResturantOrders(ResturantId: number): Observable<ResturantOrderDto[]> {
         let baseUrl: string = this.configService.getBaseApiUrl();
-        // console.log(`${baseUrl}Restaurant/Products/${RestaurantId}`);
-        return this.http.get<ResturantOrderDto[]>(`${baseUrl}ResturantOrder?${RestaurantId}`);
+        // console.log(`${baseUrl}Restaurant/Products/${RestaurantId}`); 
+        //https://localhost:7020/api/ResturantOrder?ResturantId=8
+        return this.http.get<ResturantOrderDto[]>(`${baseUrl}ResturantOrder?ResturantId=${ResturantId}`);
     }
 }
