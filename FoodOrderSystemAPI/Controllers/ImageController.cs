@@ -44,7 +44,8 @@ namespace FoodOrderSystemAPI.Controllers
             #region Storing The Image
 
             var newFileName = $"{Guid.NewGuid()}{extension}";
-            var imagesPath = Path.Combine(Environment.CurrentDirectory, "UplaodedImages");
+            var currentDirectory = Environment.CurrentDirectory;
+            var imagesPath = Path.Combine(currentDirectory, "..", "FoodOrderSystemAPI.FrontEnd", "src", "assets", "Images");
             var fullFilePath = Path.Combine(imagesPath, newFileName);
 
             using var stream = new FileStream(fullFilePath, FileMode.Create);
@@ -54,7 +55,8 @@ namespace FoodOrderSystemAPI.Controllers
 
             #region Generating URL
 
-            var url = $"{Request.Scheme}://{Request.Host}/Images/{newFileName}";
+            //var url = $"{Request.Scheme}://{Request.Host}/UplaodedImages/{newFileName}";
+            var url = $"assets/Images/{newFileName}";
             return new UploadFileDto(true, "Success", url);
 
             #endregion

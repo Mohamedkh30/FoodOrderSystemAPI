@@ -13,9 +13,9 @@ namespace FoodOrderSystemAPI.Controllers
             _ResturantMangager = resturantMangager;
         }
         [HttpGet]
-        public ActionResult<OrderResturntReadDto> GetAllOrdersByResturanId(int ResturnatId)
+        public ActionResult<OrderResturntReadDto> GetAllOrdersByResturanId(int ResturantId)
         {
-            var orders = _ResturantMangager.GetOrdersByResturantId(ResturnatId);
+            var orders = _ResturantMangager.GetOrdersByResturantId(ResturantId);
             if (orders == null)
                 return BadRequest();
             return Ok(orders);
