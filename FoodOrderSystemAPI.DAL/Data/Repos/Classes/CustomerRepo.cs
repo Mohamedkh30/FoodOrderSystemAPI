@@ -19,11 +19,11 @@ public class CustomerRepo : EntityRepo<CustomerModel>, ICustomerRepo
 
     public List<CustomerModel> GetAllWithNavProp()
     {
-      return  _dbcontext.Customers.Include(s=>s.CustomerCreditCard).Include(s=>s.CustomerAddress).ToList();
+      return  _dbcontext.Customers.Include(s=>s.CustomerCreditCard).ToList();
     } 
     public CustomerModel GetCustomerByIdWithNavprop(int id)
     {
-      return  _dbcontext.Customers.Include(s=>s.CustomerCreditCard).Include(s=>s.CustomerAddress).FirstOrDefault(c=>c.Id == id );
+      return  _dbcontext.Customers.Include(s=>s.CustomerCreditCard).FirstOrDefault(c=>c.Id == id );
     }
 
     public void Login()

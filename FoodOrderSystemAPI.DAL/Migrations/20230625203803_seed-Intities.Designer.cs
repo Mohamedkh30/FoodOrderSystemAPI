@@ -4,6 +4,7 @@ using FoodOrderSystemAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     [DbContext(typeof(SystemContext))]
-    partial class SystemContextModelSnapshot : ModelSnapshot
+    [Migration("20230625203803_seed-Intities")]
+    partial class seedIntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -508,13 +511,12 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c7749b9-80ea-4c81-9482-a60a6f13c906",
+                            ConcurrencyStamp = "76149bcd-0d3f-4ccf-a7ea-dad579a5a5c2",
                             Email = "hassan@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "testmohamed",
-                            PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
@@ -526,13 +528,12 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bf20cbca-6151-43d3-8b74-101147a27501",
+                            ConcurrencyStamp = "447beeae-0e13-4da8-8dde-3d6b36b2986c",
                             Email = "hamdy@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "ramymohamed",
-                            PhoneNumber = "1234237890",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
@@ -574,7 +575,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 100,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4aa3a48e-d727-4a4b-a5ab-085089b0f823",
+                            ConcurrencyStamp = "f65576c6-d925-486d-9309-96072f1fef83",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -594,7 +595,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 101,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a81a4da6-1a11-4f11-b25c-b8ee2deb3acf",
+                            ConcurrencyStamp = "d91fb2a0-1264-4b10-8e21-af47e255de1b",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -614,7 +615,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 102,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "caed42cc-f776-48d1-99e0-ed07855adec8",
+                            ConcurrencyStamp = "a3a15e30-2bf3-48b8-b760-446f3bdf07f3",
                             Email = "test",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -634,7 +635,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 103,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1a43099f-3da7-49e2-acbb-bb3f5bdc313d",
+                            ConcurrencyStamp = "891e262e-8419-4cad-88fd-b3111c89276b",
                             Email = "info@tastybistro.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -654,7 +655,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 104,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "99b05f64-daf7-4511-b558-084708ff1618",
+                            ConcurrencyStamp = "8ace5a4e-f493-4490-8782-6e169a7e9190",
                             Email = "www.ChezGaby.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -674,7 +675,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 105,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5152619c-db35-4ef8-8006-d86eb7569c06",
+                            ConcurrencyStamp = "4d09ca9b-0c81-4058-8d22-f242867eb309",
                             Email = "www.Negro.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -694,7 +695,7 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         {
                             Id = 106,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f125164-4437-4247-8f5e-67403c141d4e",
+                            ConcurrencyStamp = "cee36d6a-f01b-4bbd-a42d-ff41f1b3e499",
                             Email = "567 Walnut Lane",
                             EmailConfirmed = false,
                             LockoutEnabled = false,

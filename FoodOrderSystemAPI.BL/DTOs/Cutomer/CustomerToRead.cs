@@ -24,8 +24,7 @@ public class CustomerToRead
 
 
     // Location Properties 
-    public double Longitude { get; set; }
-    public double Latitude { get; set; }
+    public String CustomerAddress { get; set; }
 
     // Card Properties 
 

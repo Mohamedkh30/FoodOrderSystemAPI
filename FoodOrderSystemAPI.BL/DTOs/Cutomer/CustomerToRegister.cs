@@ -30,31 +30,25 @@ public class CustomerToRegister
     // Maintainance (1) => Remove Confirm Password Proberty 
 
     // Location Properties 
-    public double Langitude { get; set; }
-    public double Landitude { get; set; }
+
+    public string CustomerAddress { get; set; }
 
     // Card Properties 
 
     // Maintainance (2) => Remove Validation On Card Number 
     public string? CardNumber { get; set; }
 
-    [Display(Name = "Customer Birth")]
-    [DataType(DataType.Date)]
-    [DateInFuture(ErrorMessage = "Your Credit Is Expired.")]
+
     public DateTime ExpirationDate  { get; set; }
 
-    [RegularExpression(@"^[0-9]{3}$", ErrorMessage = "Invalid CVV number.")]
     public string CvvNumber { get; set; }
 
     // Phone Number 
 
-    [Phone]
     public string Phone { get; set; }
 
     // Date Of Birth Validation 
-    [Display(Name = "Customer Birth")]
-    [DataType(DataType.Date)]
-    [DateInPast(ErrorMessage = "The {0} must be a date in the past.")]
+
     public DateTime CustomerBirth { get; set; }
 
 
