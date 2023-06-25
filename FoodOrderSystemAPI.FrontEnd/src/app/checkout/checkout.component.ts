@@ -91,6 +91,8 @@ export class CheckoutComponent implements OnInit {
         cartItem.product.productID,
         cartItem.quantity
       );
+      console.log(`NewItem: ------------------------------`);
+      console.log(NewItem);
       PostOrderProdcuts.push(NewItem);
     }
 
