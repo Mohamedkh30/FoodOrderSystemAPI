@@ -5,8 +5,7 @@ export class CustomerToRegisterDto {
   lastName: string = '';
   email: string ='';
   password: string = '';
-  langitude: number = 0;
-  landitude: number = 0;
+  customerAddress: string = '';
   cardNumber?: string = '';
   expirationDate: Date = new Date(Date.now());
   cvvNumber: string = ''

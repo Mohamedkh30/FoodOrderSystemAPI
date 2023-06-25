@@ -3,12 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class RemoveCustomerLocationClassAddCustomerAddressString : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,20 +63,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Location",
-                columns: table => new
-                {
-                    LocationId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Location", x => x.LocationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,6 +172,25 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustomerModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerAddress = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerModel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CustomerModel_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RestaurantModel",
                 columns: table => new
                 {
@@ -205,56 +208,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         name: "FK_RestaurantModel_AspNetUsers_Id",
                         column: x => x.Id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CustomerModel",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerAddressLocationId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CustomerModel", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CustomerModel_AspNetUsers_Id",
-                        column: x => x.Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CustomerModel_Location_CustomerAddressLocationId",
-                        column: x => x.CustomerAddressLocationId,
-                        principalTable: "Location",
-                        principalColumn: "LocationId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Productname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    price = table.Column<float>(type: "real", nullable: false),
-                    describtion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    img = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    offer = table.Column<float>(type: "real", nullable: false),
-                    rate = table.Column<float>(type: "real", nullable: false),
-                    RestaurantID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.ProductId);
-                    table.ForeignKey(
-                        name: "FK_Products_RestaurantModel_RestaurantID",
-                        column: x => x.RestaurantID,
-                        principalTable: "RestaurantModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -304,6 +257,54 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Productname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    price = table.Column<float>(type: "real", nullable: false),
+                    describtion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    img = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    offer = table.Column<float>(type: "real", nullable: false),
+                    rate = table.Column<float>(type: "real", nullable: false),
+                    RestaurantID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Products_RestaurantModel_RestaurantID",
+                        column: x => x.RestaurantID,
+                        principalTable: "RestaurantModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrdersProducts",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrdersProducts", x => new { x.OrderId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_OrdersProducts_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId");
+                    table.ForeignKey(
+                        name: "FK_OrdersProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductTags",
                 columns: table => new
                 {
@@ -343,145 +344,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrdersProducts",
-                columns: table => new
-                {
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrdersProducts", x => new { x.OrderId, x.ProductId });
-                    table.ForeignKey(
-                        name: "FK_OrdersProducts_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "OrderId");
-                    table.ForeignKey(
-                        name: "FK_OrdersProducts_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId");
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { 2, 0, "3d49c675-e1ac-440f-9816-db6eb66f03d6", "hassan@gmail.com", false, false, null, "", "testmohamed", null, null, false, 0, null, false, "testmohamed" },
-                    { 3, 0, "500e663d-8300-4bc0-8f9c-4e53ecfdb80f", "hamdy@gmail.com", false, false, null, "", "ramymohamed", null, null, false, 0, null, false, "ramymohamed" },
-                    { 100, 0, "4c970624-2d95-4eb1-ad22-559e16bc7e37", "test", false, false, null, "", "MohamedAhmed", null, null, false, 0, null, false, "MohamedAhmed" },
-                    { 101, 0, "8c422cde-3d79-417d-bdbb-ef78a6903143", "test", false, false, null, "", "KFC", null, null, false, 0, null, false, "KFC" },
-                    { 102, 0, "bdbf614e-cf03-4464-9e91-ec1239a51b09", "test", false, false, null, "", "Central", null, null, false, 0, null, false, "Central" },
-                    { 103, 0, "efe3f2e2-f3fb-436c-ac87-920bcf3d1f04", "info@tastybistro.com", false, false, null, "", "TheTastyBistro", null, null, false, 0, null, false, "TheTastyBistro" },
-                    { 104, 0, "6023e25b-7aa2-42b5-93cc-ed7f55301369", "www.ChezGaby.com", false, false, null, "", "ChezGaby", null, null, false, 0, null, false, "ChezGaby" },
-                    { 105, 0, "527ec05d-cdc4-401e-8618-1f8a360f8a7c", "www.Negro.com", false, false, null, "", "Negro", null, null, false, 0, null, false, "Negro" },
-                    { 106, 0, "35bf8e32-e748-4105-bad1-785490ba162b", "567 Walnut Lane", false, false, null, "", "seafoodshack", null, null, false, 0, null, false, "seafoodshack" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Location",
-                columns: new[] { "LocationId", "Latitude", "Longitude" },
-                values: new object[,]
-                {
-                    { 1, 0.33000000000000002, 0.22 },
-                    { 2, 0.53000000000000003, 0.62 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CustomerModel",
-                columns: new[] { "Id", "BirthDate", "CustomerAddressLocationId" },
-                values: new object[,]
-                {
-                    { 2, new DateTime(1999, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, new DateTime(2002, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "RestaurantModel",
-                columns: new[] { "Id", "Address", "Logo", "PaymentMethods", "Phone", "RestaurantName" },
-                values: new object[,]
-                {
-                    { 100, "test", "https://images.deliveryhero.io/image/talabat/restaurants/21167986_13580950369_637438183491941065.jpg?width=180", 1, "+20 111 111 1111", "Mohamed Ahmed" },
-                    { 101, "test", "https://upload.wikimedia.org/wikipedia/sco/b/bf/KFC_logo.svg", 1, "+20 111 111 1111", "KFC" },
-                    { 102, "Av. Pedro de Osma 301, Barranco, Lima, Peru", "https://centralrestaurante.com.pe/assets/images/facebook.jpg", 2, "+51 1 242 8515", "Koshary El Tahrir" },
-                    { 103, "123 Main Street", "https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148987940.jpg?size=626&ext=jpg&ga=GA1.1.118802800.1685470637&semt=ais", 1, "+20 111 111 1111", "The Tasty Bistro" },
-                    { 104, "off of Fouad Street, close to the Alexandria Opera House", "https://www.zumtaugwald.ch/uploads/8iADQWOr/chezgaby_farbig_gross_198.gif", 1, "+20 111 111 1111", "Chez Gaby" },
-                    { 105, "test", "https://cerronegrorestaurant.com/wp-content/uploads/2022/06/logo-1.png", 1, "+20 111 111 1111", "Negro" },
-                    { 106, "test", "https://img.freepik.com/premium-vector/fresh-seafood-restaurant-premium-logo_187482-625.jpg?w=2000", 1, "+20 111 111 1111", "The Seafood Shack" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CreditCards",
-                columns: new[] { "CreditId", "CVV", "Card_Expiration_Date", "Card_Number", "CustomerId" },
-                values: new object[,]
-                {
-                    { 1, "333", new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "1234123412341234", 2 },
-                    { 2, "229", new DateTime(2026, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "1212121212121212", 3 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "ProductId", "Productname", "RestaurantID", "describtion", "img", "offer", "price", "rate" },
-                values: new object[,]
-                {
-                    { 1, "Flafel", 100, "flafel so5na", "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg", 0.45555f, 3f, 4f },
-                    { 2, "fool", 100, "fool so5n", "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg", 0f, 5f, 2f },
-                    { 3, "Koshary", 100, "Koshary so5n", "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg", 0.5f, 20f, 4f },
-                    { 4, "kebda", 102, "kebda so5na", "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg", 0.1f, 30f, 3f },
-                    { 5, "Eggs With Pastrami Sandwich", 100, "Served in Shami bread", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi8s-5oiHaDOOhdsh1Q8aylMWvDZKeUFMVpmnm2ottNGiHscgP", 0f, 17f, 5f },
-                    { 6, "Rizo Spicy", 101, "Fried chicken and Rice", "https://images.deliveryhero.io/image/talabat/MenuItems/F0F5ED9174479F606B0221B326F9E866", 0.1f, 45f, 3.5f },
-                    { 7, "Twister Chilla Box", 101, "Fried chicken,3 Sandwiches", "https://images.deliveryhero.io/image/talabat/MenuItems/3283E7BD37DFE8FEF2DE4E0151391E64", 0.1f, 120f, 2f },
-                    { 8, "Classic Bucket", 101, "(9 pcs)", "https://images.deliveryhero.io/image/talabat/MenuItems/4CB1034B30EB60005948C7079C75BD3A", 0.09f, 90f, 4f },
-                    { 9, "Family Koshary Meal", 102, "for 5 Persons", "https://images.deliveryhero.io/image/talabat/Menuitems/%D9%81%D8%A7%D9%85%D9%8A%D9%84%D9%89_%D9%81%D9%88%D9%8A%D9%84637879013422961404.jpg?width=172&amp", 0.09f, 150f, 1f },
-                    { 10, "Small Mineral", 102, "Water Bottle", "https://t0.gstatic.com/images?q=tbn:ANd9GcRDvWTfXzH-61_ZP_fCAzjo6YPcd-CAKoL3dxAcKYe1tgjQ5yYO", 0.09f, 15f, 3f },
-                    { 11, "Tuna Salad", 103, "tuna and mayonnaise", "https://littlesunnykitchen.com/wp-content/uploads/2022/12/Tuna-Salad-1.jpg", 0f, 55f, 4f },
-                    { 12, "Greek Salad", 103, "pieces of tomatoes, cucumbers, onion, feta cheese, and olives and dressed with salt, Greek oregano, and olive oil", "https://hips.hearstapps.com/hmg-prod/images/greek-salad-index-642f292397bbf.jpg", 0f, 40f, 4f },
-                    { 13, "Chef", 103, "hard-boiled eggs, a variety of julienned meats", "https://www.allrecipes.com/thmb/Q84xeMgnOJPZAUOdNyrb9dbFZr4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/285625-ChefsSalad_MFS_006-2550ecee70ae46dbaec530a58314c99c.jpg", 0.09f, 70f, 5f },
-                    { 14, "Turkey With Emmental Cheese", 104, "Freshly made half baguette filled with turkey and Emmental cheese mixed with greens making it the perfect grab-and-go meal", "https://gourmetegypt.com/media/catalog/product/t/u/turkey-_-cheese-photo_nk70qlcuxsoq2rfw.jpg", 0f, 50f, 4f },
-                    { 15, "Roast Beef With Emmental", 104, "Combine the white cheese with the mustard", "http://gourmetpedia.net/media/upload/recipe/3398.jpg", 0f, 70f, 5f },
-                    { 16, "italian sub sandwich", 104, "tuna and mayonnaise", "https://static01.nyt.com/images/2022/02/07/dining/as-italian-sub/merlin_201238275_040c2bf1-9f7d-4653-9f83-9b262dd03a05-articleLarge.jpg", 0f, 60f, 3f },
-                    { 17, "Cabrito", 104, "Mexico meal", "https://lh3.googleusercontent.com/WXWvHOubytJUkjYKXTTAi_WIsosuxjsgecB4XKCat1fyy1f60ELPn3p-NPXgzJcf5FixXd_k657H_4aOFPWjdviq6v6495vCKXJl37w", 0f, 150f, 4f },
-                    { 18, "Onion Rings", 105, "A famous \"Shack Snack\", our onion rings are served with delicious whale sauce", "https://www.seafoodshack.com/wp-content/uploads/2015/04/Onion-Rings-Website-FI-500x375.jpg", 0.7f, 80f, 5f },
-                    { 19, "Almond stuffed rainbow trout", 101, "A delicious frozen cocktail made with Tres Agaves Tequila, Triple Sec, Tres Agaves Organic Margarita Mix, fresh lime and a splash of orange juice", "https://www.seafoodshack.com/wp-content/uploads/2015/04/Mango-Margarita-Website-FI-500x375.jpg", 0.2f, 220f, 4f },
-                    { 20, "Fish Tacos", 106, "Seasoned fresh local catch, colby jack cheese, napa cabbage and baja sauce served in crispy corn tortillas", "https://www.seafoodshack.com/wp-content/uploads/2015/04/FishTacos-Website-FI-500x375.jpg", 0.5f, 130f, 5f }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ProductTags",
-                columns: new[] { "ProductId", "tag" },
-                values: new object[,]
-                {
-                    { 1, "local" },
-                    { 1, "vegetarian" },
-                    { 2, "local" },
-                    { 2, "vegetarian" },
-                    { 3, "local" },
-                    { 3, "vegetarian" },
-                    { 4, "local" },
-                    { 5, "local" },
-                    { 6, "local" },
-                    { 7, "local" },
-                    { 8, "local" },
-                    { 9, "local" },
-                    { 10, "local" },
-                    { 11, "healthy" },
-                    { 11, "local" },
-                    { 12, "healthy" },
-                    { 13, "healthy" },
-                    { 14, "healthy" },
-                    { 15, "healthy" },
-                    { 16, "healthy" },
-                    { 17, "healthy" },
-                    { 18, "healthy" },
-                    { 19, "healthy" },
-                    { 20, "healthy" },
-                    { 20, "vegetarian" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -527,11 +389,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                 table: "CreditCards",
                 column: "CustomerId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CustomerModel_CustomerAddressLocationId",
-                table: "CustomerModel",
-                column: "CustomerAddressLocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
@@ -601,9 +458,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "RestaurantModel");
-
-            migrationBuilder.DropTable(
-                name: "Location");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

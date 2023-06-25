@@ -64,6 +64,9 @@ export class RegisterAsCutomerComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[0-9]{11}$')
       ]],
+      CustomerAddress: ['', [
+        Validators.required,
+      ]],
       CustomerEmail: ['', [
         Validators.required,
         Validators.email
@@ -94,6 +97,9 @@ export class RegisterAsCutomerComponent implements OnInit {
   get CustomerPhone() {
     return this.CustomerForm.get('CustomerPhone')!!;
   }
+  get CustomerAddress() {
+    return this.CustomerForm.get('CustomerAddress')!!;
+  }
   get CustomerEmail() {
     return this.CustomerForm.get('CustomerEmail')!!;
   }
@@ -113,28 +119,16 @@ export class RegisterAsCutomerComponent implements OnInit {
       this.RegisterService.RegisterdCustomer.firstName = this.CustomerFirstName.value
        this.RegisterService.RegisterdCustomer.lastName = this.CustomerLastName.value
        this.RegisterService.RegisterdCustomer.phone = this.CustomerPhone.value
+       this.RegisterService.RegisterdCustomer.customerAddress = this.CustomerAddress.value
        this.RegisterService.RegisterdCustomer.customerBirth = this.CustomerBirthDate.value
        this.RegisterService.RegisterdCustomer.email = this.CustomerEmail.value
        this.RegisterService.RegisterdCustomer.password = this.CustomerPassword.value
-      console.log("valid ")
-      console.log(this.CustomerConfirmPassword.value)
 
-      console.log(this.RegisterService.RegisterdCustomer)
       this.router.navigate(['/registration/paymentregistraion']);
      
     } else {
       // Form is invalid, handle validation errors
       this.markFormGroupTouched(this.CustomerForm); // Mark form controls as touched to display validation errors
-      this.CustomerToRegister.firstName = this.CustomerFirstName.value
-      this.CustomerToRegister.lastName = this.CustomerLastName.value
-      this.CustomerToRegister.phone = this.CustomerPhone.value
-      this.CustomerToRegister.email = this.CustomerEmail.value
-      this.CustomerToRegister.password = this.CustomerPassword.value
-      console.log(" Not valid ")
-      console.log(this.CustomerToRegister)
-      console.log(this.CustomerConfirmPassword.value)
-
-
     }
   }
 
@@ -150,3 +144,12 @@ export class RegisterAsCutomerComponent implements OnInit {
   }
 
 }
+
+
+
+
+
+
+
+
+

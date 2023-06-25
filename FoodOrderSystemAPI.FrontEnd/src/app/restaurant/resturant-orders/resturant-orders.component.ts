@@ -24,7 +24,7 @@ export class ResturantOrdersComponent implements OnInit {
   ngOnInit(): void {
     const RestaurantId = this.AuthenticationService.UserLogin?.id;
     console.log(RestaurantId)
-    this.Resturantservice.GetResturantOrders(8).subscribe((ResturnatOrders) => {
+    this.Resturantservice.GetResturantOrders(RestaurantId!).subscribe((ResturnatOrders) => {
       console.log(ResturnatOrders);
       console.log(RestaurantId);
       this.ComponentResturantOrders = ResturnatOrders
