@@ -29,6 +29,7 @@ export class RestaurantService {
     );
   }
 
+
   getRestaurantProducts(
     RestaurantId: number
   ): Observable<RestaurantProductsDto> {
@@ -57,3 +58,4 @@ export class RestaurantService {
     );
   }
 }
+

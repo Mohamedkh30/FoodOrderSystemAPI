@@ -3,6 +3,7 @@ import { AuthentcationService } from 'src/app/services/authentcation.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { ResturantOrderDto } from 'src/app/types/Order/resturant-order-dto';
 import { ProductOrder } from 'src/app/types/Product/product-order';
+// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-resturant-orders',
@@ -12,24 +13,30 @@ import { ProductOrder } from 'src/app/types/Product/product-order';
 export class ResturantOrdersComponent implements OnInit {
   isComponentVisible = false;
 
+  
+
   ComponentResturantOrders: ResturantOrderDto[] = []; 
   
   OrderProducts: ProductOrder[] = [];
 
+  OrderTotalPrice: Number = 0;
+
   ngOnInit(): void {
-    const ResturnatId = this.AuthenticationService.UserLogin?.id;
-    this.Resturantservice.GetResturantOrders(ResturnatId!).subscribe((ResturnatOrders) => {
+    const RestaurantId = this.AuthenticationService.UserLogin?.id;
+    console.log(RestaurantId)
+    this.Resturantservice.GetResturantOrders(8).subscribe((ResturnatOrders) => {
       console.log(ResturnatOrders);
-      console.log(ResturnatId);
+      console.log(RestaurantId);
       this.ComponentResturantOrders = ResturnatOrders
      })
   }
-  constructor(public Resturantservice: RestaurantService ,private AuthenticationService :AuthentcationService) { }
+  constructor(public Resturantservice: RestaurantService ,private AuthenticationService :AuthentcationService ) { }
   
 
-  toggleComponentVisibility(OrderProducts : ProductOrder[]) {
+  toggleComponentVisibility(OrderProducts : ProductOrder[] = [] , TotalPrice :Number = 0) {
     console.log(this.isComponentVisible)
     this.isComponentVisible = !this.isComponentVisible;
     this.OrderProducts = OrderProducts;
+    this.OrderTotalPrice = TotalPrice;
   }  
 }
