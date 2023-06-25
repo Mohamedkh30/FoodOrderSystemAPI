@@ -1,9 +1,7 @@
 <p-carousel [value]="restaurants" [numVisible]="4" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptions">
     <ng-template pTemplate="item" let-restaurant>
-        <p-card class="card d-flex align-items-center justify-content-center">
             <a [routerLink]="'/restaurant/'+ restaurant.restaurantId">
                 <img [src]="restaurant.logo" alt="Restaurant Logo" height="10px">
             </a>
-        </p-card>
     </ng-template>
 </p-carousel>
