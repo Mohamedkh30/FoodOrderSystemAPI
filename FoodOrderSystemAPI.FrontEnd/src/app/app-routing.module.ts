@@ -32,21 +32,21 @@ const Router: Routes = [
         (m) => m.RegistraionModule
       ),
   },
-  {path:'home',component:HomePageComponent},
-  {path:'product/:id',component:ProductDetailsComponent},
-  {path:'checkout',component:CheckoutComponent},
-  {path:'addproduct',component:AddProductComponent},
+  { path:'home',component:HomePageComponent},
+  { path:'product/:id',component:ProductDetailsComponent},
+  { path:'checkout',component:CheckoutComponent},
+  { path:'addproduct',component:AddProductComponent},
   { path: 'addcard', component: AddCardComponent },
-  {path : 'ResturantOrders', component: ResturantOrdersComponent},
+  { path : 'ResturantOrders', component: ResturantOrdersComponent},
   // {path:'restaurant',component:RestaurantPageComponent},
-  {path:'restaurant/:id',component:RestaurantPageComponent ,loadChildren: ()=> import ('./restaurant/restaurant.module').then(m=>m.RestaurantModule)},
+  { path:'restaurant/:id',component:RestaurantPageComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'customer/:id', component: CustomerProfileDetailsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];
 
- 
+
 
 
 

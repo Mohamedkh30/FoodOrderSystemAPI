@@ -66,7 +66,5 @@ export class RestaurantDetailsComponent implements OnInit {
 }
   */
 
-  search(){
-    console.log(this.searchString)
-  }
+
 }
