@@ -120,7 +120,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let cartItems = this.cartService.getCart();
+    let cartItems = this.cartService.CartItems;
     cartItems.forEach((element) => {
       this.productsList?.push(element.product);
     });
