@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { RestCardComponent } from './rest-card/rest-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import { RestCardComponent } from './rest-card/rest-card.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
@@ -21,27 +22,36 @@ import { FormsModule } from '@angular/forms';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { ResturantOrdersComponent } from './resturant-orders/resturant-orders.component';
 import { ResturantRoutingModule } from './resturant-routing.module';
+import { RestaurantUpdateComponent } from './restaurant-update/restaurant-update.component';
 
 const Router: Routes = [
-  
-  {path : 'Orders' , component: ResturantOrdersComponent},
-]
+  { path: 'Orders', component: ResturantOrdersComponent },
+];
 @NgModule({
   declarations: [
     RestCardComponent,
     RestaurantPageComponent,
     RestaurantFilterComponent,
     RestaurantDetailsComponent,
-    ResturantOrdersComponent, 
+    ResturantOrdersComponent,
+    RestaurantUpdateComponent,
   ],
   imports: [
-    CommonModule
-    ,BrowserAnimationsModule
-    ,InputTextModule,CarouselModule,TagModule,ButtonModule,PanelModule,CheckboxModule,SliderModule,CardModule,RatingModule
-    ,FormsModule
-    , RouterModule
-    , ImageModule
-    
-  ]
+    CommonModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    CarouselModule,
+    TagModule,
+    ButtonModule,
+    PanelModule,
+    CheckboxModule,
+    SliderModule,
+    CardModule,
+    RatingModule,
+    FormsModule,
+    RouterModule,
+    ImageModule,
+    ReactiveFormsModule,
+  ],
 })
-export class RestaurantModule { }
+export class RestaurantModule {}

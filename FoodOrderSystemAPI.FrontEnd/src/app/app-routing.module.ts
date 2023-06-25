@@ -12,6 +12,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { AddCardComponent } from './AddCard/add-card.component';
 import { NavigationRegisterComponent } from './Registraion/navigation-register/navigation-register.component';
 import { ResturantOrdersComponent } from './restaurant/resturant-orders/resturant-orders.component';
+import { RestaurantUpdateComponent } from './restaurant/restaurant-update/restaurant-update.component';
 
 const Router: Routes = [
   // (Lazy Loading ) Laod Module Only when Access authentiction in Url !!
@@ -22,9 +23,7 @@ const Router: Routes = [
         (m) => m.AuthentcationModule
       ),
   },
-  { path: 'registration',
-  component: NavigationRegisterComponent
-},
+  { path: 'registration', component: NavigationRegisterComponent },
   {
     path: 'registration',
     loadChildren: () =>
@@ -32,25 +31,20 @@ const Router: Routes = [
         (m) => m.RegistraionModule
       ),
   },
-  { path:'home',component:HomePageComponent},
-  { path:'product/:id',component:ProductDetailsComponent},
-  { path:'checkout',component:CheckoutComponent},
-  { path:'addproduct',component:AddProductComponent},
+  { path: 'home', component: HomePageComponent },
+  { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'addproduct', component: AddProductComponent },
   { path: 'addcard', component: AddCardComponent },
-  { path : 'ResturantOrders', component: ResturantOrdersComponent},
+  { path: 'ResturantOrders', component: ResturantOrdersComponent },
   // {path:'restaurant',component:RestaurantPageComponent},
-  { path:'restaurant/:id',component:RestaurantPageComponent },
+  { path: 'restaurant/:id', component: RestaurantPageComponent }, 
+  { path: 'restaurantUpdate', component: RestaurantUpdateComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'customer/:id', component: CustomerProfileDetailsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];
-
-
-
-
-
-
 
 @NgModule({
   declarations: [],
