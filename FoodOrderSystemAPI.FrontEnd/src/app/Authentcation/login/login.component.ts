@@ -34,7 +34,7 @@ export class LoginComponent {
     this.AuthentcatoinService.Login(Credentials).subscribe((TokenDto) => { // subscribe On Event Loging On AthentcationService To Take An Action !!
       // set the value of IsLoggedIn to true 
       this.AuthentcatoinService.SetUserDataAfterLogin(TokenDto);
-      this.router.navigate(['/home/customers'])
+      this.router.navigate(['/home'])
 
     },
       (error: HttpErrorResponse) => {

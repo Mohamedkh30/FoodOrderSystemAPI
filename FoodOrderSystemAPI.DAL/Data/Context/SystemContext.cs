@@ -64,7 +64,7 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
 
         #region product seed
         modelBuilder.Entity<ProductModel>().HasData(
-            new ProductModel { ProductId = 1, Productname = "Flafel", price = 3, describtion = "flafel so5na", img = "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg", offer = 0.45555f, rate = 4 ,RestaurantID = 100 },
+            new ProductModel { ProductId = 1, Productname = "Flafel", price = 3, describtion = "flafel so5na", img = "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg", offer = 0.45555f, rate = 4, RestaurantID = 100 },
             new ProductModel { ProductId = 2, Productname = "fool", price = 5, describtion = "fool so5n", img = "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg", offer = 0, rate = 2, RestaurantID = 100 },
             new ProductModel { ProductId = 3, Productname = "Koshary", price = 20, describtion = "Koshary so5n", img = "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg", offer = 0.5f, rate = 4, RestaurantID = 100 },
             new ProductModel { ProductId = 4, Productname = "kebda", price = 30, describtion = "kebda so5na", img = "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg", offer = 0.1f, rate = 3 , RestaurantID = 102 },
@@ -85,7 +85,7 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
             new ProductModel { ProductId = 19, Productname = "Almond stuffed rainbow trout", price = 220, describtion = "A delicious frozen cocktail made with Tres Agaves Tequila, Triple Sec, Tres Agaves Organic Margarita Mix, fresh lime and a splash of orange juice", img = "https://www.seafoodshack.com/wp-content/uploads/2015/04/Mango-Margarita-Website-FI-500x375.jpg", offer = 0.2f, rate = 4f , RestaurantID = 101 },
             new ProductModel { ProductId = 20, Productname = "Fish Tacos", price = 130, describtion = "Seasoned fresh local catch, colby jack cheese, napa cabbage and baja sauce served in crispy corn tortillas", img = "https://www.seafoodshack.com/wp-content/uploads/2015/04/FishTacos-Website-FI-500x375.jpg", offer = 0.5f, rate = 5f , RestaurantID = 106 }
         );
-        #endregion
+        #endregion //comminted
 
         #region product Tags seed
         modelBuilder.Entity<ProductTag>().HasData(
@@ -129,15 +129,6 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
 
         #endregion
 
-
-
-
-
-        modelBuilder.Entity<Location>().HasData(
-        new Location { LocationId = 1, Latitude = .33, Longitude = .22 },
-        new Location { LocationId = 2, Latitude = .53, Longitude = .62 }
-    );
-
         #region Customer Seed
         modelBuilder.Entity<CustomerModel>().HasData(
    new CustomerModel
@@ -147,7 +138,9 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
        NormalizedUserName = "testmohamed",
        Email = "hassan@gmail.com",
        BirthDate = new DateTime(1999, 3, 24),
-       CustomerAddressLocationId = 1,
+       CustomerAddress = "Gleem",
+       PhoneNumber = "1234567890",
+
 
    },
         new CustomerModel
@@ -157,7 +150,8 @@ public class SystemContext : IdentityDbContext<UserModel, IdentityRole <int>, in
             NormalizedUserName = "ramymohamed",
             Email = "hamdy@gmail.com",
             BirthDate = new DateTime(2002, 3, 24),
-            CustomerAddressLocationId = 2,
+            CustomerAddress = "Sanstifano",
+            PhoneNumber = "1234237890",
 
 
         }
@@ -167,6 +161,12 @@ new CreditCard { CreditId = 1, Card_Expiration_Date = new DateTime(2024, 3, 12),
 new CreditCard { CreditId = 2, Card_Expiration_Date = new DateTime(2026, 7, 22), Card_Number = "1212121212121212", CVV = "229", CustomerId = 3 });
 
         #endregion
+
+
+
+
+
+
 
 
 

@@ -65,8 +65,7 @@ public class CustomerManager:ICustomerManager
             CvvNumber = CustomerFromDb.CustomerCreditCard.CVV,
             // Set Address 
 
-            Longitude = CustomerFromDb.CustomerAddress.Longitude,
-            Latitude = CustomerFromDb.CustomerAddress.Latitude
+            CustomerAddress = CustomerFromDb.CustomerAddress
 
 
         };
@@ -93,12 +92,7 @@ public class CustomerManager:ICustomerManager
             },
 
             // Set Address 
-            CustomerAddress = new Location()
-            {
-                Longitude = RegisterdCustomer.Langitude,
-                Latitude = RegisterdCustomer.Landitude,
-
-            }
+            CustomerAddress = RegisterdCustomer.CustomerAddress
         };
 
         // Hashing The Password 
@@ -148,8 +142,7 @@ public class CustomerManager:ICustomerManager
            CvvNumber = c.CustomerCreditCard.CVV,
           // Set Address 
 
-          Longitude = c.CustomerAddress.Longitude,
-          Latitude = c.CustomerAddress.Latitude
+          CustomerAddress = c.CustomerAddress
 
           });
 
@@ -220,19 +213,19 @@ public class CustomerManager:ICustomerManager
 
     }
 
-    public Location UpdateAddressCutomer(int Customerid, LocationToUpadate NewLocation)
-    {
-        var DbCustomerAddress  = _unitOfWork.Customers.GetCustomerByIdWithNavprop(Customerid).CustomerAddress;
-        if (DbCustomerAddress != null)
-        {
-            DbCustomerAddress.Latitude = NewLocation.Latitude;
-            DbCustomerAddress. Longitude= NewLocation.Longitude;
-            _unitOfWork.Save();
-        }
-        return DbCustomerAddress;
+    //public Location UpdateAddressCutomer(int Customerid, LocationToUpadate NewLocation)
+    //{
+    //    var DbCustomerAddress  = _unitOfWork.Customers.GetCustomerByIdWithNavprop(Customerid).CustomerAddress;
+    //    if (DbCustomerAddress != null)
+    //    {
+    //        DbCustomerAddress.Latitude = NewLocation.Latitude;
+    //        DbCustomerAddress. Longitude= NewLocation.Longitude;
+    //        _unitOfWork.Save();
+    //    }
+    //    return DbCustomerAddress;
 
 
-    }
+    //}
 
     public async Task< CustomerModel> UpdateCustomerPersonalData(int Customerid , CustomerToUpdatPersonalData UpdatedCustomer )
     {

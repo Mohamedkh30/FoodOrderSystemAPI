@@ -220,7 +220,7 @@ public class RestaurantManager : IRestaurantManager
          OrderId = o.OrderId,
          OrderDate = o.OrderDate,
          CustomerName = o.Customer.UserName,
-         CustomerAddress = "",               // Need To Change Langitude To String Address 
+         CustomerAddress = o.Customer.CustomerAddress,
          CustomerPhone = o.Customer.PhoneNumber,
          TotalPrice = o.OrderProducts.Sum(op => (op.Product.price - op.Product.offer) * op.Quantity),
         OrderProducts = o.OrderProducts

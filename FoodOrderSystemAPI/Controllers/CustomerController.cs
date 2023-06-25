@@ -23,7 +23,7 @@ namespace FoodOrderSystemAPI.Controllers
         }
         // GET: api/<CustomerController>
         [HttpGet]
-        [Authorize("Customer")]
+        //[Authorize("Customer")]
         public ActionResult<List<CustomerModel>> GetAllCustomers()
         {
          return Ok(_customerManager.ReadAllCutomerProperties());
@@ -31,7 +31,7 @@ namespace FoodOrderSystemAPI.Controllers
 
         // GET: api/<CustomerController>/{id}
         [HttpGet("{id}")]
-        [Authorize("Customer")]
+        //[Authorize("Customer")]
         public ActionResult<CustomerToRead> Get(int id)
         {
             var customer = _customerManager.GetById(id);
@@ -78,17 +78,17 @@ namespace FoodOrderSystemAPI.Controllers
         }
 
 
-        [HttpPatch()]
-        [Route("Location/{CustomerId}")]
+        //[HttpPatch()]
+        //[Route("Location/{CustomerId}")]
 
-        public ActionResult UpdateLocation(int CustomerId, LocationToUpadate CustomerAddress)
-        {
-            var CustomerUpdated = _customerManager.UpdateAddressCutomer(CustomerId, CustomerAddress);
-            if (CustomerUpdated is null)
-                return NoContent();
-            return Ok(CustomerUpdated);
+        //public ActionResult UpdateLocation(int CustomerId, LocationToUpadate CustomerAddress)
+        //{
+        //    var CustomerUpdated = _customerManager.UpdateAddressCutomer(CustomerId, CustomerAddress);
+        //    if (CustomerUpdated is null)
+        //        return NoContent();
+        //    return Ok(CustomerUpdated);
 
-        }
+        //}
 
       
         // Delete api/<CustomerController>/5

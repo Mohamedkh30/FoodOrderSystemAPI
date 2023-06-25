@@ -209,39 +209,6 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FoodOrderSystemAPI.Location", b =>
-                {
-                    b.Property<int>("LocationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LocationId"));
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
-
-                    b.HasKey("LocationId");
-
-                    b.ToTable("Location");
-
-                    b.HasData(
-                        new
-                        {
-                            LocationId = 1,
-                            Latitude = 0.33000000000000002,
-                            Longitude = 0.22
-                        },
-                        new
-                        {
-                            LocationId = 2,
-                            Latitude = 0.53000000000000003,
-                            Longitude = 0.62
-                        });
-                });
-
             modelBuilder.Entity("FoodOrderSystemAPI.OrderModel", b =>
                 {
                     b.Property<int>("OrderId")
@@ -796,10 +763,9 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CustomerAddressLocationId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("CustomerAddressLocationId");
+                    b.Property<string>("CustomerAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("CustomerModel", (string)null);
 
@@ -814,12 +780,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "testmohamed",
+                            PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
                             UserName = "testmohamed",
                             BirthDate = new DateTime(1999, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerAddressLocationId = 1
+                            CustomerAddress = "Gleem"
                         },
                         new
                         {
@@ -831,12 +798,13 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "",
                             NormalizedUserName = "ramymohamed",
+                            PhoneNumber = "1234237890",
                             PhoneNumberConfirmed = false,
                             Role = 0,
                             TwoFactorEnabled = false,
                             UserName = "ramymohamed",
                             BirthDate = new DateTime(2002, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerAddressLocationId = 2
+                            CustomerAddress = "Sanstifano"
                         });
                 });
 
@@ -1145,19 +1113,11 @@ namespace FoodOrderSystemAPI.DAL.Migrations
 
             modelBuilder.Entity("FoodOrderSystemAPI.CustomerModel", b =>
                 {
-                    b.HasOne("FoodOrderSystemAPI.Location", "CustomerAddress")
-                        .WithMany()
-                        .HasForeignKey("CustomerAddressLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FoodOrderSystemAPI.UserModel", null)
                         .WithOne()
                         .HasForeignKey("FoodOrderSystemAPI.CustomerModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CustomerAddress");
                 });
 
             modelBuilder.Entity("FoodOrderSystemAPI.RestaurantModel", b =>
