@@ -22,16 +22,18 @@ export class ResturantOrdersComponent implements OnInit {
   OrderTotalPrice: Number = 0;
 
   ngOnInit(): void {
+    
     const RestaurantId = this.AuthenticationService.UserLogin?.id;
-    console.log(RestaurantId)
+    
     setInterval(() => {
       // Code to be executed at the specified interval
       this.Resturantservice.GetResturantOrders(RestaurantId!).subscribe((ResturnatOrders) => {
-        console.log(ResturnatOrders);
-        console.log(RestaurantId);
-        this.ComponentResturantOrders = ResturnatOrders        
+        console.log(RestaurantId)
+
+        this.ComponentResturantOrders = ResturnatOrders   
+        console.log(this.ComponentResturantOrders )     
       })
-    }, 10000); 
+    }, 7000); 
   }
   constructor(public Resturantservice: RestaurantService ,private AuthenticationService :AuthentcationService ) { }
   

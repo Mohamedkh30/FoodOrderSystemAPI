@@ -164,10 +164,13 @@
                 class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10"
               >
                 <div class="text-center">
-                  <p *ngIf="this.RegisterService.RegisterResturant.logo">
-                    {{ this.RegisterService.RegisterResturant.logo }}
-                  </p>
+                  <img [src]="this.RegisterService.RegisterResturant.logo " *ngIf="this.RegisterService.RegisterResturant.logo">
+                    
+                 
+                 
                   <svg
+                     *ngIf="!this.RegisterService.RegisterResturant.logo"
+
                     class="mx-auto h-12 w-12 text-gray-300"
                     viewBox="0 0 24 24"
                     fill="currentColor"
@@ -180,14 +183,13 @@
                     />
                   </svg>
                   <div
-                    *ngIf="!this.RegisterService.RegisterResturant.logo"
                     class="mt-4 flex text-sm leading-6 text-gray-600"
                   >
                     <label
                       for="file-upload"
                       class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
-                      <span>Upload a file</span>
+                      <span>Upload a Image</span>
                       <input
                         id="file-upload"
                         formControlName="ResturnatLogo"

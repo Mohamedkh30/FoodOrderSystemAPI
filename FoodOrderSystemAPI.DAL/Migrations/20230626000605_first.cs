@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace FoodOrderSystemAPI.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class RemoveCustomerLocationClassAddCustomerAddressString : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -344,6 +346,113 @@ namespace FoodOrderSystemAPI.DAL.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId");
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 2, 0, "0a5f081b-2bf8-471f-bd19-89709a125f44", "hassan@gmail.com", false, false, null, "", "testmohamed", null, "1234567890", false, 0, null, false, "testmohamed" },
+                    { 3, 0, "e1390e8a-8ded-4aa2-8250-0dc1cdce3dc9", "hamdy@gmail.com", false, false, null, "", "ramymohamed", null, "1234237890", false, 0, null, false, "ramymohamed" },
+                    { 100, 0, "cec699a9-54c6-4613-95e1-aa1701dcd00e", "test", false, false, null, "", "MohamedAhmed", null, null, false, 0, null, false, "MohamedAhmed" },
+                    { 101, 0, "9eb37a85-0e83-473e-a304-338c383ec6d5", "test", false, false, null, "", "KFC", null, null, false, 0, null, false, "KFC" },
+                    { 102, 0, "485dc0ef-0681-4a27-b348-770f7f4e1137", "test", false, false, null, "", "Central", null, null, false, 0, null, false, "Central" },
+                    { 103, 0, "9b0e0ed2-b276-417e-afe8-d7f0b8939757", "info@tastybistro.com", false, false, null, "", "TheTastyBistro", null, null, false, 0, null, false, "TheTastyBistro" },
+                    { 104, 0, "4d2cc6c6-c416-49b6-89a8-aab373eb2b71", "www.ChezGaby.com", false, false, null, "", "ChezGaby", null, null, false, 0, null, false, "ChezGaby" },
+                    { 105, 0, "038cc009-910a-4c45-907e-a3a563e4315c", "www.Negro.com", false, false, null, "", "Negro", null, null, false, 0, null, false, "Negro" },
+                    { 106, 0, "461ecad6-a554-4fc4-b89c-04cb3fc8375a", "567 Walnut Lane", false, false, null, "", "seafoodshack", null, null, false, 0, null, false, "seafoodshack" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CustomerModel",
+                columns: new[] { "Id", "BirthDate", "CustomerAddress" },
+                values: new object[,]
+                {
+                    { 2, new DateTime(1999, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gleem" },
+                    { 3, new DateTime(2002, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sanstifano" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RestaurantModel",
+                columns: new[] { "Id", "Address", "Logo", "PaymentMethods", "Phone", "RestaurantName" },
+                values: new object[,]
+                {
+                    { 100, "test", "https://images.deliveryhero.io/image/talabat/restaurants/21167986_13580950369_637438183491941065.jpg?width=180", 1, "+20 111 111 1111", "Mohamed Ahmed" },
+                    { 101, "test", "https://upload.wikimedia.org/wikipedia/sco/b/bf/KFC_logo.svg", 1, "+20 111 111 1111", "KFC" },
+                    { 102, "Av. Pedro de Osma 301, Barranco, Lima, Peru", "https://centralrestaurante.com.pe/assets/images/facebook.jpg", 2, "+51 1 242 8515", "Koshary El Tahrir" },
+                    { 103, "123 Main Street", "https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148987940.jpg?size=626&ext=jpg&ga=GA1.1.118802800.1685470637&semt=ais", 1, "+20 111 111 1111", "The Tasty Bistro" },
+                    { 104, "off of Fouad Street, close to the Alexandria Opera House", "https://www.zumtaugwald.ch/uploads/8iADQWOr/chezgaby_farbig_gross_198.gif", 1, "+20 111 111 1111", "Chez Gaby" },
+                    { 105, "test", "https://cerronegrorestaurant.com/wp-content/uploads/2022/06/logo-1.png", 1, "+20 111 111 1111", "Negro" },
+                    { 106, "test", "https://img.freepik.com/premium-vector/fresh-seafood-restaurant-premium-logo_187482-625.jpg?w=2000", 1, "+20 111 111 1111", "The Seafood Shack" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CreditCards",
+                columns: new[] { "CreditId", "CVV", "Card_Expiration_Date", "Card_Number", "CustomerId" },
+                values: new object[,]
+                {
+                    { 1, "333", new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "1234123412341234", 2 },
+                    { 2, "229", new DateTime(2026, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "1212121212121212", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "Productname", "RestaurantID", "describtion", "img", "offer", "price", "rate" },
+                values: new object[,]
+                {
+                    { 1, "Flafel", 100, "flafel so5na", "https://www.holidaysmart.com/sites/default/files/daily/2020/falafel-shs_1500.jpg", 0.45555f, 3f, 4f },
+                    { 2, "fool", 100, "fool so5n", "https://kitchen.sayidaty.net/uploads/small/42/423203a50a85745ee5ff98ff201043f7_w750_h500.jpg", 0f, 5f, 2f },
+                    { 3, "Koshary", 100, "Koshary so5n", "https://i.pinimg.com/originals/4c/37/99/4c37995da59d3e4cdf0da7c57084e2f5.jpg", 0.5f, 20f, 4f },
+                    { 4, "kebda", 102, "kebda so5na", "https://egy-news.net/im0photos/20220919/T16635700676390e53d7bc4b1cbbd92af455195f691image.jpg&w=1200&h=675&img.jpg", 0.1f, 30f, 3f },
+                    { 5, "Eggs With Pastrami Sandwich", 100, "Served in Shami bread", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi8s-5oiHaDOOhdsh1Q8aylMWvDZKeUFMVpmnm2ottNGiHscgP", 0f, 17f, 5f },
+                    { 6, "Rizo Spicy", 101, "Fried chicken and Rice", "https://images.deliveryhero.io/image/talabat/MenuItems/F0F5ED9174479F606B0221B326F9E866", 0.1f, 45f, 3.5f },
+                    { 7, "Twister Chilla Box", 101, "Fried chicken,3 Sandwiches", "https://images.deliveryhero.io/image/talabat/MenuItems/3283E7BD37DFE8FEF2DE4E0151391E64", 0.1f, 120f, 2f },
+                    { 8, "Classic Bucket", 101, "(9 pcs)", "https://images.deliveryhero.io/image/talabat/MenuItems/4CB1034B30EB60005948C7079C75BD3A", 0.09f, 90f, 4f },
+                    { 9, "Family Koshary Meal", 102, "for 5 Persons", "https://images.deliveryhero.io/image/talabat/Menuitems/%D9%81%D8%A7%D9%85%D9%8A%D9%84%D9%89_%D9%81%D9%88%D9%8A%D9%84637879013422961404.jpg?width=172&amp", 0.09f, 150f, 1f },
+                    { 10, "Small Mineral", 102, "Water Bottle", "https://t0.gstatic.com/images?q=tbn:ANd9GcRDvWTfXzH-61_ZP_fCAzjo6YPcd-CAKoL3dxAcKYe1tgjQ5yYO", 0.09f, 15f, 3f },
+                    { 11, "Tuna Salad", 103, "tuna and mayonnaise", "https://littlesunnykitchen.com/wp-content/uploads/2022/12/Tuna-Salad-1.jpg", 0f, 55f, 4f },
+                    { 12, "Greek Salad", 103, "pieces of tomatoes, cucumbers, onion, feta cheese, and olives and dressed with salt, Greek oregano, and olive oil", "https://hips.hearstapps.com/hmg-prod/images/greek-salad-index-642f292397bbf.jpg", 0f, 40f, 4f },
+                    { 13, "Chef", 103, "hard-boiled eggs, a variety of julienned meats", "https://www.allrecipes.com/thmb/Q84xeMgnOJPZAUOdNyrb9dbFZr4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/285625-ChefsSalad_MFS_006-2550ecee70ae46dbaec530a58314c99c.jpg", 0.09f, 70f, 5f },
+                    { 14, "Turkey With Emmental Cheese", 104, "Freshly made half baguette filled with turkey and Emmental cheese mixed with greens making it the perfect grab-and-go meal", "https://gourmetegypt.com/media/catalog/product/t/u/turkey-_-cheese-photo_nk70qlcuxsoq2rfw.jpg", 0f, 50f, 4f },
+                    { 15, "Roast Beef With Emmental", 104, "Combine the white cheese with the mustard", "http://gourmetpedia.net/media/upload/recipe/3398.jpg", 0f, 70f, 5f },
+                    { 16, "italian sub sandwich", 104, "tuna and mayonnaise", "https://static01.nyt.com/images/2022/02/07/dining/as-italian-sub/merlin_201238275_040c2bf1-9f7d-4653-9f83-9b262dd03a05-articleLarge.jpg", 0f, 60f, 3f },
+                    { 17, "Cabrito", 104, "Mexico meal", "https://lh3.googleusercontent.com/WXWvHOubytJUkjYKXTTAi_WIsosuxjsgecB4XKCat1fyy1f60ELPn3p-NPXgzJcf5FixXd_k657H_4aOFPWjdviq6v6495vCKXJl37w", 0f, 150f, 4f },
+                    { 18, "Onion Rings", 105, "A famous \"Shack Snack\", our onion rings are served with delicious whale sauce", "https://www.seafoodshack.com/wp-content/uploads/2015/04/Onion-Rings-Website-FI-500x375.jpg", 0.7f, 80f, 5f },
+                    { 19, "Almond stuffed rainbow trout", 101, "A delicious frozen cocktail made with Tres Agaves Tequila, Triple Sec, Tres Agaves Organic Margarita Mix, fresh lime and a splash of orange juice", "https://www.seafoodshack.com/wp-content/uploads/2015/04/Mango-Margarita-Website-FI-500x375.jpg", 0.2f, 220f, 4f },
+                    { 20, "Fish Tacos", 106, "Seasoned fresh local catch, colby jack cheese, napa cabbage and baja sauce served in crispy corn tortillas", "https://www.seafoodshack.com/wp-content/uploads/2015/04/FishTacos-Website-FI-500x375.jpg", 0.5f, 130f, 5f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductTags",
+                columns: new[] { "ProductId", "tag" },
+                values: new object[,]
+                {
+                    { 1, "local" },
+                    { 1, "vegetarian" },
+                    { 2, "local" },
+                    { 2, "vegetarian" },
+                    { 3, "local" },
+                    { 3, "vegetarian" },
+                    { 4, "local" },
+                    { 5, "local" },
+                    { 6, "local" },
+                    { 7, "local" },
+                    { 8, "local" },
+                    { 9, "local" },
+                    { 10, "local" },
+                    { 11, "healthy" },
+                    { 11, "local" },
+                    { 12, "healthy" },
+                    { 13, "healthy" },
+                    { 14, "healthy" },
+                    { 15, "healthy" },
+                    { 16, "healthy" },
+                    { 17, "healthy" },
+                    { 18, "healthy" },
+                    { 19, "healthy" },
+                    { 20, "healthy" },
+                    { 20, "vegetarian" }
                 });
 
             migrationBuilder.CreateIndex(

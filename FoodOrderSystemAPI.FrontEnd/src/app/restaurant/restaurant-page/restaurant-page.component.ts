@@ -26,7 +26,7 @@ export class RestaurantPageComponent implements OnInit {
   constructor(private restaurantService: RestaurantService,
     private activatedRoute: ActivatedRoute,
     private productService:ProductService,
-    private authentcationService:AuthentcationService,
+    public authentcationService:AuthentcationService,
     private router: Router
     ) {}
   productsList:FullProductCardDto[]|null = [];
