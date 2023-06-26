@@ -34,8 +34,12 @@ export class LoginComponent {
     this.AuthentcatoinService.Login(Credentials).subscribe((TokenDto) => { // subscribe On Event Loging On AthentcationService To Take An Action !!
       // set the value of IsLoggedIn to true 
       this.AuthentcatoinService.SetUserDataAfterLogin(TokenDto);
-      this.router.navigate(['/home'])
-
+      if(this.AuthentcatoinService.UserLogin?.Role == "Resturant")
+      this.router.navigate([`/restaurant/${this.AuthentcatoinService.UserLogin?.id}`])
+      else if (this.AuthentcatoinService.UserLogin?.Role == "Customer") {
+        this.router.navigate([`/home`])
+ 
+      }
     },
       (error: HttpErrorResponse) => {
       // When User Enter Wrong Data Change the WrongDataFlag property to true to Show    Span Elment in Component

@@ -130,12 +130,11 @@ export class RegisterAsResturantComponent implements OnInit {
       this.RegisterService.RegisterAsResturant().subscribe( (RegisterResturantToken) => {
         console.log(RegisterResturantToken);
         this.AuthentcationService.SetUserDataAfterLogin(RegisterResturantToken);
-        this.router.navigate(['/home']);
+        this.router.navigate([`restaurant/${this.AuthentcationService.UserLogin?.id}`]);
       },
       (error: HttpErrorResponse) => {
         console.log(error);
       })
-      this.router.navigate(['/home']);
     } else {
       // Form is invalid, handle validation errors
       this.markFormGroupTouched(this.ResturantForm); // Mark form controls as touched to display validation errors
