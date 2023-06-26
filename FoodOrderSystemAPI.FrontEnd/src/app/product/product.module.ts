@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TableModule } from 'primeng/table';
@@ -12,9 +12,11 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 
 import {} from 'primeng/';
+import { ProductUpdateComponent } from './product-update/product-update.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [ProductDetailsComponent],
+  declarations: [ProductDetailsComponent, ProductUpdateComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -24,6 +26,8 @@ import {} from 'primeng/';
     FormsModule,
     PaginatorModule,
     SelectButtonModule,
+    ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [ProductDetailsComponent],
 })

@@ -28,6 +28,7 @@ export class HomeCardComponent {
       this.product.img,
       this.product.offer,
       this.product.rate,
+      this.product.tags,
       this.product.tags[0],
       new RestaurantDetailsDto(this.product.restaurantID,this.product.restaurantName), 
       )
