@@ -9,7 +9,11 @@ import { RegistrationService } from './registration.service';
   providedIn: 'root',
 })
 export class ImageService {
-  constructor(private client: HttpClient , private productservice:ProductService ,private RegistrationService:RegistrationService) {}
+  constructor(
+    private client: HttpClient,
+    private productservice: ProductService,
+    private RegistrationService: RegistrationService
+  ) {}
 
   public upload(file: File): Observable<UploadFileDto> {
     var form = new FormData();
@@ -21,26 +25,37 @@ export class ImageService {
     );
   }
 
-
   uploadProductPhoto(e: Event) {
     const input = e.target as HTMLInputElement;
     const file = input.files?.[0];
     if (!file) return;
 
-    this.upload(file).subscribe((response)  => {
+    this.upload(file).subscribe((response) => {
       this.productservice.productToAdd.img = response.url;
-     
     });
   }
-  
+
   uploadResturantPhoto(e: Event) {
-  const input = e.target as HTMLInputElement;
-  const file = input.files?.[0];
-  if (!file) return;
+    const input = e.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
 
-  this.upload(file).subscribe((response)  => {
-    this.RegistrationService.RegisterResturant.logo = response.url;
-  });
-}
+    this.upload(file).subscribe((response) => {
+      this.RegistrationService.RegisterResturant.logo = response.url;
+    });
+  }
+  updateRestaurantPhoto(e: Event): string {
+    const input = e.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return '';
 
+    let responseImageUrl: string = '';
+    this.upload(file).subscribe(
+      (response) => {
+        responseImageUrl = response.url;
+      },
+      (error) => console.error(error)
+    );
+    return responseImageUrl;
+  }
 }
