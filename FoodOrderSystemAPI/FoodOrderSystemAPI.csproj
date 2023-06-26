@@ -26,4 +26,8 @@
     <ProjectReference Include="..\FoodOrderSystemAPI.BL\FoodOrderSystemAPI.BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UplaodedImages\" />
+  </ItemGroup>
+
 </Project>
