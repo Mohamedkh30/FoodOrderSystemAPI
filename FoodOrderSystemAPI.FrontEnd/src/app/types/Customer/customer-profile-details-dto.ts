@@ -2,8 +2,7 @@ export class CustomerProfileDetails {
   fullName: string;
   role: string;
   email: string;
-  longitude: number;
-  latitude: number;
+  customerAddress: string;
   cardNumber: string;
   expirationDate: string;
   cvvNumber: string;
@@ -14,8 +13,7 @@ export class CustomerProfileDetails {
     this.fullName = '';
     this.role = '';
     this.email = '';
-    this.longitude = 0;
-    this.latitude = 0;
+    this.customerAddress = '';
     this.cardNumber = '';
     this.expirationDate = '';
     this.cvvNumber = '';

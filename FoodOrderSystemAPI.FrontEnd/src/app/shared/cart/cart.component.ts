@@ -16,4 +16,9 @@ export class CartComponent {
     this.position = position;
     this.visible = true;
   }
+
+  isCartEmpty(): boolean {
+    return this.cartService.CartItems.length === 0;
+  }
+  
 }

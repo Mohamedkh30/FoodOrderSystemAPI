@@ -130,7 +130,7 @@ export class RegisterAsResturantComponent implements OnInit {
       this.RegisterService.RegisterAsResturant().subscribe( (RegisterResturantToken) => {
         console.log(RegisterResturantToken);
         this.AuthentcationService.SetUserDataAfterLogin(RegisterResturantToken);
-        this.router.navigate(['/home/customers']);
+        this.router.navigate(['/home']);
       },
       (error: HttpErrorResponse) => {
         console.log(error);
