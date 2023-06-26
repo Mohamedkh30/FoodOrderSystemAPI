@@ -1,9 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ImageService } from 'src/app/services/image.service';
-import { RegistrationService } from 'src/app/services/registration.service';
+// import { ImageService } from 'src/app/services/image.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { RestaurantUpdateDto } from 'src/app/types/Restaurant/Restuarant-Update-Dto';
 import { AuthentcationService } from 'src/app/services/authentcation.service';
@@ -26,7 +24,7 @@ export class RestaurantUpdateComponent {
     private fb: FormBuilder,
     private router: Router,
     private restaurantService: RestaurantService,
-    public imageservice: ImageService,
+    // public imageservice: ImageService,
     public authenticationService: AuthentcationService
   ) {}
 
@@ -34,8 +32,9 @@ export class RestaurantUpdateComponent {
     this.UpdateResturantForm = this.fb.group({
       Name: ['', [Validators.required]],
       Address: ['', [Validators.required]],
+      Phone: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]],
       PaymentMethods: ['', [Validators.required]],
-      ResturnatLogo: [null, Validators.required],
+      // ResturnatLogo: [null, Validators.required],
     }); // Add the confirmPasswordValidator
 
     // FILLING DATA VALUES OF CURRENT RESTAURANT
@@ -57,9 +56,13 @@ export class RestaurantUpdateComponent {
             this.ResturantPaymentMehods.setValue(
               this.CurrentLoggedInRestaurant.paymentMethods
             );
-            this.ResturnatLogo.setValue(this.CurrentLoggedInRestaurant.logo);
+            this.ResturantPhone.setValue(this.CurrentLoggedInRestaurant.phone);
+            // this.ResturnatLogo.setValue(this.CurrentLoggedInRestaurant.logo);
+            this.NewRestuarantUpdateDto.logo =
+              this.CurrentLoggedInRestaurant.logo;
           },
           (error) => {
+            console.log('errrrrrrrrrrrrrrrrrrrrrrr');
             console.error(error);
           }
         );
@@ -76,14 +79,16 @@ export class RestaurantUpdateComponent {
   get ResturantPaymentMehods() {
     return this.UpdateResturantForm.get('PaymentMethods')!!;
   }
-  get ResturnatLogo() {
-    return this.UpdateResturantForm.get('ResturnatLogo')!!;
+  get ResturantPhone() {
+    return this.UpdateResturantForm.get('Phone')!!;
   }
+  // get ResturnatLogo() {
+  //   return this.UpdateResturantForm.get('ResturnatLogo')!!;
+  // }
   //#endregion
 
   // When form Submit
   submitForm() {
-    //TODO: EDIT SUBMIT FUNCTION
     if (this.UpdateResturantForm.valid) {
       // Form is valid, perform registration logic
 
@@ -94,8 +99,11 @@ export class RestaurantUpdateComponent {
       this.NewRestuarantUpdateDto.paymentMethods = Number.parseInt(
         this.ResturantPaymentMehods.value
       );
-      this.NewRestuarantUpdateDto.logo = this.ResturnatLogo.value;
+      this.NewRestuarantUpdateDto.phone = this.ResturantPhone.value;
 
+      this.NewRestuarantUpdateDto.logo = this.CurrentLoggedInRestaurant.logo;
+      this.NewRestuarantUpdateDto.id =
+        this.CurrentLoggedInRestaurant.restaurantId;
       console.log(this.NewRestuarantUpdateDto);
 
       this.restaurantService
@@ -128,6 +136,12 @@ export class RestaurantUpdateComponent {
       }
     });
   }
+
+  // public uploadImage(changeEvent: Event) {
+  //   this.NewRestuarantUpdateDto.logo =
+  //     this.imageservice.updateRestaurantPhoto(changeEvent);
+  //   this.CurrentLoggedInRestaurant.logo = this.NewRestuarantUpdateDto.logo;
+  // }
 }
 
 //TODO: test with backend
