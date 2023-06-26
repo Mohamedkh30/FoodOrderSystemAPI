@@ -8,6 +8,7 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthentcationService } from '../services/authentcation.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
@@ -27,7 +28,8 @@ export class AddProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     public ProductService: ProductService,
     private AuthenticationService: AuthentcationService,
-    public imageservice: ImageService
+    public imageservice: ImageService,
+    private router:Router
   ) {
     this.productForm = this.formBuilder.group({
       ProductName: ['', Validators.required],
@@ -95,6 +97,9 @@ export class AddProductComponent implements OnInit {
       this.ProductService.AddProduct().subscribe((productid: number) => {
         console.log(productid)
         this.productForm.reset();
+        this.router.navigate([`restaurant/${this.AuthenticationService.UserLogin?.id}`]);
+
+        
       }, (error: HttpErrorResponse) => {
         console.log(error)
       })
