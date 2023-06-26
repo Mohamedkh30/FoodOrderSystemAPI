@@ -64,8 +64,46 @@
                 required
               />
             </div>
+            <div class="sm:col-span-2 mb-2">
+                <label
+                  for="phone-number"
+                  class="block text-sm font-semibold leading-6 text-gray-900"
+                  >Phone number</label
+                >
+  
+                <p
+                  *ngIf="ResturantPhone.invalid && ResturantPhone.touched"
+                  class="text-red-500 text-xs italic"
+                >
+                  Phone Not Valid
+                </p>
+  
+                <div class="relative mt-2.5">
+                  <div class="absolute inset-y-0 left-0 flex items-center">
+                    <label for="country" class="sr-only">Country</label>
+                    <select
+                      id="country"
+                      name="country"
+                      class="h-full rounded-md border-0 bg-transparent bg-none py-0 pl-4 pr-0 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                    >
+                      <option>EG +20</option>
+                      <option>US +1</option>
+                      <option>EU +44</option>
+                    </select>
+                  </div>
+                  <input
+                    type="tel"
+                    formControlName="Phone"
+                    name="phone-number"
+                    id="phone-number"
+                    placeholder="000-0000-0000"
+                    autocomplete="tel"
+                    class="block w-full px-20 rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
 
-            <div class="col-span-full">
+            <!-- <div class="col-span-full">
               <label
                 for="cover-photo"
                 class="block text-sm font-medium leading-6 text-gray-900"
@@ -84,6 +122,7 @@
                   <p *ngIf="this.CurrentLoggedInRestaurant.logo">
                     {{ this.CurrentLoggedInRestaurant.logo }}
                   </p>
+
                   <svg
                     class="mx-auto h-12 w-12 text-gray-300"
                     viewBox="0 0 24 24"
@@ -97,7 +136,7 @@
                     />
                   </svg>
                   <div
-                    *ngIf="!this.CurrentLoggedInRestaurant.logo"
+                    *ngIf="this.CurrentLoggedInRestaurant.logo"
                     class="mt-4 flex text-sm leading-6 text-gray-600"
                   >
                     <label
@@ -123,7 +162,7 @@
                   </p>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="mb-6">
               <label

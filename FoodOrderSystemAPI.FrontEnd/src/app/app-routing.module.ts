@@ -16,6 +16,8 @@ import { ResturantOrdersComponent } from './restaurant/resturant-orders/resturan
 import { OrderCondirmationComponent } from './order-confirmation/order-condirmation/order-condirmation.component';
 
 import { RestaurantUpdateComponent } from './restaurant/restaurant-update/restaurant-update.component';
+import { ProductUpdateComponent } from './product/product-update/product-update.component';
+
 
 
 const Router: Routes = [
@@ -39,9 +41,10 @@ const Router: Routes = [
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'addproduct', component: AddProductComponent },
+  { path: 'productUpdate/:Id', component: ProductUpdateComponent },
   { path: 'addcard', component: AddCardComponent },
   { path: 'ResturantOrders', component: ResturantOrdersComponent },
-  { path: 'restaurant/:id', component: RestaurantPageComponent }, 
+  { path: 'restaurant/:id', component: RestaurantPageComponent },
   { path: 'restaurantUpdate', component: RestaurantUpdateComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'customer/:id', component: CustomerProfileDetailsComponent },

@@ -52,10 +52,7 @@ export class RestaurantService {
     restaurant: RestaurantUpdateDto
   ): Observable<RestaurantUpdateDto> {
     let apiUrl: string = this.configService.getBaseApiUrl() + 'Restaurant';
-    return this.http.put<RestaurantUpdateDto>(
-      apiUrl,
-      JSON.stringify(restaurant)
-    );
+    return this.http.put<RestaurantUpdateDto>(apiUrl, restaurant);
   }
 }
 
